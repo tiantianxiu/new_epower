@@ -1,0 +1,397 @@
+.container {
+  padding: 0;
+}
+
+.zan-loadmore {
+  margin: 24rpx auto 10rpx;
+  line-height: 18px;
+}
+
+.square-header {
+}
+
+.square-header .li {
+}
+
+.square-header .li .content {
+  width: 100%;
+  display: flex;
+  margin: 8rpx 0 18rpx;
+  height: 162rpx;
+}
+.square-header .li .content.content-per{
+  height: 80rpx;
+}
+.content.content-per .av {
+  width: 12.5%;
+  
+}
+
+.li .title .round {
+  padding-left: 40rpx;
+  background: url(http://cdn.e-power.vip/resources/image/square/round.png) left center no-repeat;
+  background-size: auto 60%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.content .av {
+
+}
+
+.content .av {
+  width: 25%;
+  box-sizing: border-box;
+  margin-right: 8rpx;
+  height: 100%;
+  border: 3rpx solid #868686;
+  overflow: hidden;
+}
+.content .av:first-child {
+  border-top-left-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
+}
+.content .av:last-child {
+  border-top-right-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+}
+.content .av:last-child {
+  margin: 0;
+}
+
+.square-header {
+  margin-bottom: 54rpx;
+}
+
+.square-header .li .title {
+  padding-left: 24rpx;
+  position: relative;
+  font-size: 30rpx;
+}
+
+.square-header .li .title .sex {
+  position: absolute;
+  top: 2rpx;
+  right: 40%;
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.square-header .li .title .sex.female {
+  right: 30%;
+}
+
+.square-header .li .title::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 0;
+  height: 60%;
+  width: 12rpx;
+  background-color: #00c481;
+}
+
+.area-list-wrap {
+  padding: 4rpx 0 10rpx 40rpx;
+  background-color: #fff;
+  display: flex;
+  border-bottom: 2rpx solid #f3f3f3;
+}
+
+.area-list-wrap .area-list {
+  display: inline-block;
+  width: 28%;
+  text-align: center;
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+
+.area-list-wrap .area-list .logo {
+  height: 90rpx;
+  width: 90rpx;
+  text-align: center;
+  margin: 0 auto;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  box-align: center;
+  -moz-box-align: center;
+  -webkit-box-align: center;
+  justify-content: center;
+}
+
+.area-list-wrap .area-list .logo image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.area-list-wrap .area-list .text {
+  font-size: 24rpx;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #757575;
+}
+
+.section-wrap {
+  background-color: #fff;
+  /* padding: 20rpx 0; */
+}
+
+.section-zone-wrap {
+  background-color: #fff;
+}
+
+.section-zone-title {
+  border-bottom: 1rpx solid #eee;
+  padding: 10rpx 0;
+  color: #868686;
+  font-size: 22rpx;
+  line-height: 40rpx;
+  font-weight: bold;
+}
+
+.section-zone-list {
+  border-bottom: 3rpx solid #eee;
+  font-size: 28rpx;
+  height: 86rpx;
+}
+
+.section-zone-list view {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+}
+
+.section-zone-list view.col-1 {
+  overflow: visible;
+}
+
+.forum-title {
+  padding: 20rpx 24rpx 20rpx 6rpx;
+  box-sizing: border-box;
+  text-align: center;
+  color: #00c481;
+  position: relative;
+  height: 108rpx;
+  width: 138rpx;
+  line-height: 134%;
+  background: url(http://cdn.e-power.vip/resources/image/square_icon.png) no-repeat;
+  background-size: 100% 100%;
+  vertical-align: text-top;
+  margin-top: 20rpx;
+}
+
+.forum-title view {
+  height: 4rpx;
+}
+
+.scroll-view {
+  position: relative;
+}
+
+.scroll-view .grey {
+  height: 100%;
+}
+
+.section-wrap .section-title {
+  margin-bottom: 34rpx;
+}
+
+.topic-body-content .post {
+  background-color: #f0f0f0;
+  border-radius: 8rpx;
+  padding: 20rpx 20rpx 16rpx;
+  font-size: 26rpx;
+  position: relative;
+  margin-top: 10rpx;
+}
+
+.topic-body-content .post::after {
+  content: ' ';
+  position: absolute;
+  left: 40rpx;
+  top: -16rpx;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  border-left: 12rpx solid transparent;
+  border-right: 12rpx solid transparent;
+  border-bottom: 18rpx solid #f0f0f0;
+}
+
+.topic-body-content .post view {
+  padding-bottom: 6rpx;
+}
+
+.topic-body-content .message {
+  font-size: 34rpx;
+  margin: 10rpx 0 20rpx;
+  color: #2b2a2a;
+  
+}
+
+.mask .add-list {
+  font-size: 36rpx;
+  position: absolute;
+  z-index: 12rpx;
+  left: 30%;
+  width: 40%;
+  height: 110rpx;
+  line-height: 110rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  top: 400rpx;
+  text-align: center;
+}
+
+.add-list text {
+  font-size: 50rpx;
+}
+
+.mask .add-list.add-video {
+  top: 600rpx;
+}
+
+video {
+  width: 260rpx;
+  height: 360rpx;
+  z-index: 0;
+  position: relative;
+}
+video{
+  position: relative
+}
+.cover-view-all {
+  position:absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0
+}
+.video-icon {
+  position: absolute;
+  top: 37%;
+  left: 34%;
+  width: 88rpx;
+  height: 88rpx;
+  background: url(http://cdn.e-power.vip/resources/image/square/video_icon.png) no-repeat;
+  background-size: 100% 100%;
+  z-index: 9;
+}
+
+.topic-body-content .contents {
+  padding-left: 100rpx;
+}
+
+.topic-icon {
+  text-align: right;
+  vertical-align: middle;
+}
+
+.topic-icon image {
+  width: 52rpx;
+  height: 52rpx;
+  margin-left: 1%;
+  padding-right: 24rpx;
+  position: relative;
+}
+
+.topic-icon image text {
+  position: absolute;
+  left:65%;
+  top: 5%;
+  color: #969696;
+  font-size: 20rpx;
+}
+
+.topic-body-content {
+  padding: 20rpx 30rpx 0;
+}
+
+.topic-body-content .list {
+  border-bottom: 1rpx solid #e7e6e6;
+  padding-bottom: 20rpx;
+  margin-bottom: 35rpx;
+}
+
+.images {
+  width: 94%;
+}
+
+.images .images-for {
+  width: 31.3%;
+  margin-right: 1%;
+  display: inline-block;
+  height: 154rpx;
+  overflow: hidden;
+  border-radius: 6rpx;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  margin-bottom:-8rpx;
+}
+
+.images .images-for-image {
+  max-width: 40%;
+  position: relative;
+}
+.images-for-image video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.images .images-for-image image {
+  border-radius: 6rpx;
+  text-align: left;
+  max-width: 100%;
+  height: 240rpx;
+}
+.images .images-for-image.images-for-video image {
+  border-radius: 0;
+  height: 360rpx;
+}
+
+.message-more {
+  color: #00c481;
+  font-size: 32rpx;
+}
+.post .message-more {
+  font-size: inherit;
+  padding-bottom: 0 !important;
+  color:#289c58;
+  /* font-weight: bold; */
+}
+
+.pic-class-text {
+  color: #6284e2;
+}
+
+.square-address {
+  color: #c5c3c3;
+  text-align: left;
+  font-size: 26rpx;
+}
+
+.topic-icon {
+  position: relative;
+}
+
+.topic-icon .square-address {
+  position: absolute;
+  top: 10rpx;
+  left: 0;
+  color: #868585;
+}
+.topic-icon .tag-top{
+  display: inline-block;
+  margin-top: 10rpx;
+}

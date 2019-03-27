@@ -1,0 +1,29 @@
+/* pages/zone/zone.wxss */
+.container-nopadding{background-color: #fff;}
+.slide-image{
+	height: 258rpx;
+}
+
+.ranklist{
+	display: flex;
+}
+.col{
+	flex: 2;
+	text-align: center;
+	height: 70rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #464646;
+}
+.ranklist:nth-child(even){
+	background-color: #ccfaea;
+}
+.col-rank,
+.col-num{
+	flex: 1;
+}
+.col-rank image{
+	width: 50rpx;
+	height: 50rpx;
+}

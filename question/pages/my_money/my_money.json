@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "navigationBarTitleText": "我的余额",
+  "usingComponents": {
+    "navBar": "/components/navBar/navBar"
+  }
+}

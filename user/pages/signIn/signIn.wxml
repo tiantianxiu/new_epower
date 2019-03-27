@@ -1,0 +1,101 @@
+<view class="container-nopadding">
+
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+
+  <authorization showAuthorization="{{showAuthorization}}" bindagreeAuthorizeFun="agreeAuthorizeFun" bindrejectAuthorizeFun="rejectAuthorizeFun"></authorization>
+<navBar navbar-data="{{navbarData}}"></navBar>
+
+  <view class="page-body"  style="margin-top:{{heightMt}}px">
+    <view class="sign-top">
+      <view class="text">你已经连续签到 {{continuity_daka}} 天</view>
+    </view>
+
+    <view class="signinwrap">
+      <view class="date-list"> 
+        <view  wx:for="{{dayList}}" wx:for-item="dayIem" wx:key="" class="day-item {{dakaList[dayIem.d] ? 'signed':''}} {{dayIem.active && !dakaList[dayIem.d] ? 'sign-active':''}}">
+          <view class="sign-icon"></view>
+          <view class="solar-date">{{dayIem.m}}/{{dayIem.d}}</view>
+          <view class="lunar-date">{{dayIem.lunar.IDayCn}}</view>
+        </view>
+
+
+<!--         <view class="day-item sign-active">
+          <view class="sign-icon"></view>
+          <view class="solar-date">09/30</view>
+          <view class="lunar-date">二十</view>
+        </view> -->
+                   
+      </view>
+
+       
+      <view class="sign-btn {{isSign == 0?'':'sign-btn-disabled'}}" bindtap="signIn">
+        <text>{{isSign == 0 ? '签到':'已签到'}}</text>
+      </view>   
+     </view>  
+
+      <view class="section-round-wrap">
+        <view class="section-wrap" wx:if="{{threadList.length != 0}}">
+          <view class="section-title">
+            <view class="title">今日焦点</view>
+            <view class="navigator-arrow" bindtap="toIndexThread">更多</view>
+          </view>
+          <view class="section-body">
+            <view wx:for="{{threadList}}" wx:for-item="article" wx:key="" class="article box-wrap" bindtap="toDetail" data-tid="{{article.tid}}">
+              <view class="item">
+                <view class="article-content">
+                  <view class="article-title">{{article.subject}}</view>
+                </view>
+                <view class="article-ext-info">
+                  <view class="article-re">
+                    <view><view class="views-icon">
+                          <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/views-icon.png"></image>
+                        </view>
+                        {{article.views}}</view> 
+                    <view>
+                    <view class="views-icon">
+                          <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/text-icon.png"></image>
+                        </view>
+                    {{article.replies}}</view>
+                  </view>
+                  <view class="article-post-time">{{article.create_time}}</view>              
+                </view>
+              </view>
+              <view wx:if="{{article.image_list.length > 0}}"  class="article-img" style="background-image: url({{article.image_list[0]}})">
+              </view>            
+            </view>
+          </view>
+        </view>
+        <view class="section-wrap">
+          <view class="section-title">
+            <view class="title">本周资讯</view>
+            <view class="navigator-arrow" bindtap="toIndexArticle">更多</view>
+          </view>
+          <view class="section-body">
+            <view wx:for="{{articleList}}" wx:for-item="article" wx:key="" class="article box-wrap" bindtap="toEdetail" data-aid="{{article.aid}}">
+              <view class="item">
+                <view class="article-content">
+                  <view class="article-title">{{article.title}}</view>
+                </view>
+                <view class="article-ext-info">
+                  <view class="article-re">
+                    <view>{{article.dateline}}</view> 
+                    <!-- <view>评论 {{article.commentnum}}</view> -->
+                  </view>
+                  <!-- <view class="article-post-time">{{article.dateline}}</view>               -->
+                </view>
+              </view>
+              <view class="article-img" style="background-image: url({{article.pic}})">
+              </view>            
+            </view>
+          </view>
+        </view>
+      </view>
+
+  </view>
+</view>
+
+
+
+

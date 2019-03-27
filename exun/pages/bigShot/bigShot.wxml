@@ -1,0 +1,25 @@
+<!--pages/saerch/saerch.wxml-->
+<view class="container-nopadding">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>	
+  <navBar navbar-data="{{navbarData}}"></navBar>
+  <view class="page-body" style="margin-top:{{heightMt}}px">
+	<view class="section-wrap">
+		<view class="section-title">
+			<text class="title">大咖媒体号推荐</text>
+		</view>
+		<view class="section-body bigshot-wrap row">
+			<view class="col-3" wx:for="{{rankList}}" wx:for-item="list" wx:key="" bindtap="toEList" data-fid="{{list.fid}}">
+				<view class="bigshot-list">
+					<view class="icon"><image src="{{list.icon}}" /></view>
+					<view class="name">{{list.name}}</view>
+					<view class="info">{{list.description}}</view>
+					<view class="ext">{{list.posts}} 作品 {{list.rank}}排名</view>
+				</view>
+			</view>
+
+		</view>
+	</view>
+  </view> 
+</view>

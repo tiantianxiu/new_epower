@@ -1,0 +1,12 @@
+@import '../quest_quest_my/quest_quest_my.wxss';
+
+.article .title{
+  border-top: 2rpx solid #eeeeee;
+  border-bottom: 0;
+}
+.message{
+  background-color: #eee;
+  padding: 20rpx 16rpx;
+  color: #575757;
+  font-size: 30rpx;
+}

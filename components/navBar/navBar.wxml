@@ -1,0 +1,35 @@
+<view class='nav-wrap' style='height: {{heightMt + 20 * 2}}px;'>
+  <!-- // 导航栏 中间的标题 -->
+  <view class="index-header" wx:if="{{navbarData.isIndex}}" >
+    <image src="../../resources/image/e_logo.png" mode="widthFix"></image>
+    <view class="e-num">
+      <view>在线：{{navbarData.online}}</view>
+      <view>会员：{{navbarData.members}}</view>
+    </view>
+  </view>
+  <view class='nav-title' wx:if="{{!navbarData.isIndex}}" style='line-height: {{heightMt*2 + 40}}px;'>{{navbarData.title}}</view>
+  <view style='display: flex; justify-content: space-around;flex-direction: column'>
+    <!-- // 导航栏 左上角的返回按钮 和home按钮 // 其中wx:if='{{navbarData.showCapsule}}' 是控制左上角按钮的显示隐藏，首页不显示 -->
+    <view class="square-camera" bindlongpress="squareLong" bindtap="squareTap" wx:if='{{navbarData.square}}' style="height: {{heightMt + 20 * 2}}px;">
+      <image src="http://cdn.e-power.vip/resources/image/camera.png" class=""></image>
+    </view>
+    <view class='nav-capsule' wx:if='{{navbarData.showCapsule}}' style="height: {{heightMt + 20 * 2}}px;">
+      <image bindtap="backtap" class="header-back" wx:if="{{!share && !navbarData.hideBack}}"  src='http://cdn.e-power.vip/resources/image/left.png'></image>
+      <image class="icon-png" bindtap="hometap" src='http://cdn.e-power.vip/resources/image/header_home.png' >
+        <view class="icon-text home-text"></view>
+      </image>
+      <block wx:if="{{!navbarData.hideShare}}">
+        <block wx:if="{{!navbarData.shareImg}}">
+          <button plain="{{true}}" open-type="share" class="icon-png icon-png-button">
+            <image src='http://cdn.e-power.vip/resources/image/header_share.png' ></image>
+          </button>
+        </block>
+        <block wx:else>
+          <image bindtap="sharetap" class="icon-png" src='http://cdn.e-power.vip/resources/image/header_share.png' >
+            <view class="icon-text share-text"></view>
+          </image>
+        </block>
+      </block>
+    </view>
+  </view>
+</view>

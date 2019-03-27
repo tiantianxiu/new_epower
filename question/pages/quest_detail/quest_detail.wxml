@@ -1,0 +1,152 @@
+<import src="/zanui/loadmore/index.wxml" />
+<import src="/wxParse/wxParse.wxml" />
+<navBar navbar-data="{{navbarData}}"></navBar>
+
+<view class="quest-detail" style="margin-top:{{heightMt}}px;">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+
+  <view class="section-wrap section-detail-wrap section-wrap-question" id="articleWrap">
+
+    <view class="thread_content-cell article">
+
+      <view wx-if="{{is_admin==1 && is_share==1}}" class="section-title section-title-admin">
+        <view class="detail-admin">
+          <picker class="input-picker" range="{{digestLevel}}" bindchange="setDigest" value="{{thread_data.digest}}" mode="selector">
+            <view>置顶</view>
+          </picker>
+        </view>
+        <view class="detail-admin-fake"></view>
+        <view class="detail-admin-fake"></view>
+        <view class="detail-admin" data-tid="{{tid}}" bindtap="postDel">删除</view>
+      </view>
+
+      <view class="author-info" data-uid="{{thread_data.authorid}}" bindtap="toUserDetail">
+        <view class="author">
+          <image src="{{thread_data.avatar}}" />
+        </view>
+          <image class="icon-width icon-width-l icon-v4" src="http://cdn.e-power.vip/resources/image/icon-v2.png" wx:if="{{thread_data.level=='自媒体' || thread_data.level=='新能源砖家' || thread_data.is_carvip == 1 || thread_data.is_auth_car_icon == 1}}" />
+        <view class="author-name">
+          <text class="text-name">{{thread_data.author}}</text>
+          <text class="tag-item tag-red">楼主</text>
+          <!-- <view wx:if="{{thread_data.level=='自媒体' || thread_data.level=='新能源砖家' || thread_data.is_carvip==1 || thread_data.is_auth_car_icon == 1}}" class="icon1">
+            <image class="icon-width icon-width-l" src="http://cdn.e-power.vip/resources/image/icon-v2.png" />
+          </view> -->
+          <text class="tag-item tag-green" wx:if="{{thread_data.level != '车代表' && thread_data.level != ''}}">{{thread_data.level}}</text>
+        </view>
+        <view class="tag-item-wrap">
+          <view wx:if="{{thread_data.is_carvip == 1}}" class="tag-item tag-green">
+            <image class="icon-v" src="http://cdn.e-power.vip/resources/image/icon-v.png" />车代表</view>
+          <view wx:if="{{thread_data.is_auth_car}}" class="tag-item tag-green">{{thread_data.is_auth_car}}</view>
+       
+          <view class="e-power">
+            <image src="http://cdn.e-power.vip/resources/image/e_power2.png" />
+            <view class="exts">
+              <text wx:for="{{thread_data.extcredits2_arr}}" wx:for-item="ext_item" wx:key="{{index}}" class="index{{ext_item}}"></text>
+            </view>
+            <view class="du">度</view>
+          </view>
+        </view>
+        <view class="ext red" wx:if="{{thread_data.question_price != 0.00}}">￥{{thread_data.question_price}}</view>
+      </view>
+      <view class="article-text rich-text">
+        {{thread_data.subject}}
+        <view class="images" wx:if="{{thread_data.image_list.length > 0}}">
+          <view class="li" wx:for="{{thread_data.image_list}}" wx:for-item="images" wx:key="{{index}}" style="background-image: url('{{images}}')" bindtap="wxParseImgTap" data-src="{{images}}">
+          </view>
+        </view>
+      </view>
+      <view class="dateline" wx:if="{{thread_data.show_car}}">
+        <text>咨询车型：</text>
+        <text class="cars">{{thread_data.show_car}}</text>
+        <text class="dateline-text">{{thread_data.time}}</text>
+      </view>
+      <view class="dateline datelines">
+        <text>谁可以答（车主）：</text>
+        <block wx:if="{{member_tag != 0}}">
+          <text class="cars" wx:for="{{member_tag}}" wx:key="{{index}}" wx:for-item="item">{{item}}</text>
+        </block>
+        <block wx:else>
+          <text class="cars">所有人</text>
+          <text class="dateline-text" wx:if="{{!thread_data.show_car}}">{{thread_data.time}}</text>
+        </block>
+      </view>
+    </view>
+
+  </view>
+  <block wx:if="{{!total_num}}">
+    <view class="none-num" wx:if="{{thread_data.is_self == 1}}">
+      <image src="http://cdn.e-power.vip/resources/image/question/safa_self.png"></image>
+    </view>
+    <view class="none-num" wx:else>
+      <image src="http://cdn.e-power.vip/resources/image/question/safa_unself.png"></image>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="section-wrap section-detail-wrap" id="reply-title">
+      <view class="section-title">
+        <text class="title">{{total_num}}人回答</text>
+        <view class="average" bindtap="averageTap" data-reward_type="2" wx:if="{{show_reward && total_num> 1}}">
+          <view class="img" style="background-image:url(http://cdn.e-power.vip/resources/image/question/average_reward.png)"></view>
+        </view>
+      </view>
+      <view class="section-body">
+        <block wx:for="{{articleList}}" wx:for-index="index" wx:for-item="article" wx:key="articleId">
+          <view class="article article-li" hover-class="hover" bindtap="toQuestDiague" data-pid="{{article.pid}}" data-tid="{{thread_data.tid}}">
+            <view class="author-info">
+              <view class="author" data-uid="{{article.authorid}}" bindtap="toUserDetail">
+                <image src="{{article.avatar}}" />
+              </view>
+                 <image class="icon-width icon-width-l icon-v4" src="http://cdn.e-power.vip/resources/image/icon-v2.png" wx:if="{{article.level=='自媒体' || article.level=='新能源砖家' || article.is_carvip == 1 || article.is_auth_car_icon == 1}}" />
+
+              <view class="author-name">
+                <text class="text-name">{{article.author}}</text>
+               
+                <text class="tag-item tag-green" wx:if="{{article.level != '车代表' && article.level != ''}}">{{article.level}}</text>
+                <text class="ext">{{article.time}}</text>
+              </view>
+              <view class="tag-item-wrap">
+                <view wx:if="{{article.is_carvip == 1}}" class="tag-item tag-green">
+                  <image class="icon-v" src="http://cdn.e-power.vip/resources/image/icon-v.png" />车代表</view>
+
+                <view wx:if="{{article.is_auth_car}}" class="tag-item tag-green">{{article.is_auth_car}}</view>
+              
+                <view class="e-power">
+                  <image src="http://cdn.e-power.vip/resources/image/e_power2.png" />
+                  <view class="exts">
+                    <text wx:for="{{article.extcredits2_arr}}" wx:for-item="ext_item" wx:key="{{index}}" class="index{{ext_item}}"></text>
+                  </view>
+                  <view class="du">度</view>
+                </view>
+                <view class="reward-person" catchtap='averageTap' hover-stop-propagation='true' data-reward_type="1" data-pid="{{article.pid}}" wx:if="{{show_reward}}">采纳打赏</view>
+                <view class="ext red">
+                  {{thread_data.show_pid == article.pid ? '￥' + thread_data.question_price : ''}} {{thread_data.is_reward == 1 && thread_data.reward_type == 2 ? '￥' + price_abs : ''}}
+                </view>
+              </view>
+            </view>
+            <rich-text class="article-text rich-text" nodes="{{article.message}}"></rich-text>
+            <view class="answer-abs" wx:if="{{thread_data.show_pid == article.pid}}">
+              <image src="http://cdn.e-power.vip/resources/image/question/reward.png"></image>
+            </view>
+            <view class="answer-abs" wx:if="{{thread_data.is_reward == 1 && thread_data.reward_type == 2}}">
+              <image src="http://cdn.e-power.vip/resources/image/question/ased.png"></image>
+            </view>
+            <view class="article-ext-info">
+              <text class="navigator-arrow">查看<text class="text-green">{{article.reply_num}}</text>条对话</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <!-- 加载更多 -->
+    <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+    <!-- 没有更多的数据了 -->
+    <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+  </block>
+  <replyQuest id="reply-quest" replyType="{{replyType}}" showReply="{{showReply}}" bindaddPost="addPost" showToQuest="{{is_admin == 1 ? false : true}}" showUnVip="{{showUnVip}}" btnMsg="{{btnMsg}}" disableMsg="{{disableMsg}}" tid="{{tid}}" pid="{{pid}}" isAdmin="{{is_admin}}"
+    bindtoSet="toSet"></replyQuest>
+  <!-- showUnVip="{{!thread_data.is_reply}}" -->
+  <!-- 授权登录框 -->
+  <authorization showAuthorization="{{showAuthorization}}"></authorization>
+</view>

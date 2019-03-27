@@ -1,0 +1,89 @@
+<import src="../../zanui/loadmore/index.wxml" />
+<progressBar showProgress="{{showProgress}}" progress="{{progress}}"></progressBar>
+<loading hidden="{{loading_hidden}}">
+  {{loading_msg}}
+</loading>
+<view wx:if="{{!showreplyForm}}" class="page-tail">
+  <view class="resp-input-cell">
+    <input wx:if="{{!isShowReplyForm}}" class="resp-input" type="text" bindinput="inputMessage" data-pid='0' value="{{message}}" placeholder="说点什么吧..." confirm-type="send" bindconfirm="submitMessage" confirm-hold="true" focus="{{focus}}" type='text' />
+    <view bindtap="showreplyFormFun" wx:else class="resp-input">说点什么吧...</view>
+  </view>
+  <block wx:if="{{message != null && message != undefined && message != '' || !showReplies && !showZhan &&!showCai && !showFavorite}}">
+    <view class="resp-btn2" bindtap="submitMessage">发送</view>
+  </block>
+  <block wx:else>
+
+    <view class="resp-btn" bindtap="clickFollow" wx:if="{{showFavorite}}" style="width: 9%">
+      <!-- 没有收藏过-->
+      <image wx:if="{{is_favorite == 0}}" class="ib-width" src="http://cdn.e-power.vip/resources/image/ib-star.png"></image>
+      <!-- 已经收藏-->
+      <image wx:else class="ib-width" src="http://cdn.e-power.vip/resources/image/ib-star-gray.png"></image>
+    </view>
+  </block>
+</view>
+
+<view wx:else>
+  <view class="mask-transparent" bindtouchstart="hideReplyForm"></view>
+  <view class="replyForm-fixed" style='bottom:{{height}}px;'>
+
+    <view class="input-wrap">
+      <view class='input-content {{imageList.length > 0 ? "input-hasimg":""}}'>
+        <block wx:if="{{imageList.length > 0 }}">
+          <view class="uploader-files">
+            <view class="image-cell" wx:for="{{imageList}}" wx:for-item="image" wx:key="{{index}}">
+              <view catchtap="delImg" class='del-img-btn' data-index="{{index}}" data-code="{{image.code}}"></view>
+              <bolck wx:if="{{image.type =='img'}}">
+                <image class="uploader-img" src="{{image.url}}" data-src="{{image.url}}"></image>
+              </bolck>
+              <block wx:else>
+                <video class="uploader-img" src="{{image.url}}" data-src="{{image.url}}" controls></video>
+              </block>
+            </view>
+          </view>
+        </block>
+        <input type="text" bindinput="inputMessage" data-pid='0' value="{{message}}" placeholder="优质评论将会被优先展示" confirm-type="send" bindconfirm="submitMessage" confirm-hold="true" focus="{{focus}}" placeholder-style="color:#c5c5c5" adjust-position="{{adjustPosition}}"
+          bindfocus="bindfocus" bindblur="bindblur" />
+      </view>
+      <view class="input-send {{imageList.length > 0 || message != '' ? '':'disabled'}}" bindtap="submitMessage">发布</view>
+    </view>
+    <view class='uploader-tab' wx:if="{{!hideSmiley && !is_praise}}">
+      <view class="upload-item" bindtap="chooseImage">
+        <image class="ib-width" src="http://cdn.e-power.vip/resources/image/re_image.png" />
+      </view>
+      <view class="upload-item"  bindtap="chooseEmoji">
+        <image class="ib-width" src="http://cdn.e-power.vip/resources/image/re_emoji.png" />
+      </view>
+    </view>
+    <!-- 按住有动图 -->
+    <view class="emoji-show-gif" wx:if="{{is_show_gif}}" style="left:{{gifLeft}}rpx; bottom: {{gifBottom}}rpx ">
+      <image src="{{emojiGif}}" />
+    </view>
+    <view class="emoji-box" wx:if="{{showEmoji}}">
+      <scroll-view class="emoji-scroll-view_x" scroll-with-animation="{{true}}" scroll-left="{{emojiScrollLeft}}" scroll-x style="width: 100%">
+        <view class="emoji-swiper-wrap" wx:for="{{emojiListGroup}}" wx:for-index="idx" wx:key="{{index}}" wx:for-item="emojiGroup">
+          <swiper indicator-dots="{{indicatorDots}}" indicator-active-color="#8b8b8b" indicator-color="#d7d7d7">
+            <swiper-item wx:for="{{emojiGroup.list}}" wx:key="{{index}}" wx:for-item="emojiList" data-groupidx="{{idx}}" data-idx="{{index}}" bindtouchstart="emojitouchstart" bindtouchend="emojitouchend" bindlongtap="showGifFather">
+              <view class="emoji-swiper-item">
+                <view wx:for="{{emojiList}}" wx:key="{{index}}" wx:for-item="emoji" bindtap="chooseEmojiItem" data-code="{{emoji.code}}" data-index="{{index}}" bindlongtap="showGif" class="emoji-item {{emojiGroup.typeid == 1 ? 'emoji-item-sm':''}}" bindtouchstart="touchStart"
+                  bindtouchend="touchEnd">
+                  <image src="{{emoji.url}}" />
+                </view>
+              </view>
+            </swiper-item>
+          </swiper>
+        </view>
+
+      </scroll-view>
+      <view class="emoji-tab-wrap">
+        <view class="emoji-tab">
+          <view class="emoji-tab-item {{emojiScrollLeft == index*screenW ? 'current' : ''}}" wx:for="{{emojiListGroup}}" wx:key="{{index}}" wx:for-item="emojiGroup" bindtap="chanegEmojiTab" data-idx="{{index}}">
+            <image src="{{emojiGroup.icon}}" />
+          </view>
+        </view>
+        <view class="emoji-fun">
+          <view class="send {{imageList.length > 0 || message != '' ? '':'disabled'}}" bindtap="submitMessage">发送</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

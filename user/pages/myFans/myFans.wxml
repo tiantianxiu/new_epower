@@ -1,0 +1,40 @@
+<import src="/zanui/loadmore/index.wxml" />
+<navBar navbar-data="{{navbarData}}"></navBar>
+<view class="container-nopadding" style="margin-top:{{heightMt}}px">
+	<block wx:if="{{followList.length>0}}">
+		<view class="page-body">
+		<view class="section-wrap" >
+			<view class="section-body">
+				<view class="default-list-wrap">
+	                <view class="box-wrap default-list" wx:for="{{followList}}" wx:for-item="followList" wx:key="followList.index" bindtap="toUserDetail" data-uid="{{followList.uid}}">
+	                  <view class="round-img"><image src="{{followList.avatar}}"/></view>
+	                  <view class="item">{{followList.username}}</view>
+
+	              	  <block wx:if="{{followList.mutual == 1}}">
+	                  		<view class="btn-round "><image class="icon-width" src="http://cdn.e-power.vip/resources/image/user/tick.png"></image><text class="text-m">已关注</text></view>
+	                  </block>
+	                  <block wx:else>
+	                    	<view catchtap="followBtn" data-uid="{{followList.uid}}" class="btn-round btn-color-default"><text class="text-m">关注</text></view>
+	              	  </block>
+	                </view>
+	            </view>
+			</view>
+		</view>
+
+	    <!-- 加载更多 -->
+	    <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+	    <!-- 没有更多的数据了 -->
+	    <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+	    <!-- 返回顶部 -->
+	    <moreFunctions showToTop="true" scrollTop="{{scrollTop}}"></moreFunctions>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="box-wrap page-body">
+			<view class="item no-list">
+				<view class="img"><image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/nofans.png"/></view>
+				<view>暂无粉丝</view>
+			</view>
+		</view>	
+	</block>
+</view>

@@ -1,0 +1,7 @@
+
+{
+"navigationBarTitleText": "申请版主",
+"usingComponents": {
+  "navBar": "/components/navBar/navBar"
+}
+}

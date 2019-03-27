@@ -1,0 +1,6 @@
+{
+"navigationBarTitleText": "口碑推荐",
+  "usingComponents": {
+    "navBar": "/components/navBar/navBar"
+  }
+}

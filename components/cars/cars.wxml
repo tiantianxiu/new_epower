@@ -1,0 +1,32 @@
+<block wx:if="{{carsShow}}">
+	<import src="../../zanui/loadmore/index.wxml" />
+	<loading hidden="{{loading_hidden}}">
+	{{loading_msg}}
+	</loading>
+
+	<view class="mask" bindtap="hideFixedTab"></view>
+	<view class="fixed-box"  style="top:{{heightMt}}px">
+		<view class="section-wrap">
+			<view class="section-title"><view class="title">选择品牌车主（可多选）</view></view>
+			<scroll-view scroll-y scroll-into-view="{{scrollToId}}" style="height: {{windowHeight}}px;" scroll-top="{{fixedTabScrollTop}}">
+				<view>
+					<view class="section-body section-box-list" wx:for="{{brandList}}" wx:key="" wx:for-item="bList" wx:for-index="idx" id="{{idx == '燃' ? 'ran' : idx}}">
+						<view class="title">{{idx}}</view>
+						<view class="content-list" wx:for="{{bList}}" wx:key="" wx:for-item="bListItem" data-id="{{bListItem.id}}" data-name="{{bListItem.name}}" data-index="{{index}}" bindtap="selectCarSystem">
+							<view class="img"style="background-image: url({{base_url}}{{bListItem.icon}});"></view>
+							<view class="text">{{bListItem.name}}</view>
+              <image wx:if="{{cars_arr[bListItem.id] == bListItem.name}}" src="http://cdn.e-power.vip/resources/image/question/sel_icon.png"></image>
+						</view>		
+					</view>
+				</view>
+
+			</scroll-view>
+      
+		</view>
+    <view class="btn" bindtap="hideFixedTab">确认</view>
+		<view class="fixed-letter" bindtouchstart="handlerStart" catchtouchmove="handlerMove" style="top:{{heightMt}}px">
+			<view class="letter" data-idx="{{idx == '燃' ? 'ran' : idx}}" wx:for="{{brandList}}" wx:key="" wx:for-item="bList" wx:for-index="idx" >{{idx}}</view>
+		</view>
+	</view>
+
+</block>

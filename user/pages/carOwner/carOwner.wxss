@@ -1,0 +1,100 @@
+.no-list{
+	text-align: center;
+	font-size: 32rpx;
+	color:#d4d4d4;
+	padding: 300rpx 0;
+}
+.no-list .img{
+	height: 230rpx;
+	width: 230rpx;
+	margin:0 auto 20rpx;
+}
+.no-list .img image{
+	width: 100%;
+	height: 100%;
+}
+
+.car-list-wrap{
+	padding:0 30rpx;
+}
+.car-list{
+	background-color: #fff;
+}
+.car-list-info{
+	display: flex;
+	align-items: center;
+	height: 190rpx;
+	margin-top: 8rpx;
+}
+.car-list-info .car-img{
+	margin:0 15rpx 0 30rpx;
+	width: 120rpx;
+	height: 120rpx;
+	overflow: hidden;
+	box-sizing: border-box;
+	border-radius: 50%;
+	border:2rpx solid #c6c6c6;
+	background: no-repeat #fff center center;
+	background-size: 80%;
+	box-sizing: border-box;
+}
+.car-list-info .car-text text{
+	display: block;
+	color: #858585;
+}
+.car-list-info .car-status{
+	width: 90rpx;
+	text-align: right;
+	padding-right: 30rpx;
+}
+.car-list-info .car-text{
+	flex: 1;
+	text-align: center;
+}
+.car-list-info .car-text .name{
+	font-size: 32rpx;
+}
+.car-list-info .car-text .text{
+	font-size: 24rpx;
+}
+.car-list-info .car-status .status{
+	font-size: 28rpx;
+	color: #00c481;
+	white-space: nowrap;
+}
+.car-list-info .car-status .status-red{
+	color:#e62222;
+}
+.del-car{
+	text-align: center;
+	font-size: 28rpx;
+	background-color: #00c481;
+	height: 60rpx;
+	color:#fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;	
+}
+.btn-area-fixed .btn-area{
+	position: fixed;
+	padding:30rpx 30rpx 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color:#f3f3f3;
+}
+.btn-area-fixed .btn-area .btn-main{
+	width: 100%;
+	margin:20rpx 0;
+}
+.btn-area-holder{
+	height: 335rpx;
+}
+.btn-disabled{
+	background-color: #ccc;
+}
+.tips{
+	font-size: 24rpx;
+	color: #858585;
+	text-align: center;
+}

@@ -1,0 +1,50 @@
+<!--pages/order_buy/order_buy.wxml-->
+<import src="../../../zanui/loadmore/index.wxml" />
+
+<navBar navbar-data="{{navbarData}}"></navBar>
+<view class="container-nopadding" style="margin-top:{{heightMt}}px">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+	<view class="page-body">
+		<view class="section-level-wrap {{my_level == '新手上路'?'level-1': '' || my_level == '限制会员'?'level-1': '' || my_level == '初级会员'?'level-2': '' || my_level == '中级会员'?'level-3': '' || my_level == '高级会员'?'level-4': '' || my_level == '星钻会员'?'level-5': '' || my_level == '论坛元老' ?'level-6': ''}}">
+			<view class="section-level">
+				<view class="userinfo-wrap" >
+					<view class="photo-box"><image src="{{avatar}}"/><view class="tiara" wx:if="{{is_carvip == 1}}"></view></view>
+					<view class="info-box">
+						<view class="username">{{username}}</view>
+						<view class="level" wx:if="{{is_carvip==0}}">{{my_level}}</view>
+            <view class="level carvip" wx:if="{{is_carvip}}"></view>
+            <view class="cer-car" wx:if="{{car}}" >{{car}}</view>
+						<view class="badge"><image wx:for="{{medal}}" wx:key="" src="{{item}}"></image></view>
+					</view>
+				</view>
+				<view class="item level-progress-wrap">
+					<view class="experience">经验值 <text>{{my_credits}}/{{all_credits}}</text></view>
+					<view class="progress-bar"><view class="progress-active" style="width:{{bili_credits}}"></view></view>	
+				</view>
+			</view>
+		</view>
+
+		<view class="section-wrap section-round-wrap" >
+			<view class="section-title"><view class="title">日常任务</view></view>
+			<view class="section-body">
+				<view class="default-list-wrap">
+	                <view class="box-wrap default-list" wx:for="{{credit_rule}}" wx:key="">
+	                  <view class="image-wrap"><image src="{{item.image}}"/></view>
+	                  <view class="item">
+	                  	<view>{{item.rulename}}<text class="color-gray">（{{item.cyclenum}}/{{item.rewardnum}}）</text></view>
+	                  	<view class="fs">经验值 <text class="color-default">+{{item.credits}}/次</text></view>
+	                  </view>
+	                  <block wx:if="{{item.has_do == 1}}">
+	                  	<view><view class="btn-round btn-light-default"><text class="text-m">已完成</text><image class="icon-width" src="http://cdn.e-power.vip/resources/image/user/icon_tick_g.png"></image></view></view>
+	                  </block>
+	                  <block wx:else>
+	                  	<view bindtap="doTask" data-linktype="{{item.page_model}}" data-url="{{item.page_url}}" class="btn-round btn-red"><text class="text-m">做任务</text></view>
+	                  </block>
+	                </view>
+	            </view>
+			</view>
+		</view>
+	</view>
+</view>

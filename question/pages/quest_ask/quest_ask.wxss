@@ -1,0 +1,281 @@
+@import '../add_article/add_article.wxss';
+
+.ask-content {
+  padding: 40rpx 46rpx 10rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.posting-title {
+  color: #777;
+  margin: 0 0 20rpx;
+  position: relative;
+}
+
+.posting-title text {
+  font-weight: 100;
+  font-size: 22rpx;
+  color: #c4c1c1;
+}
+
+.navigator-arrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.ask-money {
+  border-top: 2rpx solid #eee;
+  display: flex;
+  padding-top: 24rpx;
+}
+
+.ask-money .list {
+  box-sizing: border-box;
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  margin: 10rpx 16rpx 0;
+  border-radius: 50%;
+  border: 2rpx solid #c6c6c6;
+  color: #777;
+  font-size: 24rpx;
+}
+
+.list.active {
+  border-color: #00c481;
+  color: #00c481;
+}
+
+.list.diy-list {
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #b2edd9;
+  color: #058d5e;
+  border: none;
+  margin-top: 0;
+  margin-right: 0;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.diy-list input {
+  width: 84%;
+  margin-left: 8%;
+  margin-top: 24rpx;
+  height: 52rpx;
+  line-height: 52rpx;
+}
+
+.content-wrap {
+  background-color: #eee;
+  border: 0;
+  text-align: left;
+}
+
+.video-wrap, .textarea-wrap, .image-wrap {
+  width: 100%;
+  height: 300rpx;
+}
+
+.video-wrap video, .textarea-wrap .textarea {
+  height: 62%;
+}
+
+.imgs {
+  display: flex;
+}
+
+.imgs .img-li {
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 16rpx;
+  border-radius: 8rpx;
+  position: relative;
+}
+
+.add-img {
+  height: 100rpx;
+  width: 138rpx;
+  background: url('http://cdn.e-power.vip/resources/image/question/add_img.png') no-repeat;
+  background-size: 100%;
+}
+
+.put-quest {
+  border-radius: 40rpx;
+  background: #a6a7a6;
+  color: #fff;
+  font-size: 36rpx;
+  text-align: center;
+  width: 80%;
+  margin-left: 10%;
+  padding: 16rpx 0;
+  position: fixed;
+  left: 0;
+  bottom: 30rpx;
+  line-height: 50rpx;
+  height: 50rpx;
+}
+
+.put-quest.active {
+  background: #00c481;
+}
+
+.place-class {
+  color: #1c9468;
+}
+
+.animated {
+  animation-duration: 0.3s;
+}
+
+button.btn {
+  position: fixed;
+  width: 100%;
+  height: 2rpx;
+  left: 0;
+  bottom: -20rpx;
+  overflow: visible;
+  border: none;
+}
+
+.ask-content .who {
+  display: flex;
+  padding: 30rpx 0;
+}
+
+.ask-content .who .member-tag {
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 40rpx;
+  font-weight: 600;
+  box-sizing: border-box;
+  margin-right: 10%;
+  border: 2rpx solid #a7a7a7;
+  color: #a7a7a7;
+  text-align: center;
+  width: 144rpx;
+}
+
+.ask-content .who .member-tag.active {
+  border-color: #00c481;
+  color: #00c481;
+}
+
+.cars-arr {
+  width: 100%;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  margin-bottom: 10rpx;
+}
+
+.cars-arr .li {
+  flex: 0 0 18%;
+  box-sizing: border-box;
+  margin: 4rpx 1% 10rpx;
+  border-radius: 10rpx;
+  border: 2rpx solid #65dcb4;
+  color: #65dcb4;
+  height: 38rpx;
+  line-height: 38rpx;
+  text-align: center;
+  font-size: 22rpx;
+  position: relative;
+}
+
+.cars-arr .li .img-minus {
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.mask-text {
+  text-align: left;
+  font-size: 26rpx;
+  color: #777;
+  padding-left: 5%;
+  line-height: 80rpx;
+  height: 80rpx;
+}
+
+.mask-text icon {
+  margin-right: 10rpx;
+}
+
+.mask-text text {
+  color: #333;
+  font-weight: 28rpx;
+}
+
+.quest-ask-header {
+  text-align: center;
+  background-color: #fff;
+  border-bottom: 2rpx solid #eee;
+  padding: 16rpx 0;
+}
+
+.quest-ask-header text {
+  padding: 2rpx 16rpx;
+  margin: 0 12rpx;
+}
+
+.quest-ask-header text.active {
+  font-size: 30rpx;
+  color: #00c481;
+  background: url(http://cdn.e-power.vip/resources/image/poll_bg.png) center center no-repeat;
+  background-size: 90% 90%;
+}
+
+.poll-content {
+  text-align: center;
+  padding: 10rpx 0;
+}
+
+.poll-add {
+  display: inline;
+  padding: 2rpx 30rpx;
+  border: 3rpx solid #00c481;
+  border-radius: 8rpx;
+  color: #00c481;
+}
+
+.poll-content .input {
+  text-align: left;
+  padding: 8rpx 10rpx;
+  margin-bottom: 34rpx;
+  border-radius: 10rpx;
+  border: rgb(238, 238, 238) 2rpx solid;
+  display: flex;
+}
+
+.poll-content .input .closed {
+  height: 60rpx;
+  width: 60rpx;
+  background: url(http://cdn.e-power.vip/resources/image/close.png) right top no-repeat;
+  background-size: auto 100%;
+}
+
+.question-ask {
+  padding-bottom: 120rpx;
+}
+
+.poll-content .input input {
+  width: 94%;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.poll-tip {
+  text-align: center;
+  padding: 10rpx 0;
+}
+
+.poll-tip text {
+  font-size: 22rpx;
+  border-radius: 40rpx;
+  padding: 0 14rpx;
+  color: #bdbcbc;
+  border: 2rpx solid #cecdcd;
+}

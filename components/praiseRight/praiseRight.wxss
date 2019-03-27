@@ -1,0 +1,11 @@
+@import "../moreFunctions/moreFunctions.wxss";
+
+.to-icon {
+  position: fixed;
+  width: 74rpx;
+  right: 26rpx;
+  height: 74rpx;
+  border-radius: 50%;
+  text-align: center;
+  z-index: 9;
+}

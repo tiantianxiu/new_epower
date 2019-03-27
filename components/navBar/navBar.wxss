@@ -1,0 +1,123 @@
+@import "../moreFunctions/moreFunctions.wxss";
+
+/* 顶部要固定定位   标题要居中   自定义按钮和标题要和右边微信原生的胶囊上下对齐 */
+
+.nav-wrap {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: #fff;
+  color: rgb(121, 120, 120);
+  z-index: 9999;
+}
+
+/* 标题要居中 */
+
+.nav-title {
+  position: absolute;
+  text-align: center;
+  max-width: 290rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: 600;
+}
+
+.nav-capsule {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.nav-capsule button {
+  margin: 0;
+  border: 0;
+  height: 52rpx;
+  padding: 0 18rpx 0;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.nav-capsule image {
+  width: 40rpx;
+  height: 52rpx;
+  position: relative;
+  align-items: center;
+}
+
+.nav-capsule>image {
+  padding: 0 18rpx 10rpx;
+  /* margin-bottom:16rpx; */
+}
+
+.nav-capsule>image:first-child {
+  padding-left: 30rpx;
+}
+
+.nav-capsule image.header-back {
+  height: 40rpx;
+  padding-bottom: 18rpx;
+}
+
+.nav-capsule>image::after {
+  position: absolute;
+  right: 0;
+  top: 14%;
+  content: '';
+  width: 2rpx;
+  height: 26rpx;
+  border-right: 2rpx solid #3ad19c;
+}
+
+.nav-capsule>image:nth-child(3)::after {
+  border: 0;
+}
+
+/* 首页 */
+
+.index-header {
+  display: flex;
+  width: 70%;
+  padding-left: 30rpx;
+  position: absolute;
+  bottom: 10rpx;
+  left: 0;
+  vertical-align: bottom;
+}
+
+.index-header image {
+  width: 354rpx;
+  vertical-align: bottom;
+  margin-top: 8rpx;
+}
+
+.e-num {
+  padding-left: 44rpx;
+  font-size: 18rpx;
+  margin-top: 8rpx;
+}
+
+.e-num view {
+  margin-bottom: 4rpx;
+}
+
+.square-camera {
+  display: flex;
+  align-items: flex-end;
+  width: 50%;
+}
+
+.square-camera image {
+  width: 44rpx;
+  height: 44rpx;
+  padding-bottom: 14rpx;
+  padding-left: 58rpx;
+}

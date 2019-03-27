@@ -1,0 +1,212 @@
+<import src="/zanui/loadmore/index.wxml" />
+<loading hidden="{{loading_hidden}}">
+  {{loading_msg}}
+</loading>
+<authorization showAuthorization="{{showAuthorization}}" bindagreeAuthorizeFun="agreeAuthorizeFun" bindrejectAuthorizeFun="rejectAuthorizeFun"></authorization>
+<navBar navbar-data="{{navbarData}}" bindheaderShare="headerShare"></navBar>
+<view class="container-nopadding" wx:if="{{reputation_data}}" style="margin-top:{{heightMt}}px">
+
+
+  <view class="view-input {{editViews?'active':''}}" wx-if="{{is_admin==1 && is_share==1}}">
+    <input type="number" placeholder-style="color:  #c5c5c5" placeholder="设置（{{reputation_data.views}}）" bindinput="inputViews" data-pid="" focus="{{editViews?'focus':''}}" bindinput="inputViews"></input>
+    <view class="btn" bindtap="submitViews">确定</view>
+  </view>
+  <view class="article bg-white" id="articleWrap">
+    <view class="author-info" data-uid="{{reputation_data.uid}}" bindtap="toUserDetail">
+      <view class="author">
+        <image src="{{reputation_data.author_avatar}}" />
+      </view>
+      <image class="icon-width icon-width-l icon-v4" src="http://cdn.e-power.vip/resources/image/icon-v2.png" wx:if="{{reputation_data.level=='自媒体' || reputation_data.level=='新能源砖家'             || reputation_data.is_carvip == 1 || reputation_data.is_auth_car_icon == 1}}" />
+      <view class="author-name">
+        <text class="text-name">{{reputation_data.author}}</text>
+        <!-- <view wx:if="{{reputation_data.is_ident == 1}}" class="icon1">
+          <image class="icon-width icon-width-l" src="http://cdn.e-power.vip/resources/image/icon-v2.png" />
+        </view> -->
+        <view wx:if="{{reputation_data.is_auth_car}}" class="tag-item tag-green">{{reputation_data.is_auth_car}}</view>
+      </view>
+      <view class="e-power">
+        <text>购买时间 {{reputation_data.buy_car_time}}</text>
+      </view>
+
+
+      <view class="user-grade red">
+        {{reputation_data.score}}分
+        <view class="ext" decode="{{true}}">
+          <view class="views-icon">
+            <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/views-icon.png"></image>
+          </view>
+          {{reputation_data.views}}
+        </view>
+      </view>
+    </view>
+    <view class="text-center">
+      车型：
+      <text> {{reputation_data.vehicle_name}}</text>
+    </view>
+    <view class="praise-data {{reputation_data.type_category == 3?'praise-data4':''}}">
+      <view class="data">
+        {{reputation_data.buy_car_price}}万
+        <view></view>
+        <text>落地价</text>
+      </view>
+      <view class="data">
+        {{reputation_data.district_name}}
+        <view></view>
+        <text>购车地</text>
+      </view>
+      <view class="data" style="width:34%">
+        <block wx:if="{{reputation_data.rmb}}">
+          约{{reputation_data.rmb}}元/100Km
+          <view></view>
+        </block>
+        {{reputation_data.fuel_consumption != '0.00' ? reputation_data.fuel_consumption + 'L/100Km': ''}}
+        <view></view>
+        {{reputation_data.power_consumption != '0.00' ? reputation_data.power_consumption + '度/100Km': ''}}
+        <view></view>
+        <text>综合能耗</text>
+      </view>
+      <view class="data">
+        {{reputation_data.miles_power}}Km
+        <view></view>
+        <text wx:if="{{reputation_data.type_category != 3}}">纯电续航</text>
+        <text wx:else>续航里程</text>
+      </view>
+      <block wx:if="{{reputation_data.type_category != 3}}">
+        <view class="data">
+          {{reputation_data.miles_winter ? reputation_data.miles_winter + 'Km':'无数据'}}
+          <view></view>
+          <text>冬季续航</text>
+        </view>
+      </block>
+    </view>
+
+    <view class="rmb-remark" wx:if="{{reputation_data.type_category == 3}}">
+      电耗计算按照1.2元/度换算出百公里费用（各地电价不一，以当地实际情况为准）
+    </view>
+
+
+    <view class="evaluate-list" wx:if="{{reputation_data}}">
+      <block wx:if="{{reputation_data.is_ident == 1}}">
+        <view class="adopt">
+          <image src="http://cdn.e-power.vip/resources/image/praise/adopt.png" mode="widthFix"></image>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="adopt">
+          <image src="http://cdn.e-power.vip/resources/image/praise/unadopt.png" mode="widthFix"></image>
+        </view>
+      </block>
+
+      <view class="list satisfy">
+        <view class="title author-info" style="min-height:auto;">满意
+          <view class="ext">发布于：{{reputation_data.dateline}}</view>
+        </view>
+        <view class="content">
+          <block wx:for="{{reputation_data.satisfied_tag}}" wx:key="" wx:for-item="satisfied">
+            <view class="li">{{satisfied}}</view>
+          </block>
+        </view>
+      </view>
+
+      <view class="list un-satisfy">
+        <view class="title">不满意</view>
+        <view class="content">
+          <block wx:for="{{reputation_data.dissatisfied_tag}}" wx:key="" wx:for-item="dissatisfied">
+            <view class="li">{{dissatisfied}}</view>
+          </block>
+        </view>
+      </view>
+
+      <view class="list un-satisfy">
+        <view class="title">其它</view>
+        <view class="content">
+          <text>{{reputation_data.other}}</text>
+        </view>
+      </view>
+
+      <view class="list un-satisfy">
+        <view class="title">图片展示</view>
+        <view class="content">
+
+          <view class="image-li" wx:for="{{reputation_data.image_list}}" wx:key="index" wx:for-item="imgList" bindtap="wxParseImgTap" data-src="{{imgList}}" style="background-image:url({{imgList}})">
+          </view>
+
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <!-- 评论 -->
+  <view class="section-wrap section-detail-wrap" id="reply-title">
+
+    <view class="section-title">
+      <text class="title">全部评论（{{total_num}}）</text>
+    </view>
+    <view class="section-body">
+      <block wx:for="{{articleList}}" wx:for-index="index" wx:for-item="article" wx:key="articleId">
+        <view class="article {{article.is_add_post?'animated pulse':''}}">
+          <view class="author-info" data-uid="{{article.authorid}}" bindtap="toUserDetail">
+            <view class="author">
+              <image src="{{article.author_avatar}}" />
+            </view>
+            <image class="icon-width icon-width-l icon-v4" src="http://cdn.e-power.vip/resources/image/icon-v2.png" wx:if="{{article.level=='自媒体' || article.level=='新能源砖家'             || article.is_carvip == 1 || article.is_auth_car_icon == 1}}" />
+            <view class="author-name">
+              <text class="text-name">{{article.author}}</text>
+              <text class="tag-item tag-red" wx:if="{{article.authorid == authorId}}">楼主</text>
+              <!-- <view wx:if="{{article.level=='自媒体' || article.level=='新能源砖家'             || article.is_carvip == 1 || article.is_auth_car_icon == 1}}" class="icon1">
+                <image class="icon-width icon-width-l" src="http://cdn.e-power.vip/resources/image/icon-v2.png" />
+              </view> -->
+              <text class="tag-item tag-green" wx:if="{{article.is_auth_car_icon !=1 && article.level != '车代表' && article.level != ''}}">{{article.level}}</text>
+            </view>
+            <view class="tag-item-wrap">
+              <view wx:if="{{article.is_carvip == 1}}" class="tag-item tag-green">
+                <image class="icon-v" src="http://cdn.e-power.vip/resources/image/icon-v.png" />车代表</view>
+
+              <view wx:if="{{article.is_auth_car}}" class="tag-item tag-green">{{article.is_auth_car}}</view>
+              <view class="e-power">
+                <image src="http://cdn.e-power.vip/resources/image/e_power2.png" />
+                <view class="exts">
+                  <text wx:for="{{article.extcredits2_arr}}" wx:for-item="ext_item" wx:key="{{index}}" class="index{{ext_item}}"></text>
+                </view>
+                <view class="du">度</view>
+              </view>
+            </view>
+            <view class="ext">{{article.position}}楼</view>
+          </view>
+          <rich-text class="article-text rich-text" nodes="{{article.message}}"></rich-text>
+          <view class="box-wrap article-ext-info">
+            <view style="width: 200rpx;">{{article.create_time}}</view>
+            <view class="item more-function">
+              <view class="item-function" bindtap="replyComment" data-pid='{{article.pid}}'>
+                <image class="icon-width" src="http://cdn.e-power.vip/resources/image/icon-text.png"></image>
+              </view>
+              <view class="item-function {{article.is_zan == 1 ? 'active':''}}" bindtap="clickZhan" data-type='1' data-iszan="{{article.is_zan}}" data-pid="{{article.pid}}" data-index="{{index}}" data-number="{{article.zan}}">
+                <view class="ext-No">{{article.zan}}</view>
+                <image wx:if="{{article.is_zan == 0 || article.is_zan == 2}}" class="ib-width" src="http://cdn.e-power.vip/resources/image/detail/icon-zan.png"></image>
+                <image wx:else class="ib-width" src="http://cdn.e-power.vip/resources/image/detail/icon_zan_active.png"></image>
+              </view>
+              <view class="item-function {{article.is_zan == 2 ? 'active':''}}" bindtap="clickZhan" data-type='2' data-iszan="{{article.is_zan}}" data-pid="{{article.pid}}" data-index="{{index}}" data-number="{{article.cai}}">
+                <view class="ext-No">{{article.cai}}</view>
+                <image wx:if="{{article.is_zan == 0 || article.is_zan == 1}}" class="ib-width" src="http://cdn.e-power.vip/resources/image/detail/icon-cai.png"></image>
+                <image wx:else class="ib-width" src="http://cdn.e-power.vip/resources/image/detail/ib-cai-gray.png"></image>
+              </view>
+              <view class="detail-admin" wx:if="{{is_admin==1 && is_share==1}}" data-pid="{{article.pid}}" data-index="{{index}}" bindtap="replyDel">删除</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+  <!-- 没有更多的数据了 -->
+  <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+  <!-- 发口碑 -->
+  <moreFunctions id="moreFunctions" showGoHome="{{true}}" showToPraise="{{is_admin == 1 ? false : true}}" showZan="{{true}}" showCai="{{true}}" tid="{{tid}}" showReplyBtn="{{true}}" zan="{{reputation_data.zan}}" cai="{{reputation_data.cai}}" is_zan="{{reputation_data.is_zan}}"
+    bindshowAuthorization="showAuthorization" bindtoSet="toSet" showSet="{{true}}" totalNum="{{total_num}}" isAdmin="{{is_admin}}" bindfaReply="myReply" addPosts="{{addPosts}}"></moreFunctions>
+
+  <replyTail id="replyTail" bindshowAuthorization="showAuthorization" bindaddPost="addPost" focus="{{focus}}" message="{{message}}" articleId="{{reputation_data.tid}}" idtype="{{idtype}}" isShowReplyForm="{{true}}" is_praise="{{true}}"></replyTail>
+
+  <praiseRight id="praiseRight" tid="{{id}}" subject="{{subject}}" showShare="{{true}}" adopt="{{reputation_data.is_ident}}"></praiseRight>
+</view>

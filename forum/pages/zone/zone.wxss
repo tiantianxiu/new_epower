@@ -1,0 +1,186 @@
+@import '/pages/forum/forum.wxss';
+.container-nopadding{background-color: #fff;}
+.slide-image-wrap .btn-apply{
+	display: block;
+	width: 160rpx;
+	height: 54rpx;
+	line-height: 54rpx;
+	font-size: 28rpx;
+	color:#fff;
+	text-align:center;
+	background-color: rgba(0,196,129,0.6);
+	border-radius: 10rpx;
+	position: absolute;
+	bottom:20rpx;
+	right: 30rpx;
+}
+
+.slide-image-wrap .iconzone{
+	max-width:80rpx;
+	max-height: 80rpx;
+	position: absolute;
+	top: 25rpx;
+	left: 30rpx;
+}
+.nav-list-wrap{
+	height: 82rpx;
+	background-color:#fff;
+	padding-left: 340rpx;
+	position: relative;
+	padding-right: 10rpx;
+	border-bottom: 3rpx solid #eee;
+}
+.nav-list-wrap .nav-tab{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	padding-left: 10rpx;
+}
+.nav-list-wrap .nav-tab text{
+	display: inline-block;
+	float:left;
+	line-height: 82rpx;
+	font-size: 24rpx;
+	padding:0 25rpx;
+	color: #727272;
+	font-weight: bold;
+}
+.nav-list-wrap .nav-tab text.active{
+	color: #00c481;
+}
+.nav-scroll-list .scroll-wrap-x{
+	white-space: nowrap;
+	height: 82rpx;
+	overflow:hidden;
+	font-weight: bold;
+}
+.nav-scroll-list .scroll-wrap-x .scroll-x-item{
+	height: 82rpx;
+	line-height: 82rpx;
+	margin:0;
+	padding:0 20rpx;
+	font-size: 24rpx;
+	color: #727272;
+}
+
+.section-zone-wrap{
+	background-color: #fff;
+}
+.section-zone-title{
+	border-bottom: 1rpx solid #eee;
+	padding: 10rpx 0;
+	color: #868686;
+	font-size: 22rpx;
+	line-height: 40rpx;
+	font-weight: bold;
+}
+
+.section-zone-list view{
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	padding:0 10rpx;
+	box-sizing: border-box;
+}
+.col-wrap{
+	display: flex;   
+	align-items:center;
+	justify-content:center;
+}
+.section-zone-list view.col-1{
+	overflow: visible;
+}
+.col-wrap .col-1{
+	width: 94rpx;
+	padding-left: 20rpx;
+}
+.col-wrap .col-2{
+	flex:1;
+	overflow: hidden;
+}
+.col-wrap .col-3{
+	width: 250rpx;
+	text-align: center;
+	overflow: hidden;
+}
+.col-wrap .col-4{
+	width: 150rpx;
+	text-align: center;
+	overflow: hidden;
+}
+.tag-item{
+  font-size: 20rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  background-color: #7ecef4;
+  color: #fff;
+  text-align: center;
+  width: 60rpx;
+  position: relative;
+  overflow: visible;
+  border-radius: 0;
+}
+.tag-item:after{
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent transparent transparent #7ecef4;
+  border-width: 10rpx;
+  position: absolute;
+  top: 50%;
+  margin-top: -8rpx;
+  right: -14rpx;
+}
+.tag-complaints{
+  background-color: #939393;
+}
+.tag-complaints:after{
+  border-color: transparent transparent transparent #939393;
+}
+.tag-essence{
+  background-color: #00c481;
+}
+.tag-essence:after{
+  border-color: transparent transparent transparent #00c481;
+}
+.tag-pic{
+  background-color: #f39800;
+}
+.tag-pic:after{
+  border-color: transparent transparent transparent #f39800;
+}
+.tag-vedio{
+  background-color: #eb6877;
+}
+.tag-vedio:after{
+  border-color: transparent transparent transparent #eb6877;
+}
+.iconAdd{
+  width:130rpx;
+  height: 120rpx;
+  position: fixed;
+  right: 50rpx;
+  bottom: 100rpx;
+}
+.iconAdd image{
+  width: 100%;
+  height: 100%;
+}
+.color-tagTop{
+	color: #ec1515;
+}
+.color-essence{
+	color: #08a4ef;
+}
+.zan-loadmore {
+  margin:26rpx auto 10rpx
+}
+.btn-banzhu{
+  padding: 10rpx 20rpx;
+}
+.btn-banzhu text{
+  margin-right: 20rpx;
+  font-size: 26rpx;
+}

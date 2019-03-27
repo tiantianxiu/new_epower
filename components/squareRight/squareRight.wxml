@@ -1,0 +1,3 @@
+<view class="square-post-icon" bindtap="squareTap" bindlongpress="squareLong">
+  <image src="http://cdn.e-power.vip/resources/image/camera.png"></image>
+</view>

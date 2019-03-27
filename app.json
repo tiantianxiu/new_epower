@@ -1,0 +1,140 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/forum/forum",
+    "pages/square/square",
+    "pages/carOwner/carOwner",
+    "pages/user/user",
+    "pages/detail/detail",
+    "pages/topic_zone/topic_zone",
+    "pages/dialogue/dialogue",
+    "pages/add_square/add_square",
+    "pages/square_pic/square_pic"
+  ],
+  "subPackages": [
+    {
+      "root": "user",
+      "pages": [
+        "pages/editInfo/editInfo",
+        "pages/myLevel/myLevel",
+        "pages/myFollow/myFollow",
+        "pages/myFans/myFans",
+        "pages/message/message",
+        "pages/self_thread/self_thread",
+        "pages/self_collection/self_collection",
+        "pages/feedback/feedback",
+        "pages/aboutUs/aboutUs",
+        "pages/help/help",
+        "pages/signIn/signIn",
+        "pages/charging/charging",
+        "pages/user_detail/user_detail",
+        "pages/carMaster/carMaster",
+        "pages/carInfoSubmit/carInfoSubmit"
+      ]
+    },
+    {
+      "root": "exun",
+      "pages": [
+        "pages/applyInto/applyInto",
+        "pages/rankingList/rankingList",
+        "pages/bigShot/bigShot",
+        "pages/eList/eList"
+      ]
+    },
+    {
+      "root": "praise",
+      "pages": [
+        "pages/praise_index/praise_index",
+        "pages/praise_appear/praise_appear",
+        "pages/praise_user/praise_user",
+        "pages/praise_car/praise_car",
+        "pages/praise_post/praise_post",
+        "pages/pr_active/pr_active",
+        "pages/search/search",
+        "pages/district/district"
+      ]
+    },
+    {
+      "root": "question",
+      "pages": [
+        "pages/add_article/add_article",
+        "pages/question/question",
+        "pages/quest_detail/quest_detail",
+        "pages/quest_my/quest_my",
+        "pages/quest_quest/quest_quest",
+        "pages/quest_answer/quest_answer",
+        "pages/quest_ask/quest_ask",
+        "pages/quest_dialogue/quest_dialogue",
+        "pages/quest_quest_my/quest_quest_my",
+        "pages/quest_answer_my/quest_answer_my",
+        "pages/my_money/my_money",
+        "pages/poll/poll"
+      ]
+    },
+    {
+      "root": "forum",
+      "pages": [
+        "pages/zone/zone",
+        "pages/applyModerator/applyModerator",
+        "pages/forum_more/forum_more"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#00c481",
+    "navigationBarTitleText": "E区-新能源车主社区",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false,
+    "backgroundColor": "#00c481",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#555",
+    "selectedColor": "#00c481",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "resources/image/home_gray.png",
+        "selectedIconPath": "resources/image/home.png"
+      },
+      {
+        "pagePath": "pages/forum/forum",
+        "text": "论坛",
+        "iconPath": "resources/image/forum_gray.png",
+        "selectedIconPath": "resources/image/forum.png"
+      },
+      {
+        "pagePath": "pages/square/square",
+        "text": "广场",
+        "iconPath": "resources/image/square_gray.png",
+        "selectedIconPath": "resources/image/square.png"
+      },
+      {
+        "pagePath": "pages/carOwner/carOwner",
+        "text": "认证",
+        "iconPath": "resources/image/certified_gray.png",
+        "selectedIconPath": "resources/image/certified.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "resources/image/user_gray.png",
+        "selectedIconPath": "resources/image/user.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 7000,
+    "connectSocket": 20000,
+    "uploadFile": 15000,
+    "downloadFile": 15000
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获得您当前的位置，以便查询您附近的充电桩"
+    }
+  }
+}

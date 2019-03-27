@@ -1,0 +1,78 @@
+/* add_article.wxss */
+.form-group .form-item{
+	margin:0;
+	padding:0 30rpx;
+	background-color: #fff;
+	position: relative;
+}
+.form-select{
+	height: 114rpx;
+	border-bottom: 3rpx solid #eee;
+}
+.form-group{
+	padding:0;
+}
+.form-item-title{
+	font-size: 14px;
+	padding-top: 40rpx;
+}
+.form-group .input-textarea{
+	border:none;
+	background-color: #fff;
+	padding:20rpx 0;
+}
+.textarea-ext{
+	position: absolute;
+	right: 30rpx;
+	bottom:20rpx;
+	font-size: 12px;
+	color:#dcdcdc;
+}
+.btn-area{
+	padding:100rpx 100rpx;
+}
+.feedback-type .title{
+	font-size: 28rpx;
+	line-height: 60rpx;
+}
+.feedback-item{
+	font-size: 24rpx;
+	line-height: 60rpx;
+	color: #595959;
+	position: relative;
+}
+.feedback-item:after{
+	content:'';
+	width: 26rpx;
+	height: 26rpx;
+	box-sizing: border-box;
+	border-radius: 4rpx;
+	border:1rpx solid #595959;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
+}
+.feedback-item.selected:before{
+	content:'';
+	width: 14rpx;
+	height: 14rpx;
+	box-sizing: border-box;
+	border-radius: 4rpx;
+	background-color: #00c481;
+	position: absolute;
+	top: 50%;
+	right: 6rpx;
+	transform: translateY(-50%);	
+}
+.color-default{
+	color: #555555;
+}
+
+
+
+
+
+
+
+

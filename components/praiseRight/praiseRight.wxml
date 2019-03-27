@@ -1,0 +1,43 @@
+<block wx:if="{{showShare}}">
+  <view class='to-icon to-share' bindtap="showShareBox">
+    <image src='http://cdn.e-power.vip/resources/image/detail/toshares.png'></image>
+    <text>分享</text>
+  </view>
+</block>
+
+<block wx:if="{{showToPraise}}">
+  <view class="to-icon to-post to-praise" bindtap="toPraise">
+    <image src="http://cdn.e-power.vip/resources/image/detail/topraise.png"></image>
+  </view>
+</block>
+
+<view class="mask" wx:if="{{showShareBox || showReply}}" bindtap="hideShareBox"></view>
+<view class="share-box {{showShareBox?'active':''}} {{showCopy ? '': 'done-have-copy'}}" style="height: 410rpx;">
+  <view class="tag-share">
+    <image src="http://cdn.e-power.vip/resources/image/share_to.png"></image>
+  </view>
+  <view class="share-item-wrap">
+    <view class="share-item share-quan animated {{showShareBox?'slideInUp':''}}" bindtap="shareImg">
+      <image src='http://cdn.e-power.vip/resources/image/share_quans.png'></image>
+    </view>
+    <button class="share-item share-wx animated {{showShareBox?'slideInUp':''}}" bindtap="hideShareBox" open-type="share">
+      <image src='http://cdn.e-power.vip/resources/image/share_wxs.png'></image>
+    </button>
+    <view wx:if="{{showCopy}}" class="share-item share-page animated {{showShareBox?'slideInUp':''}}" bindtap="getClipboard">
+      <image src='http://cdn.e-power.vip/resources/image/share_pages.png'></image>
+    </view>
+  </view>
+  <view class="btn-text" bindtap="hideShareBox">取消</view>
+</view>
+
+
+<block wx:if="{{showShareCanvasBox}}">
+  <view class="mask mask-canvas"></view>
+  <view class="canvas-wrap" style="top:{{heightMt}}px">
+    <view class="canvas-box">
+      <canvas canvas-id="shareCanvas" style="width: 275px; height: 450px;"></canvas>
+    </view>
+    <view class="btn-save" bindtap="saveCanvas">保存图片到本地</view>
+    <view class="btn-close" bindtap="closeCanvas">返回</view>
+  </view>
+</block>

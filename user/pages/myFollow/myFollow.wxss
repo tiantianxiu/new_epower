@@ -1,0 +1,16 @@
+/* pages/order_buy/order_buy.wxss */
+.no-list{
+	text-align: center;
+	font-size: 32rpx;
+	color:#d4d4d4;
+	padding-bottom: 200rpx;
+}
+.no-list .img{
+	height: 296rpx;
+	width: 288rpx;
+	margin:0 auto 20rpx;
+}
+.no-list .img image{
+	width: 100%;
+	height: 100%;
+}

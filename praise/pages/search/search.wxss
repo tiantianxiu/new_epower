@@ -1,0 +1,100 @@
+.search-wrap{
+	background: #fff;
+	padding:20rpx 30rpx;
+}
+.search-wrap .btn-deafult{
+	font-size: 24rpx;
+	margin:0;
+	border:5rpx solid #e5e5e5;
+	background-color: #fff;
+	border-radius: 10rpx;
+	height: 54rpx;
+  	line-height: 50rpx;
+  	margin-left: 10rpx;
+  	position: inherit;
+  	text-align: center;
+  	width: 120rpx;
+  	box-sizing: border-box;
+}
+.search-wrap .btn-deafult:after,
+.search-wrap .btn-deafult:before{
+	display: none;
+}
+.search-input-wrap{
+	position: relative;
+}
+.search-wrap .search-box {
+  text-align: left;
+  background-color: #e5e5e5;
+  height: 54rpx;
+  line-height: 54rpx;
+  padding:0 20rpx 0 50rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+.search-wrap .search-icon{
+  width: 24rpx;
+  height: 24rpx;
+  line-height: 0;
+  position: absolute;
+  top:50%;
+  margin-top: -12rpx;
+  left:18rpx;
+}
+.search-wrap .search-box text{
+  font-size: 24rpx;
+  color:#868585;
+  margin-right: 10rpx;
+}
+.search-wrap .search-box .search-icon{
+  width: 24rpx;
+  height: 24rpx;
+  vertical-align: middle;
+  line-height: 0;
+}
+.search-tag {
+	padding:0 30rpx 20rpx ;
+	margin-bottom: 3rpx;
+}
+.search-title{
+  padding: 26rpx 0;
+  font-size: 24rpx; 
+  color: #818584
+}
+.tag-big{
+	font-size: 24rpx;
+	height: 44rpx;
+	line-height: 44rpx;
+	margin-right: 14rpx;
+  margin-bottom: 10rpx;
+	display: inline-block;
+	color:#818584;
+	border: 1px solid #baded2;
+	padding:0 20rpx;
+  border-radius: 30rpx;
+}
+.search-green{
+  border-color: #00c481;
+  color: #00c481;
+}
+.no-list{
+  text-align: center;
+  font-size: 32rpx;
+  color:#d4d4d4;
+  padding:80rpx 0;
+}
+/* 热门帖子 */
+.hot-posting{
+  background: #fff;
+  padding-top: 34rpx;
+  border-top-left-radius: 40rpx;
+  border-top-right-radius: 40rpx;
+  margin-top: 50rpx;
+}
+.posting-title text{
+  position: absolute;
+  top: 0;
+  right: 8%;
+  color: #868585;
+  font-size: 24rpx;
+}

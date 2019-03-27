@@ -1,0 +1,52 @@
+<loading hidden="{{loading_hidden}}">
+  {{loading_msg}}
+</loading>
+
+<navBar navbar-data="{{navbarData}}"></navBar>
+<view style="margin-top:{{heightMt}}px; padding-bottom: 1px;">
+  <view class="active-header">
+    <text>我的口碑专属邀请码：</text>
+    <button wx:if="{{!invitation_code}}" bindtap="getCode">点击获取</button>
+    <text wx:if="{{invitation_code}}" bindtap="setClipboard" class="code">{{invitation_code}}（点击复制）</text>
+  </view>
+  <view class="active-body section-wrap" wx:if="{{invitation.length!=0}}">
+    <view class="section-title section-ext">
+      <text class="title">邀请成功的用户列表</text>
+    </view>
+
+
+    <view class="list-body">
+
+      <view class="box-wrap list list-fist">
+        <view class="list-item">
+          <text>用户名</text>
+        </view>
+        <view class="list-item">
+          <text>车型</text>
+        </view>
+        <view class="list-item">
+          <text>是否认证</text>
+        </view>
+        <view class="list-item">
+          <text>时间</text>
+        </view>
+      </view>
+      <view wx:for="{{invitation}}" wx:for-item="item" wx:key="{{index}}" class="box-wrap list list-child">
+        <view class="list-item">
+          <text>{{item.author}}</text>
+        </view>
+        <view class="list-item">{{item.car_2 + item.car_3}}</view>
+        <view class="list-item">{{item.ident==1?'已认证':'未认证'}}</view>
+        <view class="list-item">
+          <text>{{item.dateline}}</text>
+        </view>
+      </view>
+      <view class="box-wrap list list-child list-child-text" wx:if="{{invitation.length >= 10}}">
+        <text>成功邀请十位用户</text>
+      </view>
+    </view>
+    
+
+
+  </view>
+</view>

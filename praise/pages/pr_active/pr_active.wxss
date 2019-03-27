@@ -1,0 +1,141 @@
+@import '/pages/index/index.wxss';
+
+.active-header {
+  display: flex;
+  padding: 16px 30rpx;
+  background-color: #fff;
+  border-bottom-right-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
+}
+
+.active-header text {
+  height: 60rpx;
+  line-height: 60rpx;
+  width: 50%
+}
+
+.active-header text.code {
+  color: rgba(0, 0, 0, 0.6);
+  background-color: #dedede;
+  border-radius: 10rpx;
+  padding: 0 16rpx;
+  font-size: 26rpx;
+  margin-left: 20rpx;
+}
+
+.active-header button {
+  width: 30%;
+  margin: 0 0 0 30%;
+  font-size: 24rpx;
+  padding: 0 10rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #b2edd9;
+}
+.section-wrap .section-title .title{
+  color: #fff;
+  font-size: 30rpx;
+}
+.active-body{
+  width: 96%;
+  margin: 20rpx auto 50rpx;
+  
+}
+.section-wrap .section-ext{
+  background: none;
+  border: 0;
+  padding:14rpx 30rpx; 
+  background: url(http://cdn.e-power.vip/resources/image/active/list_header.png) no-repeat;
+  background-size: 100% 100%;
+}
+.list-item{
+  text-align: center;
+  overflow:hidden;
+}
+.list-item:nth-child(1) {
+  text-align: left;
+  width: 27%;
+}
+
+.list-item:nth-child(2) {
+  width: 32%;
+}
+
+.list-item:nth-child(3) {
+  width: 18%;
+}
+
+.list-item:nth-child(4) {
+  width: 18%;
+  text-align: right;
+}
+.list-fist{
+  background: url(http://cdn.e-power.vip/resources/image/active/list_first.png) no-repeat;
+  background-size: 100% 100%;
+  height: 71rpx;
+  line-height: 71rpx;
+}
+.list-child{
+  height: 233rpx;
+  line-height: 233rpx;
+  margin: 0 0 -86rpx;
+}
+.list-child:nth-child(2) .list-item{
+  margin-top: -54rpx;
+}
+.list-child:nth-child(2){
+   background: url(http://cdn.e-power.vip/resources/image/active/list_child1.png) no-repeat;
+   background-size: 100% 100%;
+  height: 190rpx;
+  line-height: 190rpx;
+}
+.list-child:nth-child(3){
+   background: url(http://cdn.e-power.vip/resources/image/active/list_child2.png) no-repeat;
+    background-size: 100% 100%;
+}
+.list-child:nth-child(4){
+   background: url(http://cdn.e-power.vip/resources/image/active/list_child3.png) no-repeat;
+    background-size: 100% 100%;
+}
+.list-child:nth-child(5){
+   background: url(http://cdn.e-power.vip/resources/image/active/list_child4.png) no-repeat;
+    background-size: 100% 100%;
+}
+.list-child:nth-child(6){
+   background: url(http://cdn.e-power.vip/resources/image/active/list_child5.png) no-repeat;
+    background-size: 100% 100%;
+}
+.list-child:nth-child(7){
+   background: url(http://cdn.e-power.vip/resources/image/active/list_child6.png) no-repeat;
+    background-size: 100% 100%;
+}
+.list-child:nth-child(8){
+   background: url(http://cdn.e-power.vip/resources/image/active/list_child7.png) no-repeat;
+    background-size: 100% 100%;
+}
+.list-child:nth-child(9){
+   background: url(http://cdn.e-power.vip/resources/image/active/list_child8.png) no-repeat;
+    background-size: 100% 100%;
+}
+.list-child:nth-child(10){
+   background: url(http://cdn.e-power.vip/resources/image/active/list_child9.png) no-repeat;
+    background-size: 100% 100%;
+}
+.list-child:nth-child(11){
+   background: url(http://cdn.e-power.vip/resources/image/active/list_child10.png) no-repeat;
+    background-size: 100% 100%;
+}
+.list-child:nth-child(12){
+   background: url(http://cdn.e-power.vip/resources/image/active/list_child11.png) no-repeat;
+    background-size: 100% 100%;
+    margin-top: 43rpx;
+    height: 71rpx;
+    line-height: 71rpx;
+}
+
+.list-body{
+  color: #fff;
+}
+.list-child-text text{
+  font-size: 32rpx;
+}

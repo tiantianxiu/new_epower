@@ -1,0 +1,34 @@
+<import src="/zanui/loadmore/index.wxml" />
+<view class="container-nopadding">
+	<loading hidden="{{loading_hidden}}">
+	{{loading_msg}}
+	</loading>
+  <navBar navbar-data="{{navbarData}}"></navBar>
+	<view class="page-body" style="margin-top:{{heightMt}}px">
+		<block wx:if="{{myCarVerify.length>0}}">
+			<view class="car-list-wrap">
+				<view class="car-list" wx:for="{{myCarVerify}}" wx:key="" wx:for-item="myCarlist" wx:if="{{myCarlist.status == '已认证'}}">
+					<view class="car-list-info">
+						<view class="car-img" style="background-image: url({{base_url}}{{myCarlist.icon}});"></view>
+						<view class="car-text">
+							<text class="name">{{myCarlist.car_1}}</text>
+							<text class="text">{{myCarlist.car_3}}</text>
+						</view>	
+            <view class="car-status">
+							<text class="status">{{myCarlist.status}}</text>
+						</view>					
+					</view>					
+				</view>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="box-wrap">
+				<view class="item no-list">
+					<view class="img"><image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/no-car.png"/></view>
+					<view>暂时没有已认证车辆</view>
+				</view>
+			</view>
+		</block>
+    </view>
+
+</view>

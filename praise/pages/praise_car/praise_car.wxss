@@ -1,0 +1,130 @@
+@import "../praise_user/praise_user.wxss";
+@import '/zanui/praise.wxss';
+
+.praise-header {
+  padding: 26rpx 30rpx 22rpx;
+  margin-bottom: 8rpx;
+}
+
+.praise-header .title {
+  color: #777;
+  font-weight: 600;
+  font-size: 30rpx;
+  position: relative;
+}
+
+.title-btn {
+  position: absolute;
+  top: 4rpx;
+  left: 44%;
+  padding: 0 16rpx;
+  border-radius: 40rpx;
+  color: #fff;
+  background: #f39800;
+  font-weight: 600;
+  font-size: 22rpx;
+}
+
+.header-list {
+  display: flex;
+  padding: 46rpx 0 18rpx;
+}
+
+.header-list .list {
+  width: 50%;
+  box-sizing: border-box;
+  vertical-align: middle;
+  display: flex;
+}
+
+.header-list .list:last-child {
+  padding-left: 10%;
+}
+
+.list image {
+  width: 100rpx;
+  margin: auto 0;
+}
+
+.list .text {
+  display: inline-block;
+  margin: auto 0 auto 20rpx;
+}
+
+.text .ext {
+  color: #acacac;
+  font-size: 16rpx;
+  text-align: left;
+}
+
+.text-header {
+  font-size: 24rpx;
+  color: #777;
+  line-height: 135%;
+  text-align: left;
+}
+
+.evaluate-list {
+  margin: 0;
+}
+
+.evaluate-list .list {
+  display: flex;
+}
+
+.car-list {
+  border-top: 2rpx solid #e5e5e5;
+  padding: 20rpx 0;
+}
+
+.list .title {
+  color: #727272;
+  padding: 0 0 0 10rpx;
+  font-size: 26rpx;
+  line-height: 208%;
+  height: 100%;
+  width: 104rpx;
+}
+
+.posting-title {
+  margin: 10rpx 0 22rpx 0;
+  color: #777;
+  font-size: 26rpx;
+}
+
+.evaluate-list .list {
+  margin-bottom: 0;
+}
+
+.see-detail {
+  position: absolute;
+  top: 12rpx;
+  right: 14rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  width: 132rpx;
+  text-align: center;
+  border-radius: 20rpx;
+  border: 2rpx solid #e6e6e6;
+  font-size: 22rpx;
+  color: #a3a3a3;
+}
+
+.user-grade .ext {
+  line-height: 20px;
+}
+
+.user-grade {
+  right: 182rpx;
+}
+
+.adopt {
+  top: -8rpx;
+  right: 5%;
+}
+
+.e-power .ext {
+  right: 184rpx;
+}
+
+

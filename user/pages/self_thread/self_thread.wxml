@@ -1,0 +1,56 @@
+<!--pages/saerch/saerch.wxml-->
+<import src="/zanui/loadmore/index.wxml" />
+<navBar navbar-data="{{navbarData}}"></navBar>
+<view class="container-nopadding" style="margin-top:{{heightMt}}px">
+  <view class="page-body" >
+    <block wx:if="{{articleList.length>0}}">
+      <view wx:for="{{articleList}}" wx:for-item="articleList" wx:key="{{articleList.tid}}" class="article" bindtap="toDetail" data-tid="{{articleList.tid}}" data-hidden="{{articleList.hidden}}" data-reputation_id="{{articleList.reputation_id}}">
+        
+        <view class="box-wrap">
+          <view class="item">
+            <view class="article-content">
+              <block>
+                <block>
+                  <view class="article-title">
+                    {{articleList.subject}}
+                  </view>
+                </block>
+              </block>
+            </view>
+            <view class="article-ext-info">
+              <view class="article-re">
+                <view>
+                <view class="views-icon">
+                          <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/views-icon.png"></image>
+                        </view>
+                {{articleList.views}}</view>
+                <view>
+                <view class="views-icon">
+                          <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/text-icon.png"></image>
+                        </view>
+                {{articleList.replies}}</view>
+              </view>
+              <view class="article-post-time">{{articleList.dateline}}</view>
+            </view>
+          </view>
+          <block>
+            <view class="article-img" style="background-image: url({{articleList.image_list[0]}})">
+              <view class="article-img-absolute" wx:if="{{articleList.hidden==1}}"></view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="no-list">
+        <view>暂无贴子</view>
+      </view>
+    </block>
+    <!-- 加载更多 -->
+    <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+    <!-- 没有更多的数据了 -->
+    <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+    <!-- 返回顶部 -->
+    <moreFunctions showToTop="true" scrollTop="{{scrollTop}}"></moreFunctions>
+  </view>
+</view>

@@ -1,0 +1,127 @@
+<!--user.wxml-->
+<navBar navbar-data="{{navbarData}}"></navBar>
+
+<view class="container bg-white" style="padding-top:{{heightMt}}px">
+
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+  <authorization showAuthorization="{{showAuthorization}}" bindagreeAuthorizeFun="agreeAuthorizeFun" bindrejectAuthorizeFun="rejectAuthorizeFun"></authorization>
+
+
+
+  <view class="page-head-info-wrap">
+    <view class="page-head-info">
+      <view class="userinfo-avatar" bindtap="selfLink" data-root="user" data-auth="1" data-item="user_detail">
+        <image class="img" src="{{userInfo.avatarUrl}}"></image>
+        <image class="sex" src="http://cdn.e-power.vip/resources/image/user/male.png" />
+      </view>
+      <view class="userinfo-nickname">
+        <view class="name">{{userInfo.nickName}}</view>
+        <view class="color-gray">{{userInfo.bio}}</view>
+      </view>
+      <view bindtap="selfLink" data-auth="1" data-item="editInfo" class="navigator-arrow">编辑</view>
+    </view>
+
+    <view class="user-info-wrap">
+      <view class="box-wrap">
+        <view bindtap="selfLink" data-auth="1" data-item="myLevel" class="item">
+          <view class="number">{{userInfo.level}}</view>
+          <view class="item-name">我的等级</view>
+        </view>
+        <view class="item" data-auth="1" data-item="myExtcredits">
+          <view class="number">{{userInfo.extcredits2}}</view>
+          <view class="item-name">我的电量</view>
+        </view>
+        <view bindtap="selfLink" data-auth="1" data-item="myFollow" class="item">
+          <view class="number">{{userInfo.following}}</view>
+          <view class="item-name">我的关注</view>
+        </view>
+        <view bindtap="selfLink" data-auth="1" data-item="myFans" class="item">
+          <view class="number">{{userInfo.follower}}</view>
+          <view class="item-name">我的粉丝</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="page-body">
+
+    <view class="user-list">
+      <view class="navtab-wrap">
+
+        <view bindtap="selfLink" data-auth="1" data-item="message" class="navtab">
+          <view class="msgNum" wx:if="{{userInfo.msg_status > 0}}">{{userInfo.msg_status}}</view>
+          <view class="icon-big">
+            <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/msg.png" />
+          </view>
+          <view class="navtab-text">消息通知</view>
+        </view>
+
+        <view bindtap="selfLink" data-auth="1" data-item="carOwner" class="navtab">
+          <view class="icon-big">
+            <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/authentication.png" />
+          </view>
+          <view class="navtab-text">车主认证</view>
+        </view>
+
+        <view bindtap="selfLink" data-auth="1" data-item="self_thread" class="navtab">
+          <view class="icon-big">
+            <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/article.png" />
+          </view>
+          <view class="navtab-text">帖子/口碑</view>
+        </view>
+
+        <view data-item="self_collection" bindtap="selfLink" data-auth="1" data-item="self_collection" class="navtab">
+          <view class="icon-big">
+            <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/collection.png" />
+          </view>
+          <view class="navtab-text">我的收藏</view>
+        </view>
+        <view data-item="self_collection" bindtap="selfLink" data-auth="1" data-item="feedback" class="navtab">
+          <view class="icon-big">
+            <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/feedback.png" />
+          </view>
+          <view class="navtab-text">意见反馈</view>
+        </view>
+        <view bindtap="selfLink" data-item="aboutUs" data-auth="0" class="navtab">
+          <view class="icon-big">
+            <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/about.png" />
+          </view>
+          <view class="navtab-text">关于我们</view>
+        </view>
+        <view bindtap="selfLink" data-item="help" data-auth="0" class="navtab">
+          <view class="icon-big">
+            <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/help.png" />
+          </view>
+          <view class="navtab-text">使用帮助</view>
+        </view>
+        <view bindtap="selfLink" data-item="signIn" class="navtab">
+          <view class="icon-big">
+            <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/sign_in.png" />
+          </view>
+          <view class="navtab-text">我的签到</view>
+        </view>
+        <view class="navtab" bindtap="selfLink" data-root="question" data-item="quest_my">
+          <view class="icon-big">
+            <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/my_quest.png" />
+          </view>
+          <view class="navtab-text">我的问答</view>
+        </view> 
+        <!-- <view class="navtab" bindtap="selfLink" data-root="praise" data-item="pr_active">
+          <view class="icon-big">
+            <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/active.png" />
+          </view>
+          <view class="navtab-text">口碑活动</view>
+        </view> -->
+        <view class="navtab">
+          <view class="icon-big">
+            <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/n-more.png" />
+          </view>
+          <view class="navtab-text">敬请期待</view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+</view>

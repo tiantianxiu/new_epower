@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "口碑选车",
+  "onReachBottomDistance": 50,
+  "usingComponents": {
+    "authorization": "/components/authorization/authorization",
+    "moreFunctions": "/components/moreFunctions/moreFunctions",
+    "navBar": "/components/navBar/navBar"
+  }
+}

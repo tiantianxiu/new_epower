@@ -1,0 +1,57 @@
+<loading hidden="{{loading_hidden}}">
+  {{loading_msg}}
+</loading>
+<navBar navbar-data="{{navbarData}}"></navBar>
+<view class="add-square-container">
+<view style="height:{{heightMt}}px"></view>
+  <view class="add-aqu-header">
+  <text class="pic-class-text">{{pic_text}}</text>
+    <view class="btn" bindtap="addSquare">发表</view>
+  </view>
+  <view>
+    <textarea placeholder="这一刻的想法..." maxlength="-1" bindinput="inputContent"></textarea>
+  </view>
+  <view class="images" wx:if="{{type == 2}}">
+    <block wx:for="{{image_list}}" wx:for-item="item" wx:key="{{index}}">
+      <view class="li">
+        <image src="{{item}}" mode="aspectFill"></image>
+        <view class="img-minus" data-idx="{{index}}" bindtap="imageDel"></view>
+      </view>
+    </block>
+    <view class="li add-image" bindtap="imageTap" wx:if="{{image_list.length < 9}}">
+      <image src="http://cdn.e-power.vip/resources/image/add.png"></image>
+    </view>
+  </view>
+  <view class="videos images" wx:if="{{type == 1}}">
+    <video wx:if="{{video}}" class="" src="{{video}}" object-fit="cover" style="width:{{100}}px;height:{{100 * v_height / v_width}}px">
+    </video>
+
+    <view class="li add-image" bindtap="videoTap" wx:if="{{!video}}">
+      <image src="http://cdn.e-power.vip/resources/image/add.png"></image>
+    </view>
+    <view class="li add-image" bindtap="videoMinusTap" wx:if="{{video}}">
+      <image src="http://cdn.e-power.vip/resources/image/minus.png"></image>
+    </view>
+
+  </view>
+
+  <view class="locals" bindtap="localTap" wx:if="{{!address}}">
+    显示位置
+  </view>
+  <view class="locals" bindtap="chooseLocation" wx:if="{{address}}">
+    {{address}}
+    <text></text>
+    <image src="http://cdn.e-power.vip/resources/image/local_del.png"></image>
+  </view>
+</view>
+
+<view class="square-pic" wx:if="{{thread.length > 0}}">
+  <view class="pic-title">
+    <text># </text> 热门话题
+  </view>
+  <view class="pic-content">
+    <block wx:for="{{thread}}" wx:key="{{index}}" wx:for-item="item">
+      <view class="li {{typeid==item.typeid ? 'active':''}}" bindtap="addPic" data-id="{{item.typeid}}" data-name="{{item.name}}">{{item.name}}</view>
+    </block>
+  </view>
+</view>

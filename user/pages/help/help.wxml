@@ -1,0 +1,30 @@
+<import src="/zanui/loadmore/index.wxml" />
+<import src="/wxParse/wxParse.wxml"/>
+<navBar navbar-data="{{navbarData}}"></navBar>
+
+<view class="container-nopadding" style="margin-top:{{heightMt}}px">
+  <view class="page-body">
+    <view class="page__bd">
+		<view class="section-wrap" wx:for="{{helpList}}" wx:key="" wx:for-item="list" wx:for-index="idx">
+			<view class="section-title {{isShow ? 'fold' :''}}" bindtap="foldFun" data-idx="{{idx}}"><text class="title">{{list.title}}</text>
+				<view class="navigator-arrow"></view>
+			</view>
+			<view hidden="{{!isShow}}" class="section-body help-list" wx:for="{{list.sub_group}}" wx:key="" wx:for-item="sublist">
+				<view class="list-item">
+					<block wx:for="{{replyTemArray}}" wx:key="">
+	                    <template is="wxParse" data="{{wxParseData:item}}"/>
+	                </block>
+				</view>
+			</view>
+		</view>
+
+    </view>
+
+    <!-- 加载更多 -->
+    <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+    <!-- 没有更多的数据了 -->
+    <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+    <!-- 返回顶部 -->
+    <moreFunctions showToTop="true" scrollTop="{{scrollTop}}"></moreFunctions>    
+  </view> 
+</view>

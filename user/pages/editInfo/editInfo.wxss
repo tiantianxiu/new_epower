@@ -1,0 +1,61 @@
+/* user.wxss */
+.userinfo-avatar {
+  border-radius: 50%;
+  width: 125rpx;
+  height: 125rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+  border:6rpx solid #00c481;
+  padding:6rpx;
+  background-color: #fff;
+}
+.userinfo-avatar .img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.item-name{
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #4f4f4f;
+  line-height: 1.6;
+}
+.user-info-item{
+  border-bottom: 3rpx solid #eee;
+  background-color: #fff;
+  padding:20rpx 30rpx;
+  min-height: 150rpx;
+  box-sizing: border-box;
+}
+.item-name-wrap{
+  width:175rpx;
+}
+.input-wrap{
+  width: 200rpx;
+}
+.user-info-item.box-top-wrap{
+  -webkit-align-items:flex-start;
+  align-items:flex-start;
+}
+.input-wrap .input-textarea{
+  line-height: 1.6;
+  padding:0;
+  margin:0;
+  margin-top: -6rpx;
+  width: 100%
+}
+.btn-area{
+  position: fixed;
+  bottom:80rpx;
+  left: 0;
+  right: 0;
+  padding: 0 30rpx;
+  
+}
+.imgs{
+  width: 100%;
+  height: 100%
+}
+
+

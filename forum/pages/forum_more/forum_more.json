@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "板块",
+  "usingComponents": {
+    "moreFunctions": "/components/moreFunctions/moreFunctions",
+    "navBar": "/components/navBar/navBar"
+  }
+}

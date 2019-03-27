@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "充电桩查询",
+  "usingComponents": {
+    "navBar": "/components/navBar/navBar"
+  }
+}

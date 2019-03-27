@@ -1,0 +1,83 @@
+<!--pages/zone/zone.wxml-->
+<navBar navbar-data="{{navbarData}}"></navBar>
+<!-- 授权登录框 -->
+<authorization showAuthorization="{{showAuthorization}}"></authorization>
+
+<view class="container-nopadding" style="margin-top:{{heightMt}}px">
+  <view class="page-body">
+    <block wx:if="{{topImg}}">
+      <view class="slide-image-wrap"> 
+        <view style="background-image:url({{topImg.banner}});" class="slide-image">
+          <view class="topic-views">
+            阅读数：<text>{{topImg.views}}</text>
+          </view>
+        </view>
+        <view class="topic-banner-text">#{{topImg.name}}#</view>
+        <view class="topic-desc">{{topImg.description}}</view>
+      </view>
+    </block>
+
+    <block wx:if="{{thread.length>0}}">
+      <view class="slide-image-wrap slide-image-wrap-radius" id="topic-body-titel">
+        <!-- <view class="topic-body-titel {{fixed?'fixed':''}}"  style="top:{{heightMt}}px">
+          <text class="{{order==1?'active':''}}" bindtap='orderTap' data-order="1">推荐</text>
+          <text class="{{order==2?'active':''}}" bindtap='orderTap' data-order="2">最新</text>
+        </view> -->
+        <view class="view-height" wx:if="{{fixed}}"></view>
+        <view class="topic-body-content" >
+          <block wx:for="{{thread}}" wx:for-item="item" wx:key="{{index}}">
+            <view class="list">
+              <view class="image" bindtap="toDetail" data-tid="{{item.tid}}">
+                <image src="{{item.avatar}}"></image>
+              </view>
+              <view class="contents">
+                <view class="author" bindtap="toDetail" data-tid="{{item.tid}}">{{item.author}}</view>
+                <view class="dateline">{{item.dateline}}</view>
+                <view class="images" wx:if="{{item.image_list.length > 0}}" bindtap="toDetail" data-tid="{{item.tid}}">
+                  <block wx:for="{{item.image_list}}" wx:for-item="images" wx:key="{{index}}">
+                    <view class="images-for-image" wx:if="{{item.image_list.length==1}}">
+                      <image src="{{images}}" mode="aspectFit" ></image>
+                    </view>
+                    <view class="images-for " style="background-image: url({{images}})" wx:else>
+                    </view>
+                  </block>
+                </view>
+                <view class="message" bindtap="toDetail" data-tid="{{item.tid}}">{{item.message}}</view>
+                <view class="topic-icon">
+                  <image class="tozans" src="http://cdn.e-power.vip/resources/image/detail/tozans.png" bindtap="toZan" wx:if="{{item.is_zan==0 || item.is_zan==2}}" data-index="{{index}}" data-type="1" data-tid="{{item.tid}}" data-is_zan="{{item.is_zan}}">
+                    <text>{{item.zan}}</text>
+                  </image>
+                  <image class="tozans" src="http://cdn.e-power.vip/resources/image/detail/tozaneds.png" bindtap="toZan" wx:else data-index="{{index}}" data-type="1" data-tid="{{item.tid}}" data-is_zan="{{item.is_zan}}">
+                    <text>{{item.zan}}</text>
+                  </image>
+                  <image class="tozans" src="http://cdn.e-power.vip/resources/image/detail/tocais.png" bindtap="toZan" wx:if="{{item.is_zan==0 || item.is_zan==1}}" data-index="{{index}}" data-type="2" data-tid="{{item.tid}}" data-is_zan="{{item.is_zan}}">
+                    <text>{{item.cai}}</text>
+                  </image>
+                  <image class="tozans" src="http://cdn.e-power.vip/resources/image/detail/tocaieds.png" bindtap="toZan" wx:else data-index="{{index}}" data-type="2" data-tid="{{item.tid}}" data-is_zan="{{item.is_zan}}">
+                    <text>{{item.cai}}</text>
+                  </image>
+                  <image class="tozans" src="http://cdn.e-power.vip/resources/image/detail/toreplys.png" bindtap="toDetail" data-tid="{{item.tid}}">
+                    <text>{{item.replies}}</text>
+                  </image>
+                </view>
+                <view class="post" wx:if="{{item.post.length > 0}}" bindtap="toDetail" data-tid="{{item.tid}}">
+                  <view wx:for="{{item.post}}" wx:for-item="post" wx:key="{{index}}">
+                    <text>{{post.username}}： </text>{{post.message}}
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="no-list">暂无此贴子</view>
+    </block>
+
+
+    <view wx:if='{{is_show_post.is_show == 1}}' bindtap="toAddArtice" class="iconAdd">
+      <image src="http://cdn.e-power.vip/resources/image/iconAdd.png" />
+    </view>
+  </view>
+</view>

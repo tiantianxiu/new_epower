@@ -1,0 +1,680 @@
+<!-- import zanui -->
+<import src="../../zanui/loadmore/index.wxml" />
+<!--index.wxml-->
+<view class="container-nopadding">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+  <authorization showAuthorization="{{showAuthorization}}" bindagreeAuthorizeFun="agreeAuthorizeFun" bindrejectAuthorizeFun="rejectAuthorizeFun"></authorization>
+  <!--  引入自定义组价。'navbar-data'中navbar是自定义名字，决定了组件中'navbarData'的名字 -->
+  <navBar navbar-data='{{navbarData}}'></navBar>
+
+  <view class="page-body" style="margin-top:{{heightMt}}px">
+   <view class="c-tab-fixed-wrap">
+        <view class="c-tab-fixed-holder"></view>
+        <view class="c-tab-fixed-holder"></view>
+      </view>
+    <view class="section">
+      <movable-area class="area">
+        <movable-view wx:for="{{imgRecommends}}" wx:key="{{item.tid}}" x="{{item.x}}" y="{{item.y}}" damping ="40" direction="all" bindchange="onChange" out-of-bounds="true" data-index="{{item.idx}}" catch:touchend="tap">
+          <image animation="{{animationData}}" src="{{item.thumbpath}}" class="image image{{item.idx}}"></image>
+        </movable-view>
+      </movable-area>
+    </view>
+    <view class="c-tab-fixed-wrap c-tabSearch-fixed-wrap" style="top:{{heightMt}}px">
+      <view class="c-tab-wrap top-tap">
+        <view class="tap {{tab=='recommend' ? 'active ' : ''}}" data-tab="recommend" bindtap="navChange">推荐</view>
+        <view class="tap {{tab=='vipCar' ? 'active' : ''}}" data-tab="vipCar" bindtap="navChange">车代表</view>
+        <view class="tap" bindtap="parsePrice" data-item="0">口碑选车
+          <image src="http://cdn.e-power.vip/resources/image/praise/parse_icon.png"></image>
+        </view>
+        <view class="tap {{tab=='Enews' ? 'active' : ''}}" data-tab="Enews" bindtap="navChange">E讯</view>
+        <view class="tap {{tab=='topicList' ? 'active' : ''}}" data-tab="topicList" bindtap="navChange">话题</view>
+      </view>
+    
+    </view>
+    <block>
+     
+
+
+
+
+      <!-- 推荐 -->
+      <block wx:if="{{tab =='recommend' || tab =='forumList'}}">
+        <view class="swiper-wrap">
+          <view class="pull-down-tip {{recommendTip?'active':''}}">{{recommendTip}}</view>
+          <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperChangeR" current="{{swiperCurR}}">
+
+            <swiper-item wx:for="{{imgRecommend}}" wx:key="{{item.tid}}" bindtap="toDetail" data-tid="{{item.tid}}">
+              <view style="background-image:url('{{item.thumbpath}}');" class="slide-image"></view>
+            </swiper-item>
+          </swiper>
+          <view class="dots">
+            <block wx:for="{{imgRecommend}}" wx:key="unique">
+              <view class="dot{{index == swiperIndexR ? ' active' : ''}}"></view>
+            </block>
+          </view>
+        </view>
+        <view class="recommend-icons">
+
+
+          <view class="recom-icon" bindtap="onNODone">
+            <text>能耗</text>
+          </view>
+          <!-- <view class="recom-icon" bindtap="onNODone">
+            <text>问答</text>
+          </view> -->
+          <view class="recom-icon" bindtap="questionTap">
+            <text>问答</text>
+            <text class="msg-status-num {{msg_status && !showQuest ? 'active':''}}">
+              {{msg_status}}
+            </text>
+            <view class="question-dialogue {{showQuest ? 'active' : ''}}" catchtap="emptytap" hover-stop-propagation='{{true}}'>
+              <view class="dialogue-title">
+                <image src="{{notice.avatar}}"></image>
+                <text class="text-name">{{notice.nickname}}</text>
+              </view>
+              <view class="dialogue-body">
+                <view class="dialogue-text">{{notice.notice}}
+                  <text class="red">￥{{notice.price}}元</text>
+                </view>
+                <view class="dialogue-list">
+                  <text bindtap="selfMessage">前往</text>
+                  <text bindtap="hideShareBox">忽略</text>
+                </view>
+              </view>
+            </view>
+            <view class="mask" wx:if="{{showQuest}}" hover-stop-propagation='{{true}}' catchtap="hideShareBox"></view>
+          </view>
+          <view class="recom-icon {{tab =='forumList' ? 'active' : ''}}" bindtap="navChange" data-tab="forumList">
+            <text>吐槽</text>
+          </view>
+          <view class="recom-icon" bindtap="toCharging">
+            <text>充电桩</text>
+          </view>
+          <view class="recom-icon" bindtap="onNODone">
+            <text>销量</text>
+          </view>
+          <view class="recom-icon" bindtap="toSearch">
+            <text>搜索</text>
+          </view>
+        </view>
+        <block wx:if="{{tab =='recommend'}}">
+
+          <block wx:for="{{bannerArticleList}}" wx:for-item="article" wx:key="">
+            <view class="article article-imgs" wx:if="{{article.attachment == 1 || article.image_list.length >= 3 || article.image_list.length == 0}}" bindtap="toDetail" data-tid="{{article.tid}}" data-reputation_id="{{article.reputation_id}}" data-is_question="{{article.hidden == 2 ? true : false}}">
+              <view class="article-content">
+                <block>
+                  <block>
+                    <view class="article-title">
+                      <block wx:if="{{article.hidden == 2}}">问答：</block>
+                      <block wx:if="{{article.hidden == 1}}">口碑：</block>
+                      {{article.subject}}
+                    </view>
+                  </block>
+                </block>
+              </view>
+              <block wx:if="{{article.image_list.length>0}}">
+                <view class="article-img-wrap box-wrap">
+                  <block wx:if="{{article.image_list.length == 1}}">
+                    <view class="article-img item" style="height:200px; " data-pid="{{article.pid}}" catchtap="play" hover-stop-propagation="{{true}}">
+                      <!-- <view class="article-img item" style="height:340rpx; background:url({{article.image_list[0]}})" data-pid="{{article.pid}}" > -->
+                      <image src="{{article.image_list[0]}}" mode="aspectFill" wx:if="{{showCoverId != article.pid}}"></image>
+                      <view class="video-icon" data-pid="{{article.pid}}" catchtap="play" hover-stop-propagation="{{true}}" wx:if="{{showCoverId != article.pid}}"></view>
+                      <video src="{{article.video}}" id="myVideo{{article.pid}}" data-pid="{{article.pid}}" hover-stop-propagation="{{true}}" poster="{{article.video}}" bindended="exitFullScreen" wx:if="{{showCoverId == article.pid}}" direction="0"></video>
+                      <!-- <view class="video-icon" data-pid="{{article.pid}}" ></view> -->
+                    </view>
+                  </block>
+                  <block wx:if="{{article.image_list.length >= 3}}">
+                    <view class="article-img item" style="background-image: url({{article.image_list[0]}})">
+                    </view>
+                    <view class="article-img item" style="background-image: url({{article.image_list[1]}})">
+                    </view>
+                    <view class="article-img item" style="background-image: url({{article.image_list[2]}})">
+                    </view>
+                  </block>
+                </view>
+
+              </block>
+              <view class="article-ext-info box-wrap">
+                <view class="item author-info-little">
+                  <view class="author">
+                    <image src="{{article.avatar}}" />
+                  </view>
+                  <text class="author-name">{{article.author}}</text>
+                </view>
+                <view class="article-re item-right">
+                  <view>
+                    <view class="views-icon">
+                      <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/views-icon.png"></image>
+                    </view>
+                    {{article.views}}</view>
+                  <view>
+                    <view class="views-icon">
+                      <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/text-icon.png"></image>
+                    </view>
+                    {{article.replies}}</view>
+                  <view>{{article.create_time}}</view>
+                </view>
+              </view>
+            </view>
+            <view class="article box-wrap" bindtap="toDetail" data-tid="{{article.tid}}" data-reputation_id="{{article.reputation_id}}" data-is_question="{{article.hidden == 2 ? true : false}}" hover-class="hover" wx:else>
+              <block wx:if="{{article.ad == 0}}">
+                <view class="item thread-item-text">
+                  <view class="article-content">
+                    <block wx:if="{{!lite_switch}}">
+                      <block wx:if="{{article.subject}}">
+                        <view class="article-title">{{article.subject}}</view>
+                      </block>
+                    </block>
+                  </view>
+                  <view class="article-ext-info">
+                    <view class="article-re">
+
+                      <view wx:if="{{article.displayorder > 0}}" class="tag-top">置顶</view>
+                      <view>
+                        <view class="views-icon">
+                          <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/views-icon.png"></image>
+                        </view>
+                        {{article.views}}
+                      </view>
+                      <view>
+                        <view class="views-icon">
+                          <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/text-icon.png"></image>
+                        </view>
+                        {{article.replies}}
+                      </view>
+                    </view>
+                    <view class="article-post-time">{{article.create_time}}</view>
+                  </view>
+                </view>
+                <view wx:if="{{article.image_list.length > 0}}" class="article-img" style="background-image: url({{article.image_list[0]}})">
+                  <view wx:if="{{article.hidden==1}}" class="article-img-absolute"></view>
+                  <view wx:if="{{article.hidden==2}}" class="article-img-absolute article-img-absolute-ask"></view>
+                  <view wx:if="{{article.pushedaid != 0}}" class="article-img-absolute article-img-absolute-edetail"></view>
+                  <!-- <view class="video-icon" wx:if="{{article.attachment == 1}}"></view> -->
+                </view>
+              </block>
+              <block wx:else="{{article.ad == 1}}">
+                <view class="list-ad" style="background-image: url({{article.image_list}})">
+                  <view class="tag-ad">广告</view>
+                </view>
+              </block>
+            </view>
+            <official-account wx:if="{{index == 3}}"></official-account>
+          </block>
+
+          <block wx:for="{{articleList}}" wx:for-item="article" wx:key="">
+            <view class="article article-imgs" wx:if="{{article.attachment == 1 || article.image_list.length >= 3 || article.image_list.length == 0}}" bindtap="toDetail" data-tid="{{article.tid}}" data-reputation_id="{{article.reputation_id}}" data-is_question="{{article.hidden == 2 ? true : false}}">
+              <view class="article-content">
+                <block>
+                  <block>
+                    <view class="article-title">
+                      <block wx:if="{{article.hidden == 2}}">问答：</block>
+                      <block wx:if="{{article.hidden == 1}}">口碑：</block>
+                      {{article.subject}}
+                    </view>
+                  </block>
+                </block>
+              </view>
+              <block wx:if="{{article.image_list.length>0}}">
+                <view class="article-img-wrap box-wrap">
+                  <block wx:if="{{article.image_list.length == 1}}">
+                    <view class="article-img item" style="height:200px; ">
+                      <!-- <view class="article-img item" style="height:340rpx; background:url({{article.image_list[0]}})" data-pid="{{article.pid}}" > -->
+                      <image src="{{article.image_list[0]}}" mode="aspectFill" wx:if="{{showCoverId != article.pid}}" data-pid="{{article.pid}}" catchtap="play" hover-stop-propagation="{{true}}"></image>
+                      <view class="video-icon" data-pid="{{article.pid}}" catchtap="play" hover-stop-propagation="{{true}}" wx:if="{{showCoverId != article.pid}}"></view>
+                      <video src="{{article.video}}" id="myVideo{{article.pid}}" data-pid="{{article.pid}}" autoplay="{{false}}" bindpause="pauseTap" hover-stop-propagation="{{true}}" poster="{{article.video}}" bindended="exitFullScreen" enable-play-gesture="{{true}}" wx:if="{{showCoverId == article.pid}}"
+                        direction="0" show-mute-btn="true" hover-stop-propagation="{{true}}" catchtap="dd"></video>
+                      <!-- <view class="video-icon" data-pid="{{article.pid}}" ></view> -->
+                    </view>
+                  </block>
+                  <block wx:if="{{article.image_list.length >= 3}}">
+                    <view class="article-img item" style="background-image: url({{article.image_list[0]}})">
+                    </view>
+                    <view class="article-img item" style="background-image: url({{article.image_list[1]}})">
+                    </view>
+                    <view class="article-img item" style="background-image: url({{article.image_list[2]}})">
+                    </view>
+                  </block>
+                </view>
+
+              </block>
+              <view class="article-ext-info box-wrap">
+                <view class="item author-info-little">
+                  <view class="author">
+                    <image src="{{article.avatar}}" />
+                  </view>
+                  <text class="author-name">{{article.author}}</text>
+                </view>
+                <view class="article-re item-right">
+                  <view>
+                    <view class="views-icon">
+                      <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/views-icon.png"></image>
+                    </view>
+                    {{article.views}}</view>
+                  <view>
+                    <view class="views-icon">
+                      <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/text-icon.png"></image>
+                    </view>
+                    {{article.replies}}</view>
+                  <view>{{article.create_time}}</view>
+                </view>
+              </view>
+            </view>
+            <view class="article box-wrap" bindtap="toDetail" data-tid="{{article.tid}}" data-reputation_id="{{article.reputation_id}}" data-is_question="{{article.hidden == 2 ? true : false}}" hover-class="hover" wx:else>
+              <block wx:if="{{article.ad == 0}}">
+                <view class="item thread-item-text">
+                  <view class="article-content">
+                    <block wx:if="{{!lite_switch}}">
+                      <block wx:if="{{article.subject}}">
+                        <view class="article-title">{{article.subject}}</view>
+                      </block>
+                    </block>
+                  </view>
+                  <view class="article-ext-info">
+                    <view class="article-re">
+
+                      <view wx:if="{{article.displayorder > 0}}" class="tag-top">置顶</view>
+                      <view>
+                        <view class="views-icon">
+                          <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/views-icon.png"></image>
+                        </view>
+                        {{article.views}}
+                      </view>
+                      <view>
+                        <view class="views-icon">
+                          <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/text-icon.png"></image>
+                        </view>
+                        {{article.replies}}
+                      </view>
+                    </view>
+                    <view class="article-post-time">{{article.create_time}}</view>
+                  </view>
+                </view>
+                <view wx:if="{{article.image_list.length > 0}}" class="article-img" style="background-image: url({{article.image_list[0]}})">
+                  <view wx:if="{{article.hidden==1}}" class="article-img-absolute"></view>
+                  <view wx:if="{{article.hidden==2}}" class="article-img-absolute article-img-absolute-ask"></view>
+                  <view wx:if="{{article.pushedaid != 0}}" class="article-img-absolute article-img-absolute-edetail"></view>
+                  <!-- <view class="video-icon" wx:if="{{article.attachment == 1}}"></view> -->
+                </view>
+              </block>
+              <block wx:else="{{article.ad == 1}}">
+                <view class="list-ad" style="background-image: url({{article.image_list}})">
+                  <view class="tag-ad">广告</view>
+                </view>
+              </block>
+            </view>
+            <official-account wx:if="{{index == 3}}"></official-account>
+          </block>
+        </block>
+        <block wx:if="{{tab =='forumList'}}">
+          <block wx:if="{{articleListForumlist.length>0}}">
+            <view wx:for="{{articleListForumlist}}" wx:for-item="article" wx:key="{{article.tid}}" class="article article-imgs" bindtap="toDetail" data-tid="{{article.tid}}">
+              <view class="article-content">
+                <block>
+                  <block>
+                    <view class="article-title">{{article.subject}}</view>
+                  </block>
+                </block>
+              </view>
+              <block wx:if="{{article.image_list.length>0}}">
+                <view class="article-img-wrap box-wrap">
+                  <block wx:if="{{article.image_list.length == 1}}">
+                    <view class="article-img item" style="height:300rpx; background-image: url({{article.image_list[0]}})">
+                    </view>
+                  </block>
+                  <block wx:if="{{article.image_list.length == 2}}">
+                    <view class="article-img item" style="height:200rpx; background-image: url({{article.image_list[0]}})">
+                    </view>
+                    <view class="article-img item" style="height:200rpx; background-image: url({{article.image_list[1]}})">
+                    </view>
+                  </block>
+                  <block wx:if="{{article.image_list.length >= 3}}">
+                    <view class="article-img item" style="background-image: url({{article.image_list[0]}})">
+                    </view>
+                    <view class="article-img item" style="background-image: url({{article.image_list[1]}})">
+                    </view>
+                    <view class="article-img item" style="background-image: url({{article.image_list[2]}})">
+                    </view>
+                  </block>
+                </view>
+              </block>
+
+              <view class="article-ext-info box-wrap">
+                <view class="item author-info-little">
+                  <view class="author">
+                    <image src="{{article.avatar}}" />
+                  </view>
+                  <text class="author-name">{{article.author}}</text>
+                </view>
+                <view class="article-re item-right">
+                  <view>
+                    <view class="views-icon">
+                      <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/views-icon.png"></image>
+                    </view>
+                    {{article.views}}</view>
+                  <view>
+                    <view class="views-icon">
+                      <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/text-icon.png"></image>
+                    </view>
+                    {{article.replies}}</view>
+                  <view>{{article.dateline}}</view>
+                </view>
+
+              </view>
+            </view>
+          </block>
+        </block>
+      </block>
+      <!-- end 推荐 -->
+
+      <!-- 车代表 -->
+      <block wx:if="{{tab =='vipCar'}}">
+        <view class="sub-tab-wrap box-wrap">
+          <view bindtap="tagChange" data-tag='carVipThread' class="item {{carViptag =='carVipThread' ? 'current currentCarVip' : ''}}">
+            <text>车代表原创</text>
+          </view>
+          <view bindtap="tagChange" data-tag='carVipUser' class="item {{carViptag =='carVipUser' ? 'current currentCarVip' : ''}}">
+            <text>车代表</text>
+          </view>
+          <!-- <view bindtap="tagChange" data-tag='carVipApply' class="item {{carViptag =='carVipApply' ? 'current currentCarVip' : ''}}">
+            <text>申请车代表</text>
+          </view> -->
+        </view>
+        <!-- tag车代表原创 -->
+        <block wx:if="{{carViptag =='carVipThread'}}">
+          <view wx:for="{{articleListCarVip}}" wx:for-item="article" wx:key="{{article.tid}}" class="article article-imgs" bindtap="toDetail" data-tid="{{article.tid}}">
+            <view class="article-content">
+              <block>
+                <block>
+                  <view class="article-title">{{article.subject}}</view>
+                </block>
+              </block>
+            </view>
+            <block wx:if="{{article.image_list.length>0}}">
+              <view class="article-img-wrap box-wrap">
+                <block wx:if="{{article.image_list.length == 1}}">
+                  <view class="article-img item" style="height:400rpx; background-image: url({{article.image_list[0]}})">
+                  </view>
+                </block>
+                <block wx:if="{{article.image_list.length == 2}}">
+                  <view class="article-img item" style="height:200rpx; background-image: url({{article.image_list[0]}})">
+                  </view>
+                  <view class="article-img item" style="height:200rpx; background-image: url({{article.image_list[1]}})">
+                  </view>
+                </block>
+                <block wx:if="{{article.image_list.length >= 3}}">
+                  <view class="article-img item" style="background-image: url({{article.image_list[0]}})">
+                  </view>
+                  <view class="article-img item" style="background-image: url({{article.image_list[1]}})">
+                  </view>
+                  <view class="article-img item" style="background-image: url({{article.image_list[2]}})">
+                  </view>
+                </block>
+              </view>
+            </block>
+
+            <view class="article-ext-info box-wrap">
+              <view class="item author-info-little">
+                <view class="author">
+                  <image src="{{article.avatar}}" />
+                </view>
+                <text class="author-name">{{article.author}}</text>
+              </view>
+              <view class="article-re item-right">
+                <view>
+                  <view class="views-icon">
+                    <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/views-icon.png"></image>
+                  </view>
+                  {{article.views}}</view>
+                <view>
+                  <view class="views-icon">
+                    <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/text-icon.png"></image>
+                  </view>
+                  {{article.replies}}</view>
+                <view>{{article.dateline}}</view>
+              </view>
+
+            </view>
+          </view>
+        </block>
+        <!-- tag车代表 -->
+        <block wx:elif="{{carViptag =='carVipUser'}}">
+          <view class="list-wrap">
+            <view class="list-header">
+              <view class="box-wrap">
+                <view class="list-item item-photo">头像</view>
+                <view class="list-item item-nick item">昵称</view>
+                <view class="list-item item-level" style="height: auto; background: none;">认证车型</view>
+                <view class="list-item item-E">我的电量</view>
+                <view class="list-item item-post">帖子</view>
+              </view>
+            </view>
+            <view class="list-body">
+
+              <view wx:for="{{userList}}" wx:for-item="user" wx:key="{{user.uid}}" data-uid="{{user.uid}}" class="box-wrap list" bindtap="toUserDetail">
+                <view class="list-item item-photo">
+                  <view class="author">
+                    <image src="{{user.avatar}}" />
+                  </view>
+                </view>
+                <view class="list-item item item-nick">
+                  <text>{{user.username}}</text>
+                </view>
+                <view class="list-item item-level">
+                  <text class="tag-level">{{user.car}}</text>
+                </view>
+                <view class="list-item item-E">{{user.extcredits2}}</view>
+                <view class="list-item item-post">{{user.posts}}</view>
+              </view>
+
+
+            </view>
+          </view>
+        </block>
+        <!-- tag申请车代表 -->
+        <!-- <block wx:else>
+          <view class="carvip">
+            <view class="section-text">
+              <view class="section-text-title">E区首批车代表申请条件</view>
+              <view class="section-text-body">
+                <view class="text-item text-in">
+                  <text class="text-number">1、</text>
+                  <text class="text-content">车代表申请人为E区任一新能源车型的认证车主；</text>
+                </view>
+                <view class="text-item text-in">
+                  <text class="text-number">2、</text>
+                  <view class="text-item text-in">
+                    <text class="text-number">A:</text>
+                    <text class="text-content">首批申请人在E区论坛精华帖不少于1篇，有效回复不少于10篇（灌水回复不算）</text>
+                  </view>
+                  <view class="text-item text-in">
+                    <text class="text-number">B:</text>
+                    <text class="text-content">有效主帖不少于10篇，有效回复不少于30条（水贴和灌水回复不算）；</text>
+                  </view>
+                  <view class="text-item">
+                    <text class="text-content">满足第2条中A/B任一即可</text>
+                  </view>
+                </view>
+
+              </view>
+            </view>
+            <view class="section-text">
+              <view class="section-text-title">首批车代表权益</view>
+              <view class="section-text-body">
+                <view class="text-item">
+                  <text class="text-number">1、</text>
+                  <text class="text-content">首批车代表原创精华贴，奖励300元京东购物卡；</text>
+                </view>
+                <view class="text-item">
+                  <text class="text-number">2、</text>
+                  <text class="text-content">优先晋升版主，成为对应车型板块掌门人；</text>
+                </view>
+                <view class="text-item">
+                  <text class="text-number">3、</text>
+                  <text class="text-content">您的观点建议直通厂家，并优先参与厂家线下活动；</text>
+                </view>
+                <view class="text-item">
+                  <text class="text-number">4、</text>
+                  <text class="text-content">网红大V体验，E区自媒体矩阵重点展示您的文章观点；</text>
+                </view>
+                <view class="text-item">
+                  <text class="text-number">5、</text>
+                  <text class="text-content">体验各品牌主机厂车友会活动；</text>
+                </view>
+                <view class="text-item">
+                  <text class="text-number">6、</text>
+                  <text class="text-content">更多权益等待开启</text>
+                </view>
+              </view>
+            </view>
+            <view class="section-text">
+              <view class="section-text-title">如何申请车代表</view>
+              <view class="section-text-body">
+                <view class="text-item">
+                  <text class="text-content">注册认证车主 → 点击申请车代表 → 完善资料提交申请 → 提交后台审核</text>
+                </view>
+                <view class="text-item">
+                  <view class="check-box-wrap" style="width: 50%" bindtap="checkboxChange">
+                    <view class="check-box {{checkRead == true ? 'checked' : ''}}">
+                      <image wx:if="{{checkRead == true}}" src="http://cdn.e-power.vip/resources/image/checked.png" />
+                    </view>
+                    <text>已阅读以上内容</text>
+                  </view>
+                </view>
+
+              </view>
+            </view>
+
+            <view class="btn-wrap">
+              <view bindtap="applyCarOwner" class="btn-default {{applyStatus == 4 && checkRead == true? '':'btn-disabled'}}">{{applyTest}}</view>
+
+              <view wx:if="{{applyStatus == 2}}" class="btn-default" bindtap="applyCarOwner">重新申请</view>
+
+            </view>
+          </view>
+        </block> -->
+      </block>
+      <!-- end 车代表-->
+
+      <!-- 话题 -->
+      <block wx:if="{{tab =='topicList'}}">
+        <block wx:if="{{newTopicList}}">
+          <view class="section-wrap section-detail-wrap">
+            <view class="section-body">
+              <view class="slide-image-wrap-index topic-banner">
+                <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+                  <block wx:for="{{topic_banner}}" wx:for-item="item" wx:key="{{index}}">
+                    <swiper-item bindtap="toTopicDetail" data-fid="{{item.fid}}">
+                      <view style="background-image:url({{item.banner}});" class="slide-image">
+                        <!-- <view class="new-topic">
+                          <image src="http://cdn.e-power.vip/resources/image/new-topic.png"></image>
+                        </view> -->
+                      </view>
+                      <view class="topic-banner-text">#{{item.name}}#</view>
+                      <view class="topic-desc">{{item.description}}</view>
+                    </swiper-item>
+                  </block>
+                </swiper>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view class="section-wrap section-detail-wrap section-detail-history-wrap">
+          <block wx:if="{{topic_max.length>0}}">
+
+            <view class="section-title">
+              <text class="title">本期话题</text>
+              <!-- <view class="">查看更多</view> -->
+            </view>
+            <view class="topic-body">
+              <view class="list" wx:for="{{topic_max}}" wx:key="{{index}}" wx:for-item="item" data-fid="{{item.fid}}" bindtap="toTopicDetail">
+                <image src="{{item.icon}}"></image>
+                <view class="topic-text"># {{item.name}} #</view>
+              </view>
+              <view class="clear"></view>
+            </view>
+
+          </block>
+
+          <block wx:if="{{topic_min.length>0}}">
+
+            <view class="section-title">
+              <text class="title">往期回顾</text>
+              <!-- <view class="">查看更多</view> -->
+            </view>
+            <view class="topic-body">
+              <view class="list" wx:for="{{topic_min}}" wx:key="{{index}}" wx:for-item="item" data-fid="{{item.fid}}" bindtap="toTopicDetail">
+                <image src="{{item.icon}}"></image>
+                <view class="topic-text"># {{item.name}} #</view>
+              </view>
+              <view class="clear"></view>
+            </view>
+          </block>
+        </view>
+      </block>
+      <!-- end 话题 -->
+
+      <!-- E讯 -->
+      <block wx:if="{{tab =='Enews'}}">
+        <view class="swiper-wrap">
+          <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperChangeE" current="{{swiperCurE}}">
+            <block>
+              <swiper-item wx:for="{{imgEnews}}" wx:key="{{item.aid}}" bindtap="toEdetail" data-aid="{{item.aid}}" data-tid="{{item.tid}}">
+                <view style="background-image:url({{item.thumbpath}});" class="slide-image"></view>
+              </swiper-item>
+            </block>
+          </swiper>
+
+          <view class="dots">
+            <block wx:for="{{imgEnews}}" wx:key="unique">
+              <view class="dot{{index == swiperIndexE ? ' active' : ''}}"></view>
+            </block>
+          </view>
+        </view>
+
+
+        <view class="box-wrap tab-enews">
+          <!-- <view class="item" bindtap="toApplyInto">申请进驻
+            <image class="icon-width" src="http://cdn.e-power.vip/resources/image/icon-goto.png"></image>
+          </view> -->
+          <view class="item" bindtap="toRankingList">媒体排行榜
+            <image class="icon-width" src="http://cdn.e-power.vip/resources/image/icon-goto.png"></image>
+          </view>
+        </view>
+
+        <view class="section-wrap">
+          <view class="section-title section-ext">
+            <text class="title">最新资讯</text>
+            <view class="navigator-arrow" bindtap="toBigshot">更多</view>
+          </view>
+          <view class="section-body">
+            <block wx:if="{{einfoList.length>0}}">
+              <view class="article box-wrap" wx:for="{{einfoList}}" wx:for-item="einfoList" wx:key="{{index}}" bindtap="toDetail" data-tid="{{einfoList.tid}}" hover-class="hover">
+                <view class="article-img" style="margin-right: 30rpx;margin-left: 0; background-image: url({{einfoList.image_list[0]}})">
+                </view>
+                <view class="item">
+                  <view class="article-content">
+                    <view class="article-title">{{einfoList.subject}}</view>
+                  </view>
+                  <view class="article-ext-info">
+                    <view class="article-post-time">{{einfoList.create_time}}</view>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+
+        </view>
+      </block>
+      <!-- end E讯 -->
+    </block>
+    <!-- 加载更多 -->
+    <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+    <!-- 没有更多的数据了 -->
+    <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+    <!-- 返回顶部 -->
+    <moreFunctions showToPost="{{!hidePostIcon}}"></moreFunctions>
+  </view>
+</view>

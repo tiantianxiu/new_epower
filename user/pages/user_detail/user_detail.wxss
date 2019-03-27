@@ -1,0 +1,268 @@
+@import "/pages/square/square.wxss";
+
+.page-head-info {
+  padding: 0 30rpx 30rpx 20rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  box-align: center;
+  -webkit-box-align: center;
+  justify-content: center;
+  margin-top: -68rpx;
+  position: relative;
+  z-index: 0;
+}
+
+.userinfo-avatar {
+  width: 136rpx;
+  height: 136rpx;
+  box-sizing: border-box;
+  padding: 6rpx;
+  margin: 0 26rpx 0 0;
+  position: relative;
+}
+
+.userinfo-avatar .img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+}
+
+.userinfo-nickname {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  color: #676666;
+  margin-top: 46rpx;
+}
+
+.userinfo-nickname-mar {
+  margin-top: -24rpx;
+}
+
+.userinfo-nickname .name {
+  margin-top: 18rpx;
+  font-size: 26rpx;
+}
+
+.userinfo-nickname .color-gray {
+  font-size: 24rpx;
+}
+
+.user-info-wrap {
+  border-bottom: 3rpx solid #e5e5e5;
+  padding: 0 30rpx;
+}
+
+.user-info-wrap .box-wrap {
+  margin: 0 -30rpx;
+  height: 124rpx;
+  text-align: center;
+}
+
+.user-info-wrap .number {
+  color: #00c481;
+  font-size: 28rpx;
+}
+
+.user-info-wrap .item-name {
+  color: #676767;
+  font-size: 28rpx;
+}
+
+.btn-group-wrap {
+  /* display: flex; */
+  text-align: right;
+  margin-bottom: -8rpx;
+}
+
+.btn-group-wrap .btn-green {
+  height: 44rpx;
+  line-height: 44rpx;
+  font-size: 22rpx;
+  color: #fff;
+  background-color: #00c481;
+  padding: 0 18rpx;
+  border-radius: 22rpx;
+  text-align: center;
+  width: 104rpx;
+}
+
+.btn-group-wrap .btn-green:first-child {
+}
+
+.btn-group-wrap .btn-green.btn-gray {
+  background-color: #999;
+}
+
+.badge-wrap {
+  border-bottom: 3rpx solid #eee;
+}
+
+.badge-wrap .badge-item {
+  text-align: center;
+  width: 150rpx;
+  font-size: 24rpx;
+  color: #515151;
+  padding: 30rpx 0;
+}
+
+.badge-wrap .badge-item .badge-img {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0 auto 10rpx;
+  line-height: 0;
+}
+
+.badge-wrap .badge-item .badge-img image {
+  max-width: 80rpx;
+  max-height: 80rpx;
+  width: 40rpx;
+  height: 70rpx;
+}
+
+.page-tail-space {
+  height: 120rpx;
+  /*background-color: white;*/
+}
+
+.page-tail {
+  left: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #00c481;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resp-input-cell {
+  width: 84%;
+  margin-right: 20rpx;
+}
+
+.resp-input {
+  height: 60rpx;
+  line-height: 60rpx;
+  padding-left: 20rpx;
+  margin: 15rpx 0 15rpx 25rpx;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+  border-radius: 10rpx;
+  background-color: #fff;
+  color: #757575;
+  flex: 1;
+}
+
+.resp-btn {
+  height: 60rpx;
+  width: 10%;
+  text-align: center;
+  margin-right: 8rpx;
+  color: #4b0;
+  font-size: 30rpx;
+}
+
+.resp-btn2 {
+  font-size: 30rpx;
+  color: #fff;
+  line-height: 60rpx;
+  width: 20%;
+  text-align: center;
+}
+
+.e-power image {
+  height: 30rpx;
+  width: 74rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+}
+
+.e-power text {
+  vertical-align: middle;
+  font-size: 20rpx;
+  color: #6a6a6a;
+}
+
+.e-power .text-green {
+  font-size: 28rpx;
+  color: #00c481;
+}
+
+.page-head-bg {
+  width: 100%;
+  height: 426rpx;
+  position: relative;
+  z-index: 0;
+}
+
+.page-head-bg text {
+  color: #fff;
+  position: absolute;
+  top: 16rpx;
+  right: 30rpx;
+  font-size: 24rpx;
+}
+
+.user-ban {
+  background: url(http://cdn.e-power.vip/resources/image/square/ban.png) no-repeat;
+}
+
+.user-baned {
+  background: url(http://cdn.e-power.vip/resources/image/square/baned.png) no-repeat;
+}
+
+.user-message {
+  background: url(http://cdn.e-power.vip/resources/image/square/message.png) no-repeat;
+}
+
+.user-follow {
+  background: url(http://cdn.e-power.vip/resources/image/square/add_view.png) no-repeat;
+}
+
+.user-followed {
+  background: url(http://cdn.e-power.vip/resources/image/square/add_viewed.png) no-repeat;
+}
+
+.user-heart {
+  background: url(http://cdn.e-power.vip/resources/image/square/heart.png) no-repeat;
+}
+
+.btn-group-wrap-li {
+  display: inline-block;
+  padding-top: 46rpx;
+  background-size: 92%;
+  color: #fff;
+  margin-left: 58rpx;
+  background-position: top center;
+  font-size: 24rpx;
+}
+
+.topic-body-content .contents {
+  position: relative;
+}
+
+.topic-body-content .contents .author {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.icon-v4 {
+  bottom: 5%;
+  left: 100rpx;
+  width: 32rpx;
+  height: 32rpx;
+}
+.author-name{
+  margin-top: 18rpx;
+}

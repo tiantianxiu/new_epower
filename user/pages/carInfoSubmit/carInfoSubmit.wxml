@@ -1,0 +1,49 @@
+<!--pages/order_buy/order_buy.wxml-->
+<import src="/zanui/loadmore/index.wxml" />
+<view class="container-nopadding">
+	<loading hidden="{{loading_hidden}}">
+	{{loading_msg}}
+	</loading>
+	<progressBar showProgress="{{showProgress}}" progress="{{progress}}"></progressBar>
+
+  <navBar navbar-data="{{navbarData}}" ></navBar>
+	<view class="page-body" style="margin-top:{{heightMt}}px">
+		<view class="form-center-wrap">
+			<view class="form-group" bindtap="chooseCarModel">
+				<view class="group-name group-name-block">
+					<view>认证车型</view>
+					<view class="group-name-ext">{{car_2}} {{car_3}}</view>
+				</view>
+				<view class="navigator-arrow" wx:if="{{status != '已认证'}}"></view>
+			</view>	
+
+			<view class="form-group-img">
+				<view class="group-name">行驶证正面照片<text class="color-tips">（横向拍摄识别更精确）</text></view>
+				<view class="view-img" bindtap="chooseImage">
+					<image src="http://cdn.e-power.vip/resources/image/carNumber.png" />
+					<view style="background-image: url({{imageList}});"data-src="{{imageList}}"></view>
+				</view>
+			</view>
+			<view class="form-group">
+				<view class="group-name">姓名</view>
+				<view class="group-text"><input type="text" placeholder="请输入您的姓名" value="{{name}}" disabled="{{status == '已认证'? true : false}}" bindinput="inputName" placeholder-style="color:#c2c2c2" /></view>
+			</view>
+			<view class="form-group">
+				<view class="group-name">车牌号码</view>
+				<view class="group-text"><input placeholder="请输入您的车牌号码" value="{{carNumber}}" bindinput="inputCarNumber" placeholder-style="color:#c2c2c2" disabled="{{status == '已认证'? true : false}}" /></view>
+			</view>
+			<view class="form-group">
+				<view class="group-name">联系电话</view>
+				<view class="group-text"><input type="number" placeholder="请输入您的联系电话" value="{{phone}}" bindinput="inputPhone" placeholder-style="color:#c2c2c2" disabled="{{status == '已认证'? true : false}}" /></view>
+			</view>	
+		</view>
+
+		<!-- <view class="btn-area-fixed">
+			<view class="btn-area-holder"></view> -->
+			<view class="btn-area">
+            	<view class="btn-main" bindtap="submitFun" wx:if="{{status != '已认证'}}">上传资料</view>
+            </view>
+        <!-- </view> -->
+	</view>
+	<carModel carModelShow="{{carModelShow}}" bindcarModelInfo="carModelInfo"></carModel>
+</view>

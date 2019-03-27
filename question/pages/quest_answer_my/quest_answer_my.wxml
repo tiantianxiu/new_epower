@@ -1,0 +1,50 @@
+<navBar navbar-data="{{navbarData}}"></navBar>
+<view style="margin-top:{{heightMt}}px">
+  <view class="section-wrap">
+    <view class="section-title section-ext">
+      <text class="title">共有{{articleList.length}}条回答</text>
+    </view>
+  </view>
+  <view class="article" wx:for="{{articleList}}" wx:key="{{index}}" wx:for-item="article" data-tid="{{article.tid}}" bindtap="todetail">
+    <view class="author-info" data-uid="{{article.authorid}}" bindtap="toUserDetail">
+      <view class="author">
+        <image src="{{article.avatar}}" />
+      </view>
+      <view class="author-name">
+        <text class="text-name">{{article.author}}</text>
+        <text class="tag-item tag-red">楼主</text>
+
+        <text class="tag-item tag-green" wx:if="{{article.is_auth_car_icon !=1 && article.level != '车代表' && article.level != ''}}">{{article.level}}</text>
+      </view>
+      <view class="tag-item-wrap">
+        <view wx:if="{{article.is_auth_car_icon == 1}}" class="icon1">
+          <image class="icon-width icon-width-l" src="http://cdn.e-power.vip/resources/image/icon-v2.png" />
+        </view>
+        <view wx:if="{{article.is_carvip == 1}}" class="tag-item tag-green">
+          <image class="icon-v" src="http://cdn.e-power.vip/resources/image/icon-v.png" />车代表</view>
+
+        <view wx:if="{{article.is_auth_car}}" class="tag-item tag-green">{{article.is_auth_car}}</view>
+        <view class="e-power">
+          <image src="http://cdn.e-power.vip/resources/image/e_power.png" />
+          <text class="text-green">{{article.extcredits2}}</text>
+          <text>度</text>
+        </view>
+      </view>
+      <view class="ext red" wx:if="{{article.question_price != '0.00' && article.question_price}}">￥{{article.question_price}}</view>
+    </view>
+
+    <view class="title">{{article.subject}}
+      <view class="answer-abs" wx:if="{{article.is_reward == 1}}">
+        <image src="http://cdn.e-power.vip/resources/image/question/reward.png"></image>
+      </view>
+    </view>
+    <view class="message">
+      <view>我的回答：</view> {{article.message}}
+    </view>
+    <view class="article-name">
+      <view class="reply">共有
+        <text>{{article.replies}}</text>条新回答</view>
+      <view class="ext">{{article.dateline}}</view>
+    </view>
+  </view>
+</view>

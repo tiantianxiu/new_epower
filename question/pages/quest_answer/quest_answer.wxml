@@ -1,0 +1,3 @@
+  <navBar navbar-data="{{navbarData}}"></navBar>
+  <view style="margin-top:{{heightMt}}px">
+  </view>

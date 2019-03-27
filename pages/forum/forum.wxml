@@ -1,0 +1,194 @@
+<import src="../../zanui/loadmore/index.wxml" />
+<view class="container-nopadding">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+  <navBar navbar-data="{{navbarData}}"></navBar>
+  <view class="page-body" style="margin-top:{{heightMt}}px">
+    <view class="section-wrap">
+      <view class="section-title">
+        <text class="title">热门论坛</text>
+      </view>
+      
+      <view class="section-body">
+        <view class="area-list-wrap scroll-view">
+          <view class="forum-title">
+            <!-- <view></view>
+            <view></view>
+            <view></view>
+            <view></view>
+            <view></view>
+            <view></view> -->
+            热门
+            <!-- <view></view> -->
+            品牌
+          </view>
+          <view class="grey"></view>
+          <scroll-view scroll-x class="scroll-wrap-x">
+            <view wx:for="{{formDataSource[1]}}" wx:for-item="item" wx:key="{{item.fid}}" url="../zone/zone?fid={{fid.fid}}" data-fid="{{item.fid}}" bindtap="toZone" class="area-list">
+              <view class="logo">
+                <image src="{{item.icon}}"  mode="widthFix"/>
+              </view>
+              <text class="text">{{item.name}}</text>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="area-list-wrap scroll-view">
+          <view class="forum-title">
+            <!-- <view></view>
+            <view></view>
+            <view></view>
+            <view></view>
+            <view></view> -->
+            造车
+            <!-- <view></view> -->
+            新势力
+          </view>
+          <view class="grey"></view>
+          <scroll-view scroll-x class="scroll-wrap-x ">
+            <view wx:for="{{formDataSource[2]}}" wx:for-item="item" wx:key="{{item.fid}}" url="../zone/zone?fid={{fid.fid}}" data-fid="{{item.fid}}" bindtap="toZone" class="area-list">
+              <view class="logo">
+                <image src="{{item.icon}}" mode="widthFix"/>
+              </view>
+              <text class="text">{{item.name}}</text>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="area-list-wrap scroll-view">
+          <view class="forum-title">
+          <view></view>
+          <view></view>
+          <view></view>
+          <view></view>其它
+          </view>
+          <view class="grey"></view>
+          <scroll-view scroll-x class="scroll-wrap-x">
+            <view wx:for="{{formDataSource[3]}}" wx:for-item="item" wx:key="{{item.fid}}" url="../zone/zone?fid={{fid.fid}}" data-fid="{{item.fid}}" bindtap="toZone" class="area-list">
+              <view class="logo">
+                <image src="{{item.icon}}"  mode="widthFix"/>
+              </view>
+              <text class="text">{{item.name}}</text>
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-wrap section-zone-wrap">
+      <view class="section-body">
+        <view class="swiper-wrap">
+          <swiper indicator-dots="{{indicatorDots}}" style="height: 314rpx;" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperChange" current="{{swiperCurrent}}">
+            <block>
+              <swiper-item wx:for="{{imgDaka}}" wx:key="{{item.tid}}" bindtap="linkToForum" data-tid="{{item.tid}}">
+                <view style="background-image:url({{item.thumbpath}});" class="slide-image"></view>
+                <text class="text">{{img.title}}</text>
+              </swiper-item>
+            </block>
+          </swiper>
+
+          <view class="dots">
+            <block wx:for="{{imgDaka}}" wx:key="unique">
+              <view class="dot{{index == swiperIndex ? ' active' : ''}}"></view>
+            </block>
+          </view>
+        </view>
+
+      </view>
+      <view class="section-title section-ext">
+        <text class="title">最新帖子</text>
+        <view class="navigator-arrow" bindtap="moreForum" data-type='1'>更多</view>
+      </view>
+      <view class="section-body">
+        <view class="section-zone-title col-wrap">
+          <view class="col-1">标题</view>
+          <view class="col-2"></view>
+          <view class="col-4">回复/点击</view>
+        </view>
+        <view wx:for="{{newArticle}}" wx:for-item="article" wx:key="{{article.tid}}" data-tid="{{article.tid}}" class="box-wrap list" bindtap="toDetail" class="section-zone-list col-wrap">
+          <view class="col-1">
+            <block wx:if="{{article.icon==3}}">
+              <view class="tag-item tag-essence">精华</view>
+            </block>
+            <block wx:elif="{{article.icon==2}}">
+              <view class="tag-item tag-complaints">吐槽</view>
+            </block>
+            <block wx:elif="{{article.icon==1}}">
+              <view class="tag-item tag-pic">图</view>
+            </block>
+            <block wx:elif="{{article.icon==5}}">
+              <view class="tag-item tag-vedio">视频</view>
+            </block>
+            <block wx:else>
+              <view class="tag-item">文</view>
+            </block>
+          </view>
+          <view class="col-2">{{article.subject}}</view>
+          <view class="col-4">
+            <view class="fsm">{{article.replies}}</view>
+            <view class="fsm color-gray">{{article.views}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-wrap section-zone-wrap">
+      <view class="section-title section-ext">
+        <text class="title">精华帖子</text>
+        <view class="navigator-arrow" bindtap="moreForum" data-type='2'>更多</view>
+      </view>
+      <view class="section-body">
+        <view class="section-zone-title col-wrap">
+          <view class="col-1">标题</view>
+          <view class="col-2"></view>
+          <!--        <view class="col-3">作者/发布时间</view> -->
+          <view class="col-4">回复/点击</view>
+        </view>
+        <view wx:for="{{qualityArticle}}" wx:for-item="article" wx:key="{{article.tid}}" data-tid="{{article.tid}}" class="box-wrap list" bindtap="toDetail" class="section-zone-list col-wrap">
+          <view class="col-1">
+            <block wx:if="{{article.icon==3}}">
+              <view class="tag-item tag-essence">精华</view>
+            </block>
+            <block wx:elif="{{article.icon==2}}">
+              <view class="tag-item tag-complaints">吐槽</view>
+            </block>
+            <block wx:elif="{{article.icon==1}}">
+              <view class="tag-item tag-pic">图</view>
+            </block>
+            <block wx:elif="{{article.icon==5}}">
+              <view class="tag-item tag-vedio">视频</view>
+            </block>
+            <block wx:else>
+              <view class="tag-item">文</view>
+            </block>
+          </view>
+
+          <view class="col-2">{{article.subject}}</view>
+          <view class="col-4">
+            <view class="fsm">{{article.replies}}</view>
+            <view class="fsm color-gray">{{article.views}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-wrap">
+      <view class="section-title">
+        <text class="title">已入驻自媒体</text>
+      </view>
+      <view class="section-body">
+        <view class="forum-recommendation">
+          <view wx:for="{{formDatadaka}}" wx:for-item="item" wx:key="{{item.fid}}" url="../zone/zone?fid={{fid.fid}}" data-fid="{{item.fid}}" bindtap="toZone" class="forum-recommendation-img">
+            <image src="{{item.icon}}" />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+    <!-- 没有更多的数据了 -->
+    <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+    <!-- 返回顶部 -->
+    <moreFunctions showToTop="true" scrollTop="{{scrollTop}}"></moreFunctions>
+  </view>
+</view>

@@ -1,0 +1,10 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "车主认证",
+  "usingComponents": {
+    "progressBar": "/components/progressBar/progressBar",
+    "carModel": "../../components/carModel/carModel",
+    "authorization": "../../components/authorization/authorization",
+    "navBar": "../../components/navBar/navBar"
+  }
+}

@@ -1,0 +1,44 @@
+<!--pages/saerch/saerch.wxml-->
+<import src="/zanui/loadmore/index.wxml" />
+<view class="container-nopadding">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>	
+  <navBar navbar-data="{{navbarData}}"></navBar>
+  <view class="page-body" style="margin-top:{{heightMt}}px"> 
+      <!-- E讯 -->
+      <block>
+        <view class="section-wrap">
+          <view class="section-title section-ext">
+            <text class="title">最新资讯</text>
+            <view class="navigator-arrow" bindtap="toEindex">返回e讯首页</view>
+          </view>
+          <view class="section-body">
+            <block wx:if="{{einfoList.length>0}}">
+              <view class="article box-wrap" wx:for="{{einfoList}}" wx:for-item="einfoList" wx:key="{{index}}" bindtap="toDetail" data-tid="{{einfoList.tid}}">
+            <view  class="article-img" style="margin-right: 30rpx;margin-left: 0; background-image: url({{einfoList.image_list}})">
+            </view>
+                  <view class="item">
+                    <view class="article-content">
+                        <view class="article-title">
+                          {{einfoList.subject}}
+                        </view>
+                    </view>
+                    <view class="article-ext-info">
+                      <view class="article-post-time">{{einfoList.create_time}}</view>              
+                    </view>
+                  </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>  
+      <!-- end E讯 -->
+    <!-- 加载更多 -->
+    <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+    <!-- 没有更多的数据了 -->
+    <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+    <!-- 返回顶部 -->
+    <moreFunctions showToTop="true" scrollTop="{{scrollTop}}"></moreFunctions>
+  </view> 
+</view>

@@ -1,0 +1,161 @@
+/* user.wxss */
+
+.container {
+  padding: 0 68rpx;
+}
+
+.page-head-info {
+  padding: 50rpx 0 30rpx 0;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  box-align: center;
+  -webkit-box-align: center;
+  justify-content: center;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+
+.page-head-info .navigator-arrow {
+  background: none;
+  padding-right: 0;
+  padding-left: 0;
+  text-align: right;
+  width: 110rpx;
+}
+
+.navigator-arrow:after {
+  position: relative;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.userinfo-avatar {
+  border-radius: 50%;
+  width: 170rpx;
+  height: 170rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 6rpx solid #00c481;
+  padding: 6rpx;
+  background-color: #fff;
+  margin-right: 40rpx;
+  margin-left: 10rpx;
+}
+
+.userinfo-avatar .img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  color: #676666;
+}
+
+.userinfo-nickname .name {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin: 10rpx 0;
+}
+
+.userinfo-nickname .color-gray {
+  font-size: 24rpx;
+  line-height: 1.4;
+  word-wrap: break-word;
+  word-break: normal;
+  width: 278rpx;
+  height: 100rpx;
+  overflow: hidden;
+}
+
+.user-info-wrap {
+  border-bottom: 1rpx solid #e5e5e5;
+}
+
+.user-info-wrap .box-wrap {
+  margin: 0 -30rpx;
+  height: 124rpx;
+  text-align: center;
+}
+
+.user-info-wrap .number {
+  color: #00c481;
+  font-size: 30rpx;
+}
+
+.user-info-wrap .item-name {
+  color: #676767;
+  font-size: 24rpx;
+}
+
+.user-info-wrap button {
+  background: none;
+  border: 0;
+  line-height: 1.6;
+}
+
+.user-info-wrap button:after {
+  display: none;
+}
+
+.navtab-wrap {
+  margin: 0 -30rpx;
+}
+
+.navtab-wrap:after {
+  clear: both;
+  width: 0;
+  height: 0;
+  content: '';
+  overflow: hidden;
+  display: block;
+}
+
+.navtab-wrap .navtab {
+  float: left;
+  width: 24.9%;
+  padding: 0 30rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #676767;
+  box-sizing: border-box;
+  margin: 40rpx 0;
+  background: none;
+  border: 0;
+  line-height: 1.6;
+  position: relative;
+  max-height: 108rpx;
+}
+
+.navtab .dot {
+  width: 10rpx;
+  height: 10rxp;
+  position: absolute;
+  top: 0;
+  right: 34rpx;
+  background-color: #f54040;
+  border-radius: 50%;
+}
+
+.navtab-wrap .navtab:after {
+  display: none;
+}
+
+.navtab-wrap .navtab .icon-big {
+  width: 70rpx;
+  height: 70rpx;
+  display: inline-block;
+}
+
+.navtab-wrap .navtab .icon-big image {
+  width: 100%;
+  height: 100%;
+}
+
+.msgNum {
+  right: 32rpx;
+}

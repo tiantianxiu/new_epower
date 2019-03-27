@@ -1,0 +1,12 @@
+<block wx:if="{{showAuthorization}}">
+  <view class="mask"></view>
+  <view class="win-box">
+    <view class="win-text">授权登录后才能和E区新能源车主们一起玩耍哦~</view>
+    <view class="win-btn-wrap">
+      <button type="default" bindtap="hideAuthorization">取消</button>
+      <button type="primary" open-type="getUserInfo" bindgetuserinfo="authorization">
+        授权登录
+      </button>
+    </view>
+  </view>
+</block>

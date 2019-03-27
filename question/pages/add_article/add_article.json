@@ -1,0 +1,9 @@
+
+{
+"navigationBarTitleText": "发贴",
+"usingComponents": {
+    "progressBar": "/components/progressBar/progressBar",
+    "authorization": "/components/authorization/authorization",
+    "navBar": "/components/navBar/navBar"
+  }
+}

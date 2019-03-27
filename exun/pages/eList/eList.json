@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "navigationBarTitleText": "大咖媒体号推荐",
+  "usingComponents": {
+	"moreFunctions": "/components/moreFunctions/moreFunctions",
+  "navBar": "/components/navBar/navBar"
+	}
+}

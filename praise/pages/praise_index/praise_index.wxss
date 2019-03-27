@@ -1,0 +1,446 @@
+@import '/zanui/praise.wxss';
+@import '../search/search.wxss';
+
+.image image {
+  width: 100% !important;
+  height: 130rpx !important;
+}
+
+.scroll-view {
+  display: flex;
+  border-bottom: 6rpx solid #eee;
+  position: fixed;
+  left: 0;
+}
+
+.c-tab-fixed-wrap .c-tab-fixed-holder {
+  height: 80rpx;
+}
+
+.scroll-view .title, .scroll-view .all {
+  width: 12%;
+  display: inline-block;
+  text-align: center;
+  font-size: 26rpx;
+  font-weight: 600;
+  font-family: '黑体';
+  color: #777;
+  line-height: 246%;
+  margin-left: 10rpx;
+}
+
+.c-tab-wrap {
+  height: 76rpx;
+  position: relative !important;
+}
+
+.scroll-view .all {
+  width: 10%;
+  color: #5c5c5c;
+}
+
+.scroll-view .scroll-wrap-x {
+  width: 78%;
+}
+
+.scroll-view .active {
+  position: relative;
+}
+
+.scroll-view .active::after {
+  content: '';
+  position: absolute;
+  left: 30%;
+  bottom: 0;
+  right: auto;
+  height: 6rpx;
+  width: 40%;
+  background: #00c481;
+}
+
+.scroll-view .all.active::after {
+  bottom: 10%;
+}
+
+.specific-list {
+  margin-top: 2px;
+}
+
+.list {
+  margin-bottom: 16rpx;
+  display: flex;
+  padding: 28rpx 32rpx 24rpx;
+  background: #fff;
+  position: relative;
+}
+
+.list .image {
+  width: 200rpx;
+  border-radius: 12rpx;
+  border: 2rpx solid #e5e5e5;
+  display: inline-block;
+  height: 170rpx;
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.ranking {
+  position: absolute;
+  height: 46rpx;
+  width: 46rpx;
+  line-height: 46rpx;
+  border-radius: 50%;
+  border: 2rpx solid #bdbdbd;
+  top: 0;
+  font-size: 26rpx;
+  text-align: center;
+  font-weight: 600;
+  background: #959595;
+  color: #fff;
+  left: 36rpx;
+}
+
+.ranking1 {
+  background: url(http://cdn.e-power.vip/resources/image/praise/ranking1.png);
+}
+
+.ranking2 {
+  background: url(http://cdn.e-power.vip/resources/image/praise/ranking2.png);
+}
+
+.ranking3 {
+  background: url(http://cdn.e-power.vip/resources/image/praise/ranking3.png);
+}
+
+.ranking1, .ranking2, .ranking3 {
+  width: 46rpx;
+  height: 50rpx;
+  background-size: 100%;
+  background-position: lett top;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 0;
+}
+
+.list .image .text {
+  font-size: 16rpx;
+  text-align: center;
+  color: #676767;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  vertical-align: middle;
+  display: flex;
+  border-top: 2rpx solid #d2d2d2;
+  box-sizing: box-sizing;
+  font-weight: 600;
+  height: 36rpx;
+}
+
+.list .image .text .text-title {
+  width: 40rpx;
+  height: 36rpx;
+  display: inline-block;
+  line-height: 18rpx;
+  color: #fff;
+  background: #39d09d;
+  border-top-right-radius: 10rpx;
+  border-bottom-left-radius: 10rpx;
+  font-size: 14rpx;
+}
+
+.list .image .text text {
+  margin: auto;
+  line-height: 36rpx;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list .content {
+  width: 69%;
+  margin-left: 24rpx;
+  margin-top: 6rpx;
+}
+
+.list .content .title {
+  font-weight: 600;
+  position: relative;
+  font-size: 26rpx;
+}
+
+.title .grade {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #ed0000;
+}
+
+.content .remark {
+  color: #00c481;
+  font-size: 22rpx;
+  line-height: 134%;
+}
+
+.satisfaction {
+  margin-bottom: 6rpx;
+}
+
+.specific .spot {
+  border-radius: 10rpx;
+}
+
+.specific-title, .spot {
+  display: inline-block;
+  padding: 2rpx 10rpx;
+  font-weight: 600;
+  font-size: 22rpx;
+  margin: 0 0 0 10rpx;
+}
+
+.specific-title {
+  width: 15%;
+  margin: 0 -8rpx 0 0;
+  padding-left: 0;
+  text-align: justify;
+  text-align-last: justify;
+  height: 38rpx;
+}
+
+.spot {
+  color: #fff;
+}
+
+.satisfaction .specific-title {
+  color: #e77a19;
+}
+
+.un-satisfaction .specific-title {
+  color: #6c6c6c;
+}
+
+.satisfaction .spot {
+  background: #f8b551;
+}
+
+.un-satisfaction .spot {
+  background: #aaa;
+}
+
+.c-tab-wrap .item .text {
+  font-size: 26rpx;
+}
+
+/* 隐藏滚动条 */
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.grey {
+  color: #8d8c8c !important;
+}
+
+.c-tab-wrap-content {
+  margin-bottom: 20rpx;
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 32rpx;
+  vertical-align: middle;
+  height: 94rpx;
+}
+
+.c-tab-wrap-content .content {
+  line-height: 76rpx;
+  position: relative;
+}
+
+swiper {
+  height: 100%;
+  width: 100%;
+}
+
+.c-tab-wrap-content .content1 text {
+  display: inline-block;
+  line-height: 120%;
+  overflow: hidden;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.c-tab-wrap-content .content1 {
+  width: 60%;
+  padding-right: 2%;
+  font-weight: 600;
+  color: #777;
+  overflow: hidden;
+}
+
+.c-tab-wrap-content .content2 {
+  width: 10%;
+  background: #00c481;
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  margin: auto 44rpx auto 0;
+  height: 40rpx;
+  line-height: 40rpx;
+  padding: 0 2rpx;
+  font-size: 22rpx;
+}
+
+.c-tab-wrap-content .content3 {
+  width: 12%;
+  background: #eee;
+  color: #acacac;
+  border-radius: 20rpx;
+  text-align: center;
+  margin: auto 0;
+  height: 56rpx;
+  line-height: 56rpx;
+  padding: 0 10rpx;
+  font-size: 24rpx;
+}
+
+.c-tabSearch-fixed-wrap {
+  position: fixed;
+  left: 0;
+  z-index: 4;
+  width: 100%;
+}
+
+.c-tab-fixed-holder {
+  height: 82rpx;
+}
+
+.index-header {
+  display: flex;
+  text-align: center;
+  background: #fff;
+  border-bottom: 6rpx solid #eee;
+}
+
+.index-header .li {
+  width: 23%;
+  margin: 10rpx 10% 0;
+  font-weight: 600;
+  font-size: 28rpx;
+  color: #7a7a7a;
+  border-top: 8rpx solid rgba(0, 0, 0, 0);
+}
+
+.index-header .li.active {
+  border-bottom: 8rpx solid #00c481;
+  font-size: 30rpx;
+  color: #000;
+}
+
+.index-header .li:first-child {
+  position: relative;
+}
+
+.index-header .li:first-child::after {
+  content: "";
+  width: 2rpx;
+  height: 60%;
+  position: absolute;
+  right: -46%;
+  bottom: 18%;
+  border-right: 2rpx solid #dcdcdc;
+}
+
+.index-header .li:last-child {
+  width: 16%;
+  margin: 0;
+  align-items: center;
+  display: flex;
+}
+
+.index-header .li image {
+  width: 42rpx;
+  height: 42rpx;
+  align-items: center;
+  padding-left: 20rpx;
+}
+
+.search-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+  box-sizing: border-box;
+  background: #fff;
+  height: 76rpx;
+}
+
+.search-wrap .search-box {
+  border-radius: 60rpx;
+}
+
+.search-wrap .btn-deafult {
+  position: static;
+  border: 0;
+  width: 80rpx;
+}
+
+/* 选车 */
+
+.letter {
+  position: fixed;
+  z-index: 11;
+  top: 376rpx;
+  right: 0;
+  width: 60rpx;
+  color: #000;
+  font-size: 24rpx;
+  text-align: center;  
+}
+
+.letter .li {
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+}
+
+.praise-container .titlea {
+  padding: 0 32rpx;
+  color: #737373;
+}
+
+.praise-container .titlea text {
+  font-weight: 600;
+  margin-right: 4rpx;
+}
+
+.search-bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.search-result {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+}
+
+.search-result .list {
+  margin-bottom: 0;
+  border-bottom: 6rpx solid #eee;
+}
+.praise-container-cars .title .grade {
+  right:46rpx;
+}

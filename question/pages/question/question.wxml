@@ -1,0 +1,155 @@
+<import src="/zanui/loadmore/index.wxml" />
+
+<navBar navbar-data="{{navbarData}}"></navBar>
+
+<view style="padding-top:{{heightMt}}px">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+  <block wx:if="{{articleList.length != 0}}">
+    <view class="section-wrap section-detail-wrap" id="reply-title">
+      <view class="section-body question-index">
+        <block wx:for="{{articleList}}" wx:for-index="index" wx:for-item="article" wx:key="articleId">
+
+          <view wx:if="{{index != 0}}" class="article" hover-class="hover" bindtap="toDetail" data-tid="{{article.tid}}">
+            <view class="author-info">
+              <view class="author" bindtap="toUserDetail" data-uid="{{article.authorid}}">
+                <image src="{{article.avatar}}" />
+              </view>
+              <image class="icon-width icon-width-l icon-v4" src="http://cdn.e-power.vip/resources/image/icon-v2.png" wx:if="{{article.level=='自媒体' || article.level=='新能源砖家' || article.is_carvip == 1 || article.is_auth_car_icon == 1}}" />
+              <view class="author-name">
+                <text class="text-name">{{article.author}}</text>
+
+                <text class="tag-item tag-green" wx:if="{{article.is_auth_car_icon !=1 && article.level != '车代表' && article.level != ''}}">{{article.level}}</text>
+              </view>
+              <view class="tag-item-wrap">
+               
+                <view wx:if="{{article.is_carvip == 1}}" class="tag-item tag-green">
+                  <image class="icon-v" src="http://cdn.e-power.vip/resources/image/icon-v.png" />车代表</view>
+
+                <view wx:if="{{article.is_auth_car}}" class="tag-item tag-green">{{article.is_auth_car}}</view>
+
+                <view class="e-power">
+                  <image src="http://cdn.e-power.vip/resources/image/e_power2.png" />
+                  <view class="exts">
+                    <text wx:for="{{article.extcredits2_arr}}" wx:for-item="ext_item" wx:key="{{index}}" class="index{{ext_item}}"></text>
+                  </view>
+                  <view class="du">度</view>
+                </view>
+              </view>
+              <view class="ext red" wx:if="{{article.question_price != '0.00' && article.question_price}}">￥{{article.question_price}}</view>
+            </view>
+            <view class="position">
+              <view class="article-text rich-text">
+                {{article.subject}}
+                <view class="images" wx:if="{{article.image_list.length > 0}}">
+                  <view class="li" wx:for="{{article.image_list}}" wx:for-item="images" wx:key="{{index}}" style="background-image: url('{{images}}')">
+                  </view>
+                </view>
+              </view>
+              <view class="answer" wx:if="{{article.show_name}}">
+                <view class="answer-text">{{article.show_name}}：</view>
+                {{article.show_message}}
+              </view>
+              <view class="answer-abs" wx:if="{{article.is_reward == 1}}">
+                <image src="http://cdn.e-power.vip/resources/image/question/ased.png" wx:if="{{article.reward_type==2}}"></image>
+                <image src="http://cdn.e-power.vip/resources/image/question/reward.png" wx:else></image>
+              </view>
+
+              <view class="article-ext-info">
+                <view class="tag-top" wx:if="{{article.digest > 0}}">置顶</view>
+                <text>查看全部<text class="text-green">{{article.replies}}</text>回答</text>
+                <text>{{article.time}}</text>
+                <!-- <text class="cars" wx:if="{{article.show_car}}">{{article.show_car}}</text> -->
+                <view class="ext btn" wx:if="{{article.is_reward == 0}}">我来回答</view>
+              </view>
+            </view>
+          </view>
+
+          <view wx:else class="article" hover-class="hover" bindtap="toDetail" data-tid="{{article.tid}}" data-item="poll">
+            <view class="author-info">
+              <view class="author" bindtap="toUserDetail" data-uid="{{article.authorid}}">
+                <image src="{{article.avatar}}" />
+              </view>
+              <image class="icon-width icon-width-l icon-v4" src="http://cdn.e-power.vip/resources/image/icon-v2.png" wx:if="{{article.level=='自媒体' || article.level=='新能源砖家' || article.is_carvip == 1 || article.is_auth_car_icon == 1}}" />
+              <view class="author-name">
+                <text class="text-name">{{article.author}}</text>
+
+                <text class="tag-item tag-green" wx:if="{{article.level != '车代表' && article.level != ''}}">{{article.level}}</text>
+              </view>
+              <view class="tag-item-wrap">
+
+                <view wx:if="{{article.is_carvip == 1}}" class="tag-item tag-green">
+                  <image class="icon-v" src="http://cdn.e-power.vip/resources/image/icon-v.png" />车代表</view>
+
+                <view wx:if="{{article.is_auth_car}}" class="tag-item tag-green">{{article.is_auth_car}}</view>
+
+                <view class="e-power">
+                  <image src="http://cdn.e-power.vip/resources/image/e_power2.png" />
+                  <view class="exts">
+                    <text wx:for="{{article.extcredits2_arr}}" wx:for-item="ext_item" wx:key="{{index}}" class="index{{ext_item}}"></text>
+                  </view>
+                  <view class="du">度</view>
+                  <view class="ext">{{article.time}}</view>
+                </view>
+              </view>
+            </view>
+            <view class="position">
+              <view class="official-text">
+              <view class="score">￥10000.00</view>
+                <text class="quest-top" wx:if="{{article.digest > 0}}">置顶</text> 【万元投票】春节猜车！答对即平分 10000元奖金~活动结束后奖金即时到账， 从首页下方点击“我的“，然后点击余额 提现。
+              </view>
+              <view class="article-text rich-text">
+                {{article.subject}}
+                <view class="images" wx:if="{{article.image_list.length > 0}}">
+                  <view class="li" wx:for="{{article.image_list}}" wx:for-item="images" wx:key="{{index}}" style="background-image: url('{{images}}')">
+                  </view>
+                </view>
+              </view>
+              <view class="answer" wx:if="{{article.show_name}}">
+                <view class="answer-text">{{article.show_name}}：</view>
+                {{article.show_message}}
+              </view>
+              <view class="poll-list">
+              <view class="title">投票选项
+                <text>投票已结束</text>
+              </view>
+                <view class="li">
+                  北汽新能源
+                  <text>投票</text>
+                </view>
+                <view class="li">
+                  北汽新能源北汽新能源北汽新能源
+                  <text>投票</text>
+                  <image class="bingo-icon" mode="widthFix" src="http://cdn.e-power.vip/resources/image/question/bingo_icon.jpg"></image>
+                  <image class="has-poll" src="http://cdn.e-power.vip/resources/image/question/has_poll.png"></image>
+                </view>
+                <view class="li">
+                  北汽新能源
+                  <text>投票</text>
+                </view>
+              </view>
+
+              <view class="article-ext-info e-power" >
+              <text class="ext" style="position: absolute;right: 0; font-size: 22rpx;">已有1008人投票</text>
+              </view>
+            </view>
+          </view>
+
+        </block>
+      </view>
+    </view>
+    <block wx:if="{{page_size < articleList.length}}">
+      <!-- 加载更多 -->
+      <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+      <!-- 没有更多的数据了 -->
+      <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+    </block>
+  </block>
+  <block wx:else>
+    <view class="no-list">
+      <view>暂无数据</view>
+    </view>
+  </block>
+  <replyQuest showToQuest="{{true}}"></replyQuest>
+</view>

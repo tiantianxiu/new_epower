@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "progressBar": "../../components/progressBar/progressBar"
+   }
+}

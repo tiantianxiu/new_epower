@@ -1,0 +1,192 @@
+<import src="/zanui/loadmore/index.wxml" />
+<navBar navbar-data="{{navbarData}}"></navBar>
+<view style="margin-top:{{heightMt}}px" class="question-ask">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+  <view class="quest-ask-header">
+    <text class="{{sort == 1 ? 'active':''}}" data-sort="1" bindtap="questTap">提问</text>
+    <text class="{{sort == 2 ? 'active':''}}" data-sort="2" bindtap="questTap">投票</text>
+  </view>
+  <block wx:if="{{sort == 1}}">
+    <form bindsubmit="formSubmit" report-submit="{{true}}">
+      <view class="ask-content">
+        <view class="posting-title">提问赏金</view>
+        <view class="ask-money">
+          <view class="list {{fee == item && !diy ? 'active':''}}" wx:for="{{moneys}}" wx:for-item="item" wx:key="{{index}}" bindtap="addMoney" data-val="{{item}}">{{item}}元</view>
+          <view class="list diy-list" bindtap="diyMoney">
+            <block wx:if="{{!diy}}">
+              <text>自定义</text>
+            </block>
+            <block wx:else>
+              <input placeholder-class="place-class" placeholder="" bindinput="setDiyFee" focus="{{true}}" value="{{price || diy_fee}}" type="number" style="font-size: 12px;" bindblur="diyMoneyBlur" bindfocus="diyMoneyFocus"></input>
+            </block>
+          </view>
+        </view>
+      </view>
+      <view class="ask-content" bindtap="addCar">
+        <view class="posting-title">
+          咨询车型
+          <text>（可以不选）</text>
+          <view class="navigator-arrow">{{my_car}}</view>
+        </view>
+      </view>
+
+      <view class="ask-content">
+        <view class="posting-title">
+          填写提问
+        </view>
+        <view class="content-wrap">
+          <view class="textarea-wrap">
+            <view class="textarea">
+              <textarea wx:if="{{!carModelShow && !quest_success && !carsShow && !show_clause}}" bindinput="inputContent" maxlength="-1" focus="{{focus}}" value="{{message}}">
+              </textarea>
+            </view>
+            <view class="">
+              <view class="imgs">
+                <block wx:for="{{imageList}}" wx:key="{{index}}" wx:for-item="item">
+                  <view class="img-li">
+                    <image src="{{item.url}}" data-src="{{item.url}}">
+                    </image>
+                    <view data-index="{{index}}" class="img-minus" bindtap="delImg"></view>
+                  </view>
+                </block>
+                <view class="add-img" bindtap="chooseImage"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="ask-content" style="margin-bottom: 0;">
+        <view class="posting-title">
+          谁可以答
+        </view>
+        <view class="who">
+          <view class="member-tag {{member_tag == 0 ? 'active':''}}" bindtap="appoint" data-item="all">所有人</view>
+          <view class="member-tag {{member_tag != 0 ? 'active':''}}" bindtap="appoint" data-item="allOfNo">指定车主</view>
+        </view>
+        <view class="cars-arr" wx:if="{{cars_arr.length > 0}}">
+
+          <block wx:for="{{cars_arr}}" wx:for-item="item" wx:key="{{index}}">
+            <view class="li" bindtap="carsArrTap" data-item="{{item}}">
+              {{item}}
+              <view data-index="{{index}}" class="img-minus" bindtap="delImg"></view>
+            </view>
+          </block>
+        </view>
+      </view>
+
+      <!-- <view class="put-quest" bindtap="payFee">支付（￥0.01）</view> -->
+
+      <block wx:if="{{!clause_agree}}">
+        <view class="put-quest">提交问题（￥{{fee || 0.00}}）</view>
+      </block>
+      <block wx:else>
+        <button formType="submit" class='btn'>
+          <view class="put-quest active">提交问题（￥{{fee || 0.00}}）</view>
+        </button>
+      </block>
+    </form>
+  </block>
+  <block wx:if="{{sort == 2}}">
+
+    <view class="ask-content">
+      <view class="posting-title">投票赏金</view>
+      <view class="ask-money">
+        <view class="list {{fee == item && !diy ? 'active':''}}" wx:for="{{moneys}}" wx:for-item="item" wx:key="{{index}}" bindtap="addMoney" data-val="{{item}}">{{item}}元</view>
+        <view class="list diy-list" bindtap="diyMoney">
+          <block wx:if="{{!diy}}">
+            <text>自定义</text>
+          </block>
+          <block wx:else>
+            <input placeholder-class="place-class" placeholder="" bindinput="setDiyFee" focus="{{true}}" value="{{price || diy_fee}}" type="number" style="font-size: 12px;" bindblur="diyMoneyBlur" bindfocus="diyMoneyFocus"></input>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <view class="ask-content">
+      <view class="posting-title">
+        填写描述
+      </view>
+      <view class="content-wrap">
+        <view class="textarea-wrap">
+          <view class="textarea">
+            <textarea wx:if="{{!carModelShow && !quest_success && !carsShow && !show_clause}}" bindinput="inputContent" maxlength="-1" focus="{{focus}}" value="{{message}}">
+            </textarea>
+          </view>
+          <view class="">
+            <view class="imgs">
+              <block wx:for="{{imageList}}" wx:key="{{index}}" wx:for-item="item">
+                <view class="img-li">
+                  <image src="{{item.url}}" data-src="{{item.url}}">
+                  </image>
+                  <view data-index="{{index}}" class="img-minus" bindtap="delImg"></view>
+                </view>
+              </block>
+              <view class="add-img" bindtap="chooseImage"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="ask-content">
+      <view class="posting-title">
+        投票选项
+      </view>
+      <view class="poll-tip" wx:if="{{fee}}">
+        <text>投票24小时候结束，赏金将随机抽取10人进行评分。</text>
+      </view>
+      <view class="poll-content">
+        <view class="input" wx:if="{{inputs.length > 0}}" wx:for="{{inputs}}" wx:for-item="item" wx:key="{{index}}">
+          <input type="text" placeholder="请输入您的选项（最多10个字）" focus="true" cursor-spacing="20" maxlength="-1" value="{{item}}" bindinput="inputBind" data-index="{{index}}"></input>
+          <view class="closed" bindtap="delPollInput" data-index="{{index}}"></view>
+        </view>
+        <view class="poll-add" bindtap="addPollInput"> + 添加选项</view>
+      </view>
+    </view>
+
+    <block wx:if="{{!clause_agree}}">
+      <view class="put-quest">提交投票（￥{{fee || 0.00}}）</view>
+    </block>
+    <block wx:else>
+      <view class="put-quest active" bindtap="askPoll">提交投票（￥{{fee || 0.00}}）</view>
+    </block>
+
+  </block>
+  <view bindtap="clauseTap" bindtap="clauseAgree">
+    <view class="mask-text">
+      <icon type="success" size="14" color="{{clause_agree ? 'red' : 'grey'}}" />我已阅读并同意
+      <text hover-stop-propagation="{{true}}" catchtap="showClause">《用户须知》</text>
+    </view>
+  </view>
+</view>
+
+<!-- 车型 -->
+<carModel carModelShow="{{carModelShow}}" hasQuest="{{true}}" bindcarModelInfo="carModelInfo" bindaddCar="addCar"></carModel>
+<!-- 车主 -->
+<cars id="cars" carsShow="{{carsShow}}" bindcarsInfo="carsInfo" bindappoint="appoint"></cars>
+
+<view class="quest-success animated {{quest_success ? 'slideInRight' : ''}}" wx:if="{{quest_success}}">
+  <image src="http://cdn.e-power.vip/resources/image/question/quest_success.png"></image>
+  <view class="navbar">
+    <view class="li" bindtap="questiontap" data-item="question">问答首页</view>
+    <view class="li" bindtap="questiontap" data-item="quest_detail" data-id="{{sid}}">查看问题</view>
+  </view>
+</view>
+<view wx:if="{{show_clause}}">
+  <view class="clause">
+    <view class="header">免责条款</view>
+    <view class="content">
+      <view class="title">用户须知</view>
+      <text>1、提问超3天仍没采纳，系统将自动采纳第一位回答者；</text>
+      <view></view>
+      <text>2、提问若违反互联网相关法律法规，将对其删除所付赏金无法退还；</text>
+    </view>
+    <view class="footer" bindtap="showClause">
+      我知道了
+    </view>
+  </view>
+  <view class="mask"></view>
+</view>

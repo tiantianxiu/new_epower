@@ -1,0 +1,159 @@
+<!--pages/saerch/saerch.wxml-->
+<import src="/zanui/loadmore/index.wxml" />
+<navBar navbar-data="{{navbarData}}"></navBar>
+
+<view class="container-nopadding" style="margin-top:{{heightMt}}px">
+  <view class="page-body">
+    <view class="page__bd">
+      <view class="search-wrap box-wrap">
+        <view class="search-input-wrap item">
+          <image class="search-icon" src="http://cdn.e-power.vip/resources/image/search.png" />
+          <input type="text" class="search-box" value="{{searchText}}" bindinput='searchInput' placeholder="搜索" />
+        </view>
+        <button type="default" class="btn-deafult" bindtap="searchBtn">确定</button>
+        <navigator open-type="navigateBack" class="btn-deafult">返回</navigator>
+      </view>
+      <view class="search-tag">
+        <view class="search-title">热门搜索</view>
+
+        <text bindtap="searchWhat" wx:for="{{hotKeywords}}" wx:for-item="keywords" wx:key="" data-text="{{keywords}}" class="tag-big {{searchText==keywords || searchText=='' && index == 0? 'search-green' :''}}">{{keywords}}</text>
+
+      </view>
+      <!-- 论坛 -->
+      <block wx:if="{{searchType == 1 && articleList.length>0}}">
+        <view class="article" wx:for="{{articleList}}" wx:for-item="article" wx:key="" bindtap="toDetail" data-tid="{{article.tid}}">
+          <view class="author-info" data-uid="{{article.authorid}}" hover-stop-propagation="{{true}}" catchtap="toUserDetail">
+            <view class="author">
+              <image src="{{article.avatar}}" />
+            </view>
+            <image class="icon-width icon-width-l icon-v4" src="http://cdn.e-power.vip/resources/image/icon-v2.png" wx:if="{{article.level=='自媒体' || article.level=='新能源砖家'             || article.is_carvip == 1 || article.is_auth_car_icon == 1}}" />
+            <view class="author-name">
+              <text class="text-name">{{article.author}}</text>
+              <text class="tag-item tag-green" wx:if="{{article.level != '车代表' && article.level != ''}}">{{article.level}}</text>
+            </view>
+            <view class="tag-item-wrap">
+              <view wx:if="{{article.is_carvip == 1}}" class="tag-item tag-green">
+                <image class="icon-v" src="http://cdn.e-power.vip/resources/image/icon-v.png" />车代表</view>
+
+              <view wx:if="{{article.is_auth_car}}" class="tag-item tag-green">{{article.is_auth_car}}</view>
+              <view class="e-power">
+
+                <image src="http://cdn.e-power.vip/resources/image/e_power2.png" />
+                <view class="exts">
+                  <text wx:for="{{article.extcredits2_arr}}" wx:for-item="ext_item" wx:key="{{index}}" class="index{{ext_item}}"></text>
+                </view>
+                <view class="du">度</view>
+              </view>
+            </view>
+            <view class="ext" wx:if="{{article.position}}">{{article.position}}楼</view>
+          </view>
+          <view class="box-wrap">
+            <view class="item">
+              <view class="article-content">
+                <block>
+                  <block>
+                    <view class="article-title">{{article.subject}}</view>
+                  </block>
+                </block>
+              </view>
+              <view class="article-ext-info">
+                <view class="article-re">
+                  <!-- <view>
+                    <view class="views-icon">
+                      <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/views-icon.png"></image>
+                    </view>
+                    {{article.views}}</view> -->
+                  <view>
+                    <view class="views-icon">
+                      <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/text-icon.png"></image>
+                    </view>
+                    {{article.replies}}</view>
+                </view>
+                <view class="article-post-time">{{article.dateline}}</view>
+              </view>
+            </view>
+            <block>
+              <view class="article-img" style="background-image: url('{{article.image_list[0]}}')">
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+
+      <block wx:if="{{noList}}">
+        <view class="no-list">没有相关数据</view>
+      </block>
+
+      <!-- 热门帖子 -->
+      <view class="hot-posting" wx:if="{{showHot}}">
+        <view class="posting-title">热门帖子
+          <text bindtap="toIndex">更多 ></text>
+        </view>
+        <view wx:for="{{articleHotlist}}" wx:for-item="article" wx:key="{{article.tid}}" class="article article-imgs" bindtap="toDetail" data-tid="{{article.tid}}">
+          <view class="article-content">
+            <block>
+              <block>
+                <view class="article-title">{{article.subject}}</view>
+              </block>
+            </block>
+          </view>
+          <block wx:if="{{article.image_list.length>0}}">
+            <view class="article-img-wrap box-wrap">
+              <block wx:if="{{article.image_list.length == 1}}">
+                <view class="article-img item" style="height:260rpx; background-image: url({{article.image_list[0]}})">
+                </view>
+              </block>
+              <block wx:if="{{article.image_list.length == 2}}">
+                <view class="article-img item" style="height:200rpx; background-image: url({{article.image_list[0]}})">
+                </view>
+                <view class="article-img item" style="height:200rpx; background-image: url({{article.image_list[1]}})">
+                </view>
+              </block>
+              <block wx:if="{{article.image_list.length >= 3}}">
+                <view class="article-img item" style="background-image: url({{article.image_list[0]}})">
+                </view>
+                <view class="article-img item" style="background-image: url({{article.image_list[1]}})">
+                </view>
+                <view class="article-img item" style="background-image: url({{article.image_list[2]}})">
+                </view>
+              </block>
+            </view>
+          </block>
+
+          <view class="article-ext-info box-wrap">
+            <view class="item author-info-little">
+              <view class="author">
+                <image src="{{article.avatar}}" />
+              </view>
+              <text class="author-name">{{article.author}}</text>
+            </view>
+            <view class="article-re item-right">
+              <view>
+                <view class="views-icon">
+                  <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/views-icon.png"></image>
+                </view>
+                {{article.views}}</view>
+              <view>
+                <view class="views-icon">
+                  <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/text-icon.png"></image>
+                </view>
+                {{article.replies}}</view>
+              <view>{{article.dateline}}</view>
+            </view>
+
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+
+
+    <!-- 加载更多 -->
+    <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+    <!-- 没有更多的数据了 -->
+    <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+    <!-- 返回顶部 -->
+    <moreFunctions showToTop="true" scrollTop="{{scrollTop}}"></moreFunctions>
+  </view>
+</view>

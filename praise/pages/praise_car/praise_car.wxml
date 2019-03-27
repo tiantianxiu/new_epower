@@ -1,0 +1,159 @@
+<!-- import zanui -->
+<import src="/zanui/loadmore/index.wxml" />
+
+<authorization showAuthorization="{{showAuthorization}}" bindagreeAuthorizeFun="agreeAuthorizeFun" bindrejectAuthorizeFun="rejectAuthorizeFun"></authorization>
+<navBar navbar-data="{{navbarData}}"></navBar>
+
+<view style="margin-top:{{heightMt}}px">
+  <block wx:if="{{evaluate_list.length != 0}}">
+    <view class="praise-header bg-white">
+      <view class="title">{{header.name}}
+        <view class="title-btn" bindtap="onNODone">询底价</view>
+      </view>
+      <view class="header-list">
+        <view class="list">
+          <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/praise/guid-icon.png"></image>
+          <view class="text">
+            <view class="text-header">
+              总评分
+              <text class="red">{{header.score}}分</text>
+            </view>
+            <view class="ext">{{header.number}}人参与</view>
+          </view>
+        </view>
+        <view class="list" bindtap="toBack">
+          <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/praise/rank-icon.png"></image>
+          <view class="text">
+            <view class="text-header">
+              同级排名
+              <text class="red">{{header.type_rank}}</text>
+            </view>
+            <view class="ext">共{{header.type_count}}台{{header.type_name}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="bg-white article">
+      <view class="posting-title">车友评价</view>
+
+      <block wx:for="{{evaluate_list}}" wx:for-item="item" wx:key="index">
+        <view class="car-list" bindtap="toDetail" data-id="{{item.id}}">
+          <view class="author-info">
+            <view class="author" bindtap="toUserDetail" data-uid="{{item.uid}}">
+              <image src="{{item.author_avatar}}" />
+            </view>
+            <image class="icon-width icon-width-l icon-v4" src="http://cdn.e-power.vip/resources/image/icon-v2.png" wx:if="{{item.level=='自媒体' || item.level=='新能源砖家'             || item.is_carvip == 1 || item.is_auth_car_icon == 1}}" />
+            <view class="author-name">
+              <text class="text-name">{{item.author}}</text>
+              <!-- <view wx:if="{{item.is_ident == 1}}" class="icon1">
+                <image class="icon-width icon-width-l" src="http://cdn.e-power.vip/resources/image/icon-v2.png" />
+              </view> -->
+              <view class="e-power">
+                <view wx:if="{{item.is_auth_car}}" class="tag-item tag-green">{{item.is_auth_car}}</view>
+                <view class="ext" decode="{{true}}">
+                  <view class="views-icon">
+                    <image mode="widthFix" src="http://cdn.e-power.vip/resources/image/views-icon.png"></image>
+                  </view>
+                  {{item.views}}
+                  <text style="margin-right: 12px;"></text> {{item.dateline}}
+                </view>
+              </view>
+              <view class="see-detail">查看详情</view>
+            </view>
+
+            <view class="user-grade red">{{item.score}}分
+
+            </view>
+          </view>
+          <view class="text-center">
+            车型：
+            <text>{{item.vehicle_type}}</text>
+          </view>
+          <view class="praise-data {{header.type_category==3?'praise-data4':''}}">
+
+            <view class="data">
+              {{item.buy_car_price}}万
+              <view></view>
+              <text>落地价格</text>
+            </view>
+            <view class="data">
+              {{item.district_name}}
+              <view></view>
+              <text>买车地</text>
+            </view>
+            <view class="data" style="width:34%">
+              <block wx:if="{{item.rmb}}">
+                约{{item.rmb}}元/100Km
+                <view></view>
+              </block>
+              {{item.fuel_consumption != '0.00' ? item.fuel_consumption + 'L/100Km': ''}}
+              <view></view>
+              {{item.power_consumption != '0.00' ? item.power_consumption + '度/100Km': ''}}
+              <view></view>
+              <text>综合能耗</text>
+            </view>
+            <view class="data">
+              {{item.miles_power}}Km
+              <view></view>
+              <block wx:if="{{header.type_category!=3}}">
+                <text>纯电续航</text>
+              </block>
+              <block wx:else>
+                <text>续航里程</text>
+              </block>
+            </view>
+            <block wx:if="{{header.type_category!=3}}">
+              <view class="data">
+                {{item.miles_winter ? item.miles_winter + 'Km':'无数据'}}
+                <view></view>
+                <text>冬季续航</text>
+              </view>
+            </block>
+          </view>
+
+          <view class="evaluate-list">
+            <view class="list satisfy">
+              <view class="title">满意</view>
+              <view class="content">
+
+                <view class="li" wx:for="{{item.satisfied_tag}}" wx:key="index" wx:for-item="satis">{{satis}}</view>
+
+              </view>
+            </view>
+            <view class="list un-satisfy">
+              <view class="title">不满意</view>
+              <view class="content">
+
+                <view class="li" wx:for="{{item.dissatisfied_tag}}" wx:key="index" wx:for-item="disatis">{{disatis}}</view>
+
+              </view>
+            </view>
+            <block wx:if="{{item.is_ident == 1}}">
+              <view class="adopt">
+                <image src="http://cdn.e-power.vip/resources/image/praise/adopt.png" mode="widthFix"></image>
+              </view>
+            </block>
+            <block wx:else>
+              <view class="adopt">
+                <image src="http://cdn.e-power.vip/resources/image/praise/unadopt.png" mode="widthFix"></image>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+    <!-- 加载更多 -->
+    <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+    <!-- 没有更多的数据了 -->
+    <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+  </block>
+  <block wx:else>
+    <view class="no-list">
+      <view>暂无数据</view>
+    </view>
+  </block>
+
+  <!-- 发口碑 -->
+  <moreFunctions showToPraise="{{true}}"  bindshowAuthorization="showAuthorization"></moreFunctions>
+</view>

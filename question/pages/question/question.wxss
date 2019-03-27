@@ -1,0 +1,201 @@
+@import '/pages/detail/detail.wxss';
+
+.red {
+  font-size: 36rpx !important;
+  font-weight: 800 !important;
+  color: #f40000 !important;
+}
+
+.question-index .article {
+  margin-bottom: 14rpx;
+}
+
+.question-index .article-ext-info {
+  font-size: 24rpx;
+  justify-content: left;
+  position: relative;
+}
+
+.article-ext-info .ext.btn {
+  position: absolute;
+  bottom: 2rpx;
+  right: 0;
+  padding: 6rpx 12rpx;
+  border-radius: 30rpx;
+  color: #fff;
+  background-color: #00c481;
+  font-size: 30rpx;
+  line-height: 120%;
+}
+
+.article-ext-info .text-green {
+  padding: 0 6rpx;
+}
+
+.question-index .article-ext-info text {
+  margin-right: 30rpx;
+  height: 36rpx;
+  /* line-height: 60rpx; */
+}
+
+.zan-loadmore--nomore .zan-loadmore__tips {
+  top: -11px;
+}
+
+.zan-loadmore {
+  margin: 14px auto 20rpx;
+}
+
+.answer {
+  background-color: #eee;
+  color: #646464;
+  padding: 20rpx 10rpx;
+  font-size: 24rpx;
+  position: relative;
+}
+
+.answer-text {
+  font-weight: 600;
+  color: #aaa;
+}
+
+.answer-abs {
+  position: absolute;
+  right: 12%;
+  bottom: 116rpx;
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.article-text.rich-text {
+  padding: 20rpx 0;
+}
+
+.images {
+  display: flex;
+}
+
+.images .li {
+  width: 33%;
+  height: 156rpx;
+  box-sizing: border-box;
+  margin: 10rpx;
+  background-size: cover;
+  background-position: center center;
+}
+
+text.cars {
+  font-size: 22rpx;
+  padding: 2rpx 8rpx;
+  border: 2rpx solid #76ceaf;
+  border-radius: 4rpx;
+  height: 36rpx !important;
+  line-height: 36rpx !important;
+}
+
+.question-index .article-ext-info text text {
+  margin-right: 0;
+}
+
+.e-power {
+  width: 100%;
+  position: relative;
+}
+
+.e-power .ext {
+  color: #aaa;
+}
+
+.official-text {
+  color: #aaa;
+  font-size: 30rpx;
+}
+
+.official-text .score {
+  color: #e73462;
+  text-decoration: underline;
+  font-size: 36rpx;
+  padding-left: 100rpx;
+  font-weight: 600;
+}
+
+.quest-top {
+  font-size: 22rpx;
+  padding: 4rpx 8rpx;
+  background: url(https://e-power.oss-cn-shenzhen.aliyuncs.com/resources/image/question/quest_top.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.poll-list .title {
+  color: #a3e3c6;
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 24rpx;
+  position: relative;
+}
+
+.poll-list .title text {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 22rpx;
+  padding: 4rpx 10rpx;
+  font-weight: 400;
+  color: #acabab;
+  background-color: rgb(233, 231, 231);
+  border-radius: 8rpx;
+}
+.poll-list .title .text{
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 22rpx;
+  color: #bebebe; 
+  display: flex;
+  font-weight: 400;
+}
+.count-down{
+  border: 2rpx solid #979797;
+  border-radius: 8rpx;
+  margin-left: 10rpx;
+  padding: 0 10rpx;
+}
+
+.poll-list .li {
+  border: 2rpx solid #d2d2d2;
+  border-radius: 12rpx;
+  margin-bottom: 26rpx;
+  padding: 32rpx 90rpx 32rpx 20rpx;
+  position: relative;
+  font-size: 30rpx;
+  white-space: nowrap; /*不换行*/
+  text-overflow: ellipsis; /*超出部分文字以...显示*/
+  box-sizing: border-box
+}
+
+.poll-list .li text {
+  font-size: 28rpx;
+  color: #00c481;
+  padding: 6rpx 20rpx;
+  background: url(http://cdn.e-power.vip/resources/image/poll_bg.png) center center no-repeat;
+  background-size: 90% 90%;
+  position: absolute;
+  right: 20rpx;
+  top: 28rpx;
+}
+
+
+.has-poll {
+  position: absolute;
+  top: -12rpx;
+  right: 140rpx;
+  width: 134rpx;
+  height: 134rpx;
+}
+
+.bingo-icon {
+  position: absolute;
+  top: 0;
+  right: 46%;
+  width: 86rpx;
+}

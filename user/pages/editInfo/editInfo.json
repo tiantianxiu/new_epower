@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "修改资料",
+  "usingComponents": {
+    "copper": "/components/copper/copper",
+    "navBar": "/components/navBar/navBar"
+  }
+}

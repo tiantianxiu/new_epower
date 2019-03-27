@@ -1,0 +1,21 @@
+<page>
+  <navBar navbar-data="{{navbarData}}"></navBar>
+  <view style="margin-top:{{heightMt}}px">
+    <view class="my-quest">
+
+      <view class="list" bindtap="todetail" data-item="my_money">
+        <text>余额</text>
+        <text class="navigator-arrow">￥{{balance}}</text>
+      </view>
+      <view class="list"  bindtap="todetail" data-item="quest_quest_my">
+        <text>提问记录</text>
+        <text class="navigator-arrow"></text>
+      </view>
+      <view class="list" bindtap="todetail" data-item="quest_answer_my">
+        <text>回答记录</text>
+        <text class="navigator-arrow"></text>
+      </view>
+
+    </view>
+  </view>
+</page>

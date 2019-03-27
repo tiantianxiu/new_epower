@@ -1,0 +1,21 @@
+<navBar navbar-data="{{navbarData}}"></navBar>
+<view style="margin-top:{{heightMt}}px">
+  <view class="section-wrap">
+    <view class="section-title section-ext">
+      <text class="title">共有{{articleList.length}}条评论</text>
+    </view>
+  </view>
+  <view class="article" wx:for="{{articleList}}" wx:key="{{index}}" wx:for-item="article" data-tid="{{article.tid}}" bindtap="todetail">
+    <view class="title">{{article.subject}}
+      <view class="answer-abs" wx:if="{{article.is_reward == 1}}">
+        <image src="http://cdn.e-power.vip/resources/image/question/reward.png"></image>
+      </view>
+    </view>
+    <view class="article-name">
+      <view class="reply">共有
+        <text>{{article.replies}}</text>条新回答</view>
+      <view class="ext">{{article.dateline}}</view>
+    </view>
+
+  </view>
+</view>

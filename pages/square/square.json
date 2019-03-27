@@ -1,0 +1,9 @@
+{
+	"navigationBarTitleText": "广场",
+  "enablePullDownRefresh": true,
+	"usingComponents": {
+      "authorization": "/components/authorization/authorization",
+      "navBar": "/components/navBar/navBar",
+      "squareRight": "/components/squareRight/squareRight"
+  	}
+}

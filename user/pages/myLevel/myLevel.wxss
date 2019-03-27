@@ -1,0 +1,206 @@
+.section-level-wrap{
+	height: 450rpx;
+	padding: 20rpx 50rpx;
+	background: no-repeat center center;
+	background-size: 90% auto;
+	box-sizing: border-box;
+}
+.section-level{
+	padding:50rpx 30rpx;
+	position: relative;
+	width: 650rpx;
+	height: 406rpx;
+	border-radius: 20rpx;
+	box-sizing: border-box;
+	color: #fff;
+}
+.userinfo-wrap{
+	display: flex;
+	align-items: top;
+}
+.photo-box{
+	background-color: #fff;
+	width: 100rpx;
+	height: 100rpx;
+	border-radius: 50%;
+	margin-right: 30rpx;
+  position:relative;
+  margin-top:6rpx;
+}
+.photo-box image{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+/* 皇冠 */
+.photo-box .tiara{ 
+  width:36rpx;
+  height:36rpx;
+  background:no-repeat center url(http://cdn.e-power.vip/resources/image/user/tiara.png);
+  background-size:100%;
+  position:absolute;
+  top:-26%;
+  left:-1%;
+  z-index:9
+}
+
+.info-box .username{
+	font-size: 28rpx;
+	font-weight: bold;
+  line-height: 32rpx;
+  height: 32rpx;
+}
+
+.info-box .badge image{
+	width:20rpx;
+	height: 35rpx;
+	margin-right: 16rpx;
+}
+.info-box .level{
+width:118rpx;
+height:28rpx;
+line-height:24rpx;
+box-sizing:border-box;
+font-size:20rpx;
+margin:6rpx 0 2rpx;
+border-radius:20rpx;
+border:1px solid #fff;
+text-align:center;
+font-weight:600;
+letter-spacing:2rpx;
+}
+.info-box .level.carvip{
+  width: 108rpx;
+  padding-left: 38rpx;
+  background: no-repeat center url(http://cdn.e-power.vip/resources/image/user/carvip.png);
+  background-size: 100%;
+  border:0;
+  font-size:18rpx;
+  text-align: left;
+}
+.info-box .cer-car{
+ font-size:26rpx;
+padding-left:58rpx;
+background:no-repeat 2% 52% url(http://cdn.e-power.vip/resources/image/user/littlecar.png);
+background-size:auto 22rpx;
+}
+.level-progress-wrap{
+	padding:0;
+	width: 200rpx;
+	text-align: center;
+	position: absolute;
+	left: 0rpx;
+	bottom:8rpx;
+}
+.progress-bar{
+	height: 20rpx;
+	width: 130rpx;
+	display: inline-block;
+	background-color: #dcdddd;
+	overflow: hidden;
+	border-radius: 10rpx;
+	margin:10rpx 0;
+	box-sizing: border-box;
+/*	box-shadow: inset 0rpx 0rpx 5rpx rgba(0,0,0,.4);*/
+	text-align: left;
+	border-left:solid #a8a9a9 1rpx;
+	border-bottom:solid #a8a9a9 1rpx;
+}
+.progress-active{
+	height: 20rpx;
+	background:linear-gradient(90deg, #32d09a 0%,#0ec586 100%);
+	border-radius: 10rpx;
+	box-sizing: border-box;
+}
+.experience{
+	font-size: 20rpx;
+	color:#333;
+}
+.level-1{
+	background-image: url(http://cdn.e-power.vip/resources/image/user/level_1.png);
+}
+.level-1 .progress-active{
+	background:linear-gradient(90deg, #32d09a 0%,#0ec586 100%);
+}
+.level-2{
+	background-image: url(http://cdn.e-power.vip/resources/image/user/level_2.png);
+}
+.level-2 .progress-active{
+	background:linear-gradient(90deg, #57b9e6 0%,#2fa7e0 100%);
+}
+.level-3{
+	background-image: url(http://cdn.e-power.vip/resources/image/user/level_3.png);
+}
+.level-3 .progress-active{
+	background:linear-gradient(90deg, #fdea8a 0%,#e5e067 100%);
+}
+.level-3 .experience,
+.level-3 .section-level{
+	color: #4f4644;
+}
+.level-3 .info-box .level{
+	border-color:#4f4644;
+}
+.level-3  .info-box .cer-car{
+  background-image:url(http://cdn.e-power.vip/resources/image/user/littlecar3.png);
+}
+.level-3  .info-box .level.carvip{
+  background-image:url(http://cdn.e-power.vip/resources/image/user/carvip3.png);
+  
+}
+.level-4{
+	background-image: url(http://cdn.e-power.vip/resources/image/user/level_4.png);
+}
+.level-4 .progress-active{
+	background:linear-gradient(90deg, #ffb469 0%,#ffa247 100%);
+}
+.level-5{
+	background-image: url(http://cdn.e-power.vip/resources/image/user/level_5.png);
+}
+.level-5 .progress-active{
+	background:linear-gradient(90deg, #ff5066 0%,#ff2742 100%);
+}
+.level-5 .experience{
+	color: #fffcfc;
+}
+.level-6{
+	background-image: url(http://cdn.e-power.vip/resources/image/user/level_6.png);
+}
+.level-6 .progress-active{
+	background:linear-gradient(90deg, #252525 0%,#171717 100%);
+}
+.level-6 .experience{
+	color: #c4c4c4;
+}
+
+.default-list-wrap{
+	color:#4a4949;
+	font-size: 28rpx;
+}
+.default-list-wrap .image-wrap{
+	width: 72rpx;
+	height: 72rpx;
+	margin-right: 30rpx;
+}
+.default-list-wrap .image-wrap image{
+	width: 100%;
+	height: 100%;
+}
+.btn-round{
+	line-height: 58rpx;
+	border-radius: 29rpx;
+	font-size: 26rpx;
+	min-width: 150rpx;
+}
+.btn-round .icon-width{
+	margin-left: 5rpx;
+	margin-right: 0;
+}
+.btn-light-default{
+	color:#00c481;
+	background-color: #ccf3e6;
+}
+.btn-red{
+	color:#ff0000;
+	background-color: #faccd0;
+}

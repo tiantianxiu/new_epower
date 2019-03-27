@@ -1,0 +1,254 @@
+<import src="../../zanui/loadmore/index.wxml" />
+
+<block wx:if="{{thisModerator && showSet || showSet && isAdmin}}">
+  <view class="to-icon-person to-set" bindtap="toSet">
+    <image src="http://cdn.e-power.vip/resources/image/detail/toset.png" />
+  </view>
+</block>
+<block wx:if="{{showToPost}}">
+  <view class="to-icon-person to-post" bindtap="toPost">
+    <image src="http://cdn.e-power.vip/resources/image/detail/topost1.png"></image>
+  </view>
+</block>
+<block wx:if="{{showToPraise}}">
+  <view class="to-icon-person to-post to-praise" bindtap="toPraise">
+    <image src="http://cdn.e-power.vip/resources/image/detail/topraise1.png"></image>
+  </view>
+</block>
+<!-- animated {{scroll_show ? 'bounceInRight' : 'bounceOutRight'}} -->
+<!-- showShare -->
+<view wx:if="{{showGoHome || showZan}}" class="to-icon-all {{showShare?'animated':''}}  {{scroll_show ? 'bounceInRight' : 'bounceOutRight'}}">
+
+  <block wx:if="{{showGoHome}}">
+    <view class="to-icon to-home" bindtap="toHome">
+      <image src="http://cdn.e-power.vip/resources/image/detail/tohome.png" />
+      <text>首页</text>
+    </view>
+  </block>
+
+  <block wx:if="{{showZan}}">
+    <view class="to-icon to-zan" bindtap="toZan" data-type="1">
+      <image wx:if="{{is_zan == 0 || is_zan == 2}}" src="http://cdn.e-power.vip/resources/image/detail/tozans.png" />
+      <image wx:elif="{{is_zan == 1}}" src="http://cdn.e-power.vip/resources/image/detail/tozaneds.png" class="animated enlarge" />
+      <text>{{zan}}</text>
+    </view>
+  </block>
+
+  <block wx:if="{{showCai}}">
+    <view class="to-icon to-cai" bindtap="toZan" data-type="2">
+      <image wx:if="{{is_zan == 0 || is_zan == 1}}" src="http://cdn.e-power.vip/resources/image/detail/tocais.png" />
+      <image wx:elif="{{is_zan == 2}}" src="http://cdn.e-power.vip/resources/image/detail/tocaieds.png" class="animated enlarge" />
+      <text>{{cai}}</text>
+    </view>
+  </block>
+
+  <block wx:if="{{showReplyBtn}}">
+    <view class="to-icon to-reply" bindtap="toReply">
+      <image src="http://cdn.e-power.vip/resources/image/detail/toreplys.png" />
+      <text>{{totalNum}}</text>
+    </view>
+  </block>
+
+
+
+  <!-- <block wx:if="{{showToTop}}">
+    <view wx:if="" class="scroll-to-top" bindtap="scrollToTop">
+      <image class="scroll-to-top-img" src="http://cdn.e-power.vip/resources/image/top.png" />
+    </view>
+  </block> -->
+
+  <block wx:if="{{showShare}}">
+    <view class='to-icon to-share' bindtap="showShareBox">
+      <image src='http://cdn.e-power.vip/resources/image/detail/toshares.png'></image>
+      <text>分享</text>
+    </view>
+  </block>
+</view>
+
+<view class="mask" wx:if="{{showShareBox || showReply}}" bindtap="hideShareBox"></view>
+<view class="share-box {{showShareBox?'active':''}}" style="height: 410rpx;">
+  <view class="tag-share">
+    <image src="http://cdn.e-power.vip/resources/image/share_to.png"></image>
+  </view>
+  <view class="share-item-wrap">
+    <view class="share-item share-quan animated {{showShareBox?'slideInUp':''}}" bindtap="shareImg">
+      <image src='http://cdn.e-power.vip/resources/image/share_quans.png'></image>
+    </view>
+    <button class="share-item share-wx animated {{showShareBox?'slideInUp':''}}" bindtap="hideShareBox" open-type="share">
+      <image src='http://cdn.e-power.vip/resources/image/share_wxs.png'></image>
+    </button>
+
+    <view class="share-item share-page animated {{showShareBox?'slideInUp':''}}" bindtap="getClipboard">
+      <image src='http://cdn.e-power.vip/resources/image/share_pages.png'></image>
+    </view>
+  </view>
+  <view class="btn-text" bindtap="hideShareBox">取消</view>
+</view>
+
+
+<block wx:if="{{showShareCanvasBox}}">
+  <view class="mask mask-canvas"></view>
+  <view class="canvas-wrap" style="top:{{heightMt}}px">
+    <view class="canvas-box">
+      <canvas canvas-id="shareCanvas" style="width: 275px; height: 450px;"></canvas>
+    </view>
+
+    <view class="btn-save" bindtap="saveCanvas">保存图片到本地</view>
+    <view class="btn-close" bindtap="closeCanvas">返回</view>
+  </view>
+</block>
+
+<block wx:if="{{showSharetail}}">
+  <view class="sharetail">
+    <view class='share-item' bindtap="shareImg">
+      <image src='http://cdn.e-power.vip/resources/image/text_share.png'></image>
+    </view>
+    <view class='share-item' bindtap="shareImg">
+      <image src='http://cdn.e-power.vip/resources/image/share_quans.png'></image>
+    </view>
+    <button class='share-item' open-type="share">
+      <image src='http://cdn.e-power.vip/resources/image/share_wxs.png'></image>
+    </button>
+    <block wx:if="{{showCopy}}">
+      <view class='share-item'>
+        <image src='http://cdn.e-power.vip/resources/image/share_pages.png' bindtap="getClipboard" wx:if="{{showCopy}}"></image>
+      </view>
+    </block>
+  </view>
+</block>
+
+<!-- 评论详情 -->
+
+<view class="show-reply show-reply{{scrBottom}} {{showReply?'active':''}}">
+  <view class="title">{{totalNum}}条评论
+    <view class="cover-close" bindtap="cloceReply"></view>
+    <view class="close">
+      <image src="http://cdn.e-power.vip/resources/image/close.png" />
+    </view>
+  </view>
+
+  <scroll-view scroll-y lower-threshold="100" scroll-top="2" bindscrolltolower="onReplyReachBottom" class="" style="height: {{replyScrollH}}px;">
+    <block wx:if="{{replyList && replyList.length > 0}}">
+      <view class="section-wrap">
+        <view class="section-title">
+          <text class="title">有人回复您</text>
+        </view>
+      </view>
+      <view class="section-body">
+        <block wx:for="{{replyList}}" wx:for-index="index" wx:for-item="article" wx:key="articleId">
+          <view class="article animated pulse">
+            <view class="author-info" data-uid="{{article.authorid}}" bindtap="toUserDetail">
+              <view class="author">
+                <image src="{{article.author_avatar}}" />
+              </view>
+              <image class="icon-width icon-width-l icon-v4" src="http://cdn.e-power.vip/resources/image/icon-v2.png" wx:if="{{article.level=='自媒体' || article.level=='新能源砖家' || article.is_carvip == 1 || article.is_auth_car_icon == 1}}" />
+              <view class="author-name">
+                <text class="text-name">{{article.author}}</text>
+                <text class="tag-item tag-red" wx:if="{{article.authorid == authorId}}">楼主</text>
+                <text class="tag-item tag-green" wx:if="{{article.level != '车代表' && article.level != ''}}">{{article.level}}</text>
+              </view>
+
+              <view class="tag-item-wrap">
+                <view wx:if="{{article.is_carvip == 1}}" class="tag-item tag-green">
+                  <image class="icon-v" src="http://cdn.e-power.vip/resources/image/icon-v.png" />车代表</view>
+
+                <view wx:if="{{article.is_auth_car}}" class="tag-item tag-green">{{article.is_auth_car}}</view>
+                <view class="e-power">
+
+                  <image src="http://cdn.e-power.vip/resources/image/e_power2.png" />
+                  <view class="exts">
+                    <text wx:for="{{article.extcredits2_arr}}" wx:for-item="ext_item" wx:key="{{index}}" class="index{{ext_item}}"></text>
+                  </view>
+                  <view class="du">度</view>
+                </view>
+
+              </view>
+              <view class="ext">{{article.position}}楼</view>
+            </view>
+            <rich-text class="article-text rich-text" nodes="{{article.message}}"></rich-text>
+            <view class="box-wrap article-ext-info">
+              <view style="width: 200rpx;">{{article.create_time}}</view>
+              <view class="item more-function">
+                <view class="item-function" bindtap="replyCommentCld" data-pid='{{article.pid}}'>
+                  <image class="icon-width" src="http://cdn.e-power.vip./resources/image/icon-text.png"></image>
+                </view>
+                <view class="item-function {{article.is_zan == 1 ? 'active':''}}" bindtap="clickZhan" data-one_man="1" data-type='1' data-iszan="{{article.is_zan}}" data-pid="{{article.pid}}" data-index="{{index}}" data-number="{{article.zan}}">
+                  <view class="ext-No">{{article.zan}}</view>
+                  <image wx:if="{{article.is_zan == 0 || article.is_zan == 2}}" class="ib-width" src="http://cdn.e-power.vip/resources/image/detail/icon-zan.png"></image>
+                  <image wx:else class="ib-width" src="http://cdn.e-power.vip/resources/image/detail/icon_zan_active.png"></image>
+                </view>
+                <view class="item-function {{article.is_zan == 2 ? 'active':''}}" bindtap="clickZhan" data-one_man="1" data-type='2' data-iszan="{{article.is_zan}}" data-pid="{{article.pid}}" data-index="{{index}}" data-number="{{article.cai}}">
+                  <view class="ext-No">{{article.cai}}</view>
+                  <image wx:if="{{article.is_zan == 0 || article.is_zan == 1}}" class="ib-width" src="http://cdn.e-power.vip/resources/image/detail/icon-cai.png"></image>
+                  <image wx:else class="ib-width" src="http://cdn.e-power.vip/resources/image/detail/ib-cai-gray.png"></image>
+                </view>
+                <view class="detail-admin" wx:if="{{isAdmin}}" data-pid="{{article.pid}}" data-index="{{index}}" bindtap="replyDel">删除</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </block>
+
+    <block wx:for="{{articleList}}" wx:for-index="index" wx:for-item="article" wx:key="articleId">
+      <view class="article {{article.is_add_post?'animated pulse':''}}">
+        <view class="author-info" data-uid="{{article.authorid}}" bindtap="toUserDetail">
+          <view class="author">
+            <image src="{{article.author_avatar}}" />
+          </view>
+          <image class="icon-width icon-width-l icon-v4" src="http://cdn.e-power.vip/resources/image/icon-v2.png" wx:if="{{article.level=='自媒体' || article.level=='新能源砖家'             || article.is_carvip == 1 || article.is_auth_car_icon == 1}}" />
+          <view class="author-name">
+            <text class="text-name">{{article.author}}</text>
+            <text class="tag-item tag-red" wx:if="{{article.authorid == authorId}}">楼主</text>
+            
+            <text class="tag-item tag-green" wx:if="{{article.level != '车代表' && article.level != ''}}">{{article.level}}</text>
+          </view>
+
+          <view class="tag-item-wrap">
+            <view wx:if="{{article.is_carvip == 1}}" class="tag-item tag-green">
+              <image class="icon-v" src="http://cdn.e-power.vip/resources/image/icon-v.png" />车代表</view>
+
+            <view wx:if="{{article.is_auth_car}}" class="tag-item tag-green">{{article.is_auth_car}}</view>
+            <view class="e-power">
+
+              <image src="http://cdn.e-power.vip/resources/image/e_power2.png" />
+              <view class="exts">
+                <text wx:for="{{article.extcredits2_arr}}" wx:for-item="ext_item" wx:key="{{index}}" class="index{{ext_item}}"></text>
+              </view>
+              <view class="du">度</view>
+            </view>
+          </view>
+          <view class="ext" wx:if="{{article.position}}">{{article.position}}楼</view>
+        </view>
+        <rich-text class="article-text rich-text" nodes="{{article.message}}"></rich-text>
+        <view class="box-wrap article-ext-info">
+          <view style="width: 200rpx;">{{article.create_time}}</view>
+          <view class="item more-function">
+            <view class="item-function" bindtap="replyCommentCld" data-pid='{{article.pid}}'>
+              <image class="icon-width" src="http://cdn.e-power.vip./resources/image/icon-text.png"></image>
+            </view>
+            <view class="item-function {{article.is_zan == 1 ? 'active':''}}" bindtap="clickZhan" data-type='1' data-iszan="{{article.is_zan}}" data-pid="{{article.pid}}" data-index="{{index}}" data-number="{{article.zan}}">
+              <view class="ext-No">{{article.zan}}</view>
+              <image wx:if="{{article.is_zan == 0 || article.is_zan == 2}}" class="ib-width" src="http://cdn.e-power.vip/resources/image/icon-zan.png"></image>
+              <image wx:else class="ib-width" src="http://cdn.e-power.vip/resources/image/icon_zan_active.png"></image>
+            </view>
+            <view class="item-function {{article.is_zan == 2 ? 'active':''}}" bindtap="clickZhan" data-type='2' data-iszan="{{article.is_zan}}" data-pid="{{article.pid}}" data-index="{{index}}" data-number="{{article.cai}}">
+              <view class="ext-No">{{article.cai}}</view>
+              <image wx:if="{{article.is_zan == 0 || article.is_zan == 1}}" class="ib-width" src="http://cdn.e-power.vip/resources/image/icon-cai.png"></image>
+              <image wx:else class="ib-width" src="http://cdn.e-power.vip/resources/image/ib-cai-gray.png"></image>
+            </view>
+            <view class="detail-admin" wx:if="{{isAdmin}}" data-pid="{{article.pid}}" data-index="{{index}}" bindtap="replyDel">删除</view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+
+
+    <!-- 加载更多 -->
+    <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+    <!-- 没有更多的数据了 -->
+    <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+  </scroll-view>
+</view>
+<!-- </block>  -->

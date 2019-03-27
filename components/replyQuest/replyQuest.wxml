@@ -1,0 +1,70 @@
+<import src="../../zanui/loadmore/index.wxml" />
+<progressBar showProgress="{{showProgress}}" progress="{{progress}}"></progressBar>
+<loading hidden="{{loading_hidden}}">
+  {{loading_msg}}
+</loading>
+
+<block wx:if="{{isAdmin == 1}}">
+  <view class="to-icon-person to-set" bindtap="toSet">
+    <image src="http://cdn.e-power.vip/resources/image/detail/toset.png" />
+  </view>
+</block>
+
+<view class="to-icon-person to-post" bindtap="toquest" wx:if="{{showToQuest}}">
+  <image src="http://cdn.e-power.vip/resources/image/question/toquest.png"></image>
+</view>
+
+<view wx:if="{{showUnVip}}" class="page-tail" bindtap="disableTap" data-msg="{{disableMsg}}">
+  <view class="question-reply disable">
+    <text>{{btnMsg || '我来回答'}}</text>
+  </view>
+</view>
+
+<view wx:if="{{showReply}}">
+  <view wx:if="{{replyType == 1}}" class="page-tail" bindtap="replyPost">
+    <view class="question-reply">
+      <text>我来回答</text>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="mask-transparent" bindtouchstart="hideReplyForm"></view>
+    <view class="replyForm-fixed" style='bottom:{{height}}px;'>
+    <form bindsubmit="formSubmit" report-submit="{{true}}">
+      <view class="input-wrap">        
+          <view class='input-content {{imageList.length > 0 ? "input-hasimg":""}}'>
+            <block wx:if="{{imageList.length > 0 }}">
+              <view class="uploader-files">
+                <view class="image-cell" wx:for="{{imageList}}" wx:for-item="image" wx:key="{{index}}">
+                  <view catchtap="delImg" class='del-img-btn' data-index="{{index}}" data-code="{{image.code}}"></view>
+                  <bolck wx:if="{{image.type =='img'}}">
+                    <image class="uploader-img" src="{{image.url}}" data-src="{{image.url}}"></image>
+                  </bolck>
+                  <block wx:else>
+                    <video class="uploader-img" src="{{image.url}}" data-src="{{image.url}}" controls></video>
+                  </block>
+                </view>
+              </view>
+            </block>
+            <input type="text" bindinput="inputMessage" data-pid='0' value="{{message}}" name="input_form" placeholder="" confirm-type="send" bindconfirm="submitMessage" confirm-hold="true" focus="{{focus}}" placeholder-style="color:#c5c5c5" adjust-position="{{adjustPosition}}" placeholder='请输入您的回答'
+              bindfocus="bindfocus" bindblur="bindblur" maxlength="-1"/>
+          </view>
+          <view class="uploader-tab" >
+            <!-- <view class="input-send {{imageList.length > 0 || message != '' ? '':'disabled'}}" bindtap="submitMessage">回答</view> -->
+            <button class="input-send {{imageList.length > 0 || message != '' ? '':'disabled'}}" form-type="submit">
+
+              <view class='u-publish-btn'>发布</view>
+
+            </button>
+          </view>
+      </view>
+      </form>
+    </view>
+  </view>
+
+</view>
+
+<view class="tall-input" wx:if="{{hasTall}}">
+  <input bindinput="tallInput" value="{{tallValue}}" type="text" cursor-spacing="20"></input>
+  <text bindtap="chooseImage">+</text>
+  <view class="btn" bindtap="sendTall">发送</view>
+</view>

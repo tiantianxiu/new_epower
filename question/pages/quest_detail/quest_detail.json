@@ -1,0 +1,9 @@
+{
+  "onReachBottomDistance": 50,
+  "navigationBarTitleText": "问答",
+  "usingComponents": {
+    "authorization": "/components/authorization/authorization",
+    "replyQuest": "/components/replyQuest/replyQuest",
+    "navBar": "/components/navBar/navBar"
+  }
+}

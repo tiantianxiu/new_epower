@@ -1,0 +1,104 @@
+@import '/pages/dialogue/dialogue.wxss';
+
+.container-nopadding {
+  padding-bottom: 158rpx;
+}
+
+.dialogue-list-wrap {
+  margin-top: 54rpx;
+  padding: 0 20rpx;
+}
+
+.dialogue-list .user-info {
+  position: relative;
+  height: auto;
+  line-height: inherit;
+  display: block;
+}
+
+.dialogue-list .time {
+  position: absolute;
+  top: -34rpx;
+  left: 110rpx;
+  font-size: 22rpx;
+  color: #b0b0b0;
+}
+
+.dialogue-right .time {
+  right: 110rpx;
+}
+
+.dialogue-list.dialogue-right .user-info {
+  display: inline-block;
+  text-align: right;
+  width: 100%;
+}
+
+.dialogue-right .dialogue-text {
+  background-color: #fff;
+}
+
+.dialogue-list {
+  width: 100%;
+  padding: 20rpx 0;
+}
+
+.dialogue-right {
+  margin-left: 0;
+}
+
+.dialogue-text {
+  font-size: 30rpx;
+  border: 2rpx solid #bebebe;
+  max-width: 60%;
+  margin-top: 0;
+  vertical-align: top;
+}
+
+.dialogue-right .dialogue-text {
+}
+
+.dialogue-text::after {
+  height: 18rpx;
+  width: 16rpx;
+  content: ' ';
+  position: absolute;
+  left: -16rpx;
+  top: 8rpx;
+  z-index: 1;
+  background-image: url(http://cdn.e-power.vip/resources/image/question/tall_icon.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.dialogue-right .dialogue-text::after {
+  transform-origin: center center;
+  transform: rotate(-180deg);
+  left: auto;
+  right: -16rpx;
+}
+
+.dialogue-image {
+  width: 40%;
+  height: 180rpx;
+  display: inline-block;
+  border-radius: 14rpx;
+  background-size: cover;
+  vertical-align: top;
+  border: 2rpx solid #eee;
+  background-position: center center;
+}
+
+.accept {
+  text-align: right;
+}
+
+.accept text {
+  background-color: #d2d2d2;
+  color: #01c482;
+  padding: 6rpx 8rpx;
+}
+
+scroll-view {
+  box-sizing: border-box;
+}

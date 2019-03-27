@@ -1,0 +1,100 @@
+@import '../replyTail/replyTail.wxss';
+@import '../moreFunctions/moreFunctions.wxss';
+
+.question-reply {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+}
+
+.question-reply text {
+  display: block;
+  margin: 30rpx auto;
+  width: 36%;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 60rpx;
+  font-size: 34rpx;
+  color: #fff;
+  background-color: #00c481;
+  text-align: center;
+}
+
+.input-content {
+  border-radius: 10rpx;
+  width: 84%;
+}
+
+.uploader-tab {
+  display: inline-block;
+  width: 16%;
+  text-align: right;
+  padding:0;
+  vertical-align: center;
+}
+.uploader-tab button{
+  margin: 0;
+  vertical-align: center;
+  width: 80%;
+  margin-left: 18%;
+  border: none;
+  background: 0;
+  padding: 0;
+}
+.replyForm-fixed {
+  padding: 30rpx 0;
+}
+
+.input-send {
+  width:90%;
+  padding-left: 18rpx;
+}
+
+.tall-input {
+  position: fixed;
+  background-color: #fff;
+  padding: 30rpx;
+  display: flex;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  align-items: Center;
+  z-index: 2;
+}
+
+.tall-input input {
+  width: 58%;
+  background: #eee;
+  border: 2rpx solid #bfbfbf;
+  border-radius: 8rpx;
+  font-size: 30rpx;
+  padding: 10rpx 20rpx;
+}
+
+.tall-input text {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 52rpx;
+  text-align: center;
+  font-size: 40rpx;
+  border-radius: 50%;
+  border: 2rpx solid #bfbfbf;
+  background: #eee;
+  font-weight: 600;
+  color: #a9a9a9;
+  margin: 0 22rpx;
+}
+
+.tall-input .btn {
+  width: 14%;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 34rpx;
+  background-color: #00c481;
+  border: 2rpx solid #00c481;
+  color: #fff;
+  font-size: 32rpx;
+  text-align: center;
+}

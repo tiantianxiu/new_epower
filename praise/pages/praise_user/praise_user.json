@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "车型口碑",
+  "usingComponents": {
+    "authorization": "/components/authorization/authorization",
+    "moreFunctions": "/components/moreFunctions/moreFunctions",
+    "replyTail": "/components/replyTail/replyTail",
+    "navBar": "/components/navBar/navBar",
+    "praiseRight": "/components/praiseRight/praiseRight"
+  }
+}

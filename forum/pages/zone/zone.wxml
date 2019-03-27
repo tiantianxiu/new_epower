@@ -1,0 +1,71 @@
+<!--pages/zone/zone.wxml-->
+<import src="/zanui/loadmore/index.wxml" />
+
+<navBar navbar-data="{{navbarData}}"></navBar>
+
+<view class="container-nopadding" style="margin-top:{{heightMt}}px">
+  <authorization showAuthorization="{{showAuthorization}}" bindagreeAuthorizeFun="agreeAuthorizeFun" bindrejectAuthorizeFun="rejectAuthorizeFun"></authorization>
+  <view class="page-body">
+    <view class="slide-image-wrap">
+      <view style="background-image:url({{topImg.banner}});" class="slide-image">
+        <image class="iconzone" src="{{topImg.icon}}" />
+        <view class="btn-apply" bindtap="applyModerator" wx:if="{{topImg.is_apply==1}}">申请版主</view>
+      </view>
+    </view>
+    <view class="btn-banzhu">
+      本版版主：
+      <text wx:for="{{topImg.banzhu}}" wx:for-item="item" wx:key="{{index}}">{{item.username}}</text>
+    </view>
+    <view class="nav-list-wrap" wx:if="{{topImg.type==1}}">
+
+      <view class="nav-tab">
+        <text bindtap="changeType" data-type="0" class="{{type=='0' ? 'active' : ''}}">综合</text>
+        <text bindtap="changeType" data-type="1" class="{{type=='1' ? 'active' : ''}}">吐槽</text>
+        <text bindtap="changeType" data-type="2" class="{{type=='2' ? 'active' : ''}}">精华</text>
+      </view>
+    </view>
+    <view class="section-zone-wrap">
+
+      <view class="section-zone-title col-wrap">
+        <view class="col-1"></view>
+        <view class="col-2">标题</view>
+        <view class="col-4">回复/点击</view>
+      </view>
+      <block wx:if="{{topicList.length>0}}">
+        <view wx:for="{{topicList}}" wx:for-item="topicList" wx:key="{{topicList.tid}}" class="section-zone-list col-wrap" data-tid="{{topicList.tid}}" bindtap="toDetail">
+          <view class="col-1">
+            <block wx:if="{{topicList.displayorder > 0}}">
+              <view class="tag-item tag-essence">置顶</view>
+            </block>
+            <block wx:else>
+              <view wx:if="{{topicList.icon==3}}" class="tag-item tag-essence">精华</view>
+              <view wx:elif="{{topicList.icon==2}}" class="tag-item tag-complaints">吐槽</view>
+              <view wx:elif="{{topicList.icon==1}}" class="tag-item tag-pic">图</view>
+              <view wx:elif="{{topicList.icon==5}}" class="tag-item tag-vedio">视频</view>
+              <view wx:else class="tag-item">文</view>
+            </block>
+          </view>
+          <view class="col-2 {{topicList.displayorder > 0 ? 'color-tagTop':''}} {{topicList.displayorder <= 0 && topicList.icon==3 ? 'color-essence':''}}">{{topicList.subject}}</view>
+          <view class="col-4">
+            <view class="fsm">{{topicList.replies}}</view>
+            <view class="fsm color-gray">{{topicList.views}}</view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="no-list">暂无此贴子</view>
+      </block>
+    </view>
+
+
+    <view wx:if='{{is_show_post.is_show == 1}}' bindtap="toAddArtice" class="iconAdd">
+      <image src="http://cdn.e-power.vip/resources/image/iconAdd.png" />
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+  <!-- 没有更多的数据了 -->
+  <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+
+</view>

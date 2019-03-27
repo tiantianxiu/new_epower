@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "媒体排行榜",
+  "usingComponents": {
+    "navBar": "/components/navBar/navBar"
+  }
+}

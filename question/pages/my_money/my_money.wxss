@@ -1,0 +1,93 @@
+.page-body{
+  padding-bottom: 60rpx;
+}
+.my-money-header {
+  background-color: #fff;
+  padding: 66rpx 60rpx 50rpx;
+  margin-bottom: 20rpx;
+}
+
+.my-money-header .em {
+  font-size: 30rpx;
+  color: #676767;
+}
+
+.my-money-header .span {
+  color: #fe3600;
+  font-size: 60rpx;
+  font-weight: 500;
+}
+
+.my-money-content {
+  padding: 60rpx;
+  background-color: #fff;
+}
+.section-wrap .section-title{
+  padding: 6rpx 0;
+}
+.section-wrap .section-title .title{
+  color: #838383;
+  padding-left:10rpx;
+}
+.record-header{
+  color: #4b4b4b;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+  padding: 10rpx 0;
+  position: relative;
+  border-bottom: 2rpx solid #eee;
+}
+.money-record .record-header::after {
+  content: " ";
+  display: inline-block;
+  height: 16rpx;
+  width: 16rpx;
+  border-width: 6rpx 6rpx 0 0;
+  border-color: #bfbfbf;
+  border-style: solid;
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: absolute;
+  top: 40%;
+  margin-top: -6rpx;
+  right: 10rpx;
+  transition: all .3s;
+}
+.money-record.active .record-header::after{
+  transform: rotate(134deg);
+}
+.record-content{
+  display: flex;
+  font-size: 24rpx;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #eee;
+}
+.record-content .list{
+  width: 50%;
+  text-align: left;
+  color: #8d8d8d;
+}
+.record-content .text{
+  width: 50%;
+  text-align: right;
+  color: #ff0000;
+}
+.cash-fixed{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 22rpx 0 38rpx;
+  background-color: #fff;
+  text-align: center;
+}
+.cash-fixed text{
+  border-radius: 50rpx;
+  background-color: #b5b5b5;
+  color: #fff;
+  font-weight: 600;
+  height: 64rpx;
+  line-height: 64rpx;
+  width: 50%;
+  display:inline-block;
+  font-size: 32rpx;
+}

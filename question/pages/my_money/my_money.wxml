@@ -1,0 +1,59 @@
+<navBar navbar-data='{{navbarData}}'></navBar>
+<view class="page-body" style="margin-top:{{heightMt}}px">
+  <view class="my-money-header">
+    <view class="em">余额（元）</view>
+    <view class="span">{{balance}}元</view>
+  </view>
+
+  <view class="my-money-content">
+    <view class="section-wrap">
+      <view class="section-title section-ext">
+        <text class="title">余额明细</text>
+      </view>
+      <view class="money-detail">
+        <!-- <view class="money-record">
+          <view class="record-header" bindtap="budgetap" data-item="budget3" data-id="3">提现</view>
+
+          <view class="record-content" wx:for="{{budget3}}" wx:key="{{index}}" wx:for-item="item">
+            <view class="list">
+              {{item.dateline}}
+            </view>
+            <view class="text">-{{item.price}}</view>
+          </view>
+
+        </view> -->
+
+
+        <view class="money-record {{budget2.length == 0 ? '' : 'active'}}">
+          <view class="record-header" bindtap="budgetap" data-item="budget2" data-id="2">回答被采纳</view>
+
+          <view class="record-content" wx:for="{{budget2}}" wx:key="{{index}}" wx:for-item="item">
+            <view class="list">
+              {{item.dateline}}
+            </view>
+            <view class="text">+{{item.price}}</view>
+          </view>
+
+        </view>
+
+        <view class="money-record {{budget3.length == 0 ? '' : 'active'}}">
+          <view class="record-header"  bindtap="budgetap" data-item="budget3" data-id="3">提问支出</view>
+
+          <view class="record-content" wx:for="{{budget3}}" wx:key="{{index}}" wx:for-item="item">
+            <view class="list">
+              {{item.dateline}}
+            </view>
+            <view class="text">-{{item.price}}</view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+
+
+    <view class="cash-fixed" bindtap="cashTap">
+      <text>提现</text>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,158 @@
+<!--pages/order_buy/order_buy.wxml-->
+<import src="../../zanui/loadmore/index.wxml" />
+<view class="container-nopadding">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+  <!-- 授权登录框 -->
+  <authorization showAuthorization="{{showAuthorization}}" bindagreeAuthorizeFun="agreeAuthorizeFun" bindrejectAuthorizeFun="rejectAuthorizeFun"></authorization>
+
+  <navBar navbar-data="{{navbarData}}"></navBar>
+  <view class="page-body">
+  <view style="height: {{heightMt}}px"></view>
+    <block wx:if="{{typeClass == 1}}">
+      <block wx:if="{{myCarVerify.length>0}}">
+        <view class="car-list-wrap">
+          <view class="car-list" wx:for="{{myCarVerify}}" wx:key="" wx:for-item="myCarlist" wx:if="{{type != 'certified' || type == 'certified' && myCarlist.status == '已认证'}}">
+            <view class="car-list-info" data-action="edit" data-name="{{myCarlist.car_3}}" data-brand="{{myCarlist.car_1}}" data-model="{{myCarlist.car_2}}" data-vid="{{myCarlist.vid}}" data-img="{{myCarlist.myfile}}" data-imgUrl="{{myCarlist.real_myfile}}" data-owner="{{myCarlist.realname}}"
+              data-phone="{{myCarlist.mobile}}" data-status="{{myCarlist.status}}" data-carnumber="{{myCarlist.plate_number}}" bindtap="toUpload">
+              <view class="car-img" style="background-image: url({{base_url}}{{myCarlist.icon}});"></view>
+              <view class="car-text">
+                <text class="name">{{myCarlist.car_1}}</text>
+                <text class="text">{{myCarlist.car_3}}</text>
+              </view>
+              <view class="car-status">
+                <text class="status {{myCarlist.status == '审核中' || myCarlist.status == '不通过' ? 'status-red' : ''}}">{{myCarlist.status}}</text>
+              </view>
+            </view>
+
+            <view wx:if="{{type != 'certified'}}" class="del-car {{myCarlist.show_plate_model == myCarlist.vid ? 'btn-disabled':''}}" data-status="{{myCarlist.status}}" data-vid="{{myCarlist.vid}}" data-show="{{myCarlist.show_plate_model}}" bindtap="carFun">{{myCarlist.status == '已认证'? '显示此车辆':'删除车辆'}}</view>
+
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="box-wrap">
+          <view class="item no-list">
+            <view class="img">
+              <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/no-car.png" />
+            </view>
+            <view>暂时没有已认证车辆</view>
+          </view>
+        </view>
+      </block>
+      <view class="btn-area-fixed" wx:if="{{type != 'certified'}}">
+        <view class="btn-area-holder"></view>
+        <view class="btn-area">
+          <view class="tips">温馨提示：每人最多可以认证3辆车</view>
+          <view class="btn-main grey" bindtap="bindTap" wx:if="{{typeClassTap}}">返回</view>
+          <view class="btn-main" bindtap="addCar">+ 添加车辆</view>
+          <view wx:if="{{applyStatus == 4 || applyStatus == 2}}" class="btn-main {{applyStatus == 4 || applyStatus == 2? '':'btn-disabled'}}" bindtap="applyCarOwner">{{applyTest}}</view>
+        </view>
+      </view>
+    </block>
+
+  <block wx:elif="{{typeClass == 2}}">
+     <view class="form-block-wrap">
+        <view class="form-block">
+          
+           <view class="form-block-item">
+            <view class="form-name">姓 名</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="text" value="{{textName}}" bindinput="inputName" placeholder="请输入您的姓名"   placeholder-class="placeholder"></input></view>
+          </view>
+          <view class="form-block-item" style="display: block;">
+            <view class="form-name" style="width: 100%;">名片或工作证
+            <!-- <text>（横向拍摄识别更精确）</text> -->
+            </view>
+            <view class="form-input">
+              <view class="uploadLicense" bindtap="chooseMediaImage">
+                <view class="licenseImage" wx:if="{{job_image_url}}" style="background-image: url({{job_image_url}});"></view>
+                <view wx:if="{{job_image_url && flag != 1}}" class="del" catchtap="delPic"></view>
+              </view>
+            </view>
+          </view>
+        
+          <view class="form-block-item">
+            <view class="form-name">手   机</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="number" value="{{textPhone}}" bindinput="inputPhone" placeholder="输入您的手机"   placeholder-class="placeholder"></input></view>
+          </view>
+          <view class="form-block-item">
+            <view class="form-name">在职公司名称</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="text" value="{{textCompany}}" bindinput="inputCompany" placeholder="输入您公司的名称" placeholder-class="placeholder"></input></view>
+          </view>
+          <view class="form-block-item" style=" display: block;">
+            <view class="form-name" style=" width: 100%;">职业或者某领域的专家</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="text" value="{{textPosition}}" bindinput="inputPosition" placeholder="如:总经理或新能源汽车专家、法律专家等" placeholder-class="placeholder"></input></view>
+          </view>
+          <view class="form-btn-wrap">
+            <view class="btn-main-round grey" wx:if="{{flag != -2}}">{{flag == 0 ? '待审核' : flag == -1 ? '审核不通过 ' : flag == 1 ? '审核通过' :''}}</view>
+            <view class="btn-main-round grey" bindtap="bindTap" wx:if="{{typeClassTap}}">返回</view>
+            <view class="btn-main-round" bindtap="submitFuns" wx:if="{{flag != 1}}">{{flag == 0 ? '修改信息' : flag == -1 ?  '重新审核':'提交审核'}}</view>
+            
+          </view>            
+        </view>
+      </view>
+    </block>
+
+    <block wx:elif="{{typeClass == 3}}">
+     <view class="form-block-wrap">
+        <view class="form-block">
+          
+           <view class="form-block-item">
+            <view class="form-name">真实姓名</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="text" value="{{textName}}" bindinput="inputName" placeholder="请输入您的姓名"   placeholder-class="placeholder"></input></view>
+          </view>
+          <view class="form-block-item" style="display: block;">
+            <view class="form-name" style="width: 100%;">名片或工作证
+            <!-- <text>（横向拍摄识别更精确）</text> -->
+            </view>
+            <view class="form-input">
+              <view class="uploadLicense" bindtap="chooseMediaImage">
+                <view class="licenseImage" wx:if="{{job_image_url}}" style="background-image: url({{job_image_url}});"></view>
+                <view wx:if="{{job_image_url && flag != 1}}" class="del" catchtap="delPic"></view>
+              </view>
+            </view>
+          </view>
+          <view class="form-block-item">
+            <view class="form-name" >公众ID号</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="text" value="{{textID}}" bindinput="inputID" placeholder="请输入您的公众号ID号"   placeholder-class="placeholder"></input></view>
+          </view>
+          <view class="form-block-item">
+            <view class="form-name">手   机</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="number" value="{{textPhone}}" bindinput="inputPhone" placeholder="输入您的手机"   placeholder-class="placeholder"></input></view>
+          </view>
+          <view class="form-block-item">
+            <view class="form-name">在职公司名称</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="text" value="{{textCompany}}" bindinput="inputCompany" placeholder="输入您公司的名称" placeholder-class="placeholder"></input></view>
+          </view>
+          <view class="form-btn-wrap">
+            <view class="btn-main-round grey" wx:if="{{flag != -2}}">{{flag == 0 ? '待审核' : flag == -1 ? '审核不通过 ' : flag == 1 ? '审核通过' :''}}</view>
+            <view class="btn-main-round grey" bindtap="bindTap" wx:if="{{typeClassTap}}">返回</view>
+            <view class="btn-main-round" bindtap="submitFun" wx:if="{{flag != 1}}">{{flag == 0 ? '修改信息' : flag == -1 ?  '重新审核':'提交审核'}}</view>
+          </view>            
+         
+        </view>
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="identification">
+        <view class="title">请选择认证类型</view>
+        <view class="list">
+          <view class="li" bindtap="bindTap" data-id="1">车主认证</view>
+          <view class="li" bindtap="showTap" data-id="1">行业人士认证
+            <block wx:if="{{showMen}}">
+              <text catchtap="bindTap" hover-stop-propagation='{{true}}' data-id="2" data-item="汽车厂家">汽车厂家</text>
+              <text catchtap="bindTap" hover-stop-propagation='{{true}}' data-id="2" data-item="经销商">经销商</text>
+              <text catchtap="bindTap" hover-stop-propagation='{{true}}' data-id="2" data-item="行业专家">行业专家</text>
+            </block>
+          </view>
+          <view class="li" bindtap="bindTap" data-id="3">媒体认证</view>
+        </view>
+      </view>
+    </block>
+
+  </view>
+
+  <carModel carModelShow="{{carModelShow}}" bindcarModelInfo="carModelInfo"></carModel>
+</view>

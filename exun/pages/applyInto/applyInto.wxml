@@ -1,0 +1,52 @@
+<!--add_article.wxml-->
+<view class="container-nopadding bg-green">
+
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+<navBar navbar-data="{{navbarData}}"></navBar>
+  <view class="page-body" style="margin-top:{{heightMt}}px">
+    <view class="page__bd">
+      <view class="form-block-wrap">
+        <view class="form-block">
+          <view class="form-block-item">
+            <view class="form-name">用 户 名</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="text" value="{{textUsername}}" bindinput="inputUsername" placeholder="请与公众号保持一致"></input></view>
+          </view>
+          <view class="form-block-item">
+            <view class="form-name">营业执照</view>
+            <view class="form-input">
+              <view class="uploadLicense" bindtap="chooseImage">
+                <view class="licenseImage" wx:if="{{certificationPic}}" style="background-image: url({{certificationPic}});"></view>
+                <view wx:if="{{certificationUrl && flag != 1}}" class="del" catchtap="delPic"></view>
+              </view>
+            </view>
+          </view>
+          <view class="form-block-item">
+            <view class="form-name">公众ID号</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="text" value="{{textID}}" bindinput="inputID"></input></view>
+          </view>
+          <view class="form-block-item">
+            <view class="form-name">证 件 号</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="text" value="{{textIdcard}}" bindinput="inputIdcard"></input></view>
+          </view>
+          <view class="form-block-item">
+            <view class="form-name">手   机</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="number" value="{{textPhone}}" bindinput="inputPhone"></input></view>
+          </view>
+          <view class="form-block-item">
+            <view class="form-name">真实姓名</view>
+            <view class="form-input"><input class="input-text" disabled="{{flag == 1? true : false}}" type="text" value="{{textName}}" bindinput="inputName"></input></view>
+          </view>    
+          <view class="form-btn-wrap">
+            <view class="btn-main-round" wx:if="{{flag != -2}}">{{flag == 0 ? '待审核' : flag == -1 ? '审核不通过 ' : flag == 1 ? '审核通过' :''}}</view>
+            <view class="btn-main-round" bindtap="submitFun" wx:if="{{flag != 1}}">{{flag == 0 ? '修改信息' : flag == -1 ?  '重新审核':'提交审核'}}</view>
+          </view>            
+         
+        </view>
+      </view>
+      
+    </view>
+  </view>
+</view>
+

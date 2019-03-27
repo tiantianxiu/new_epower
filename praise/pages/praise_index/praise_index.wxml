@@ -1,0 +1,401 @@
+<page>
+  <import src="/zanui/loadmore/index.wxml" />
+
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+  <authorization showAuthorization="{{showAuthorization}}" bindagreeAuthorizeFun="agreeAuthorizeFun" bindrejectAuthorizeFun="rejectAuthorizeFun"></authorization>
+  <navBar navbar-data='{{navbarData}}'></navBar>
+
+  <view class="c-tab-fixed-wrap c-tabSearch-fixed-wrap" style="top:{{heightMt}}px">
+
+    <view class="search-wrap box-wrap  animated  {{search?'slideInDown':'slideOutUp none'}}">
+      <view class="search-input-wrap item">
+        <image class="search-icon" src="http://cdn.e-power.vip/resources/image/search.png" />
+        <input type="text" class="search-box" value="{{name}}" bindinput='searchInput' placeholder="搜索" />
+      </view>
+      <view class="btn-deafult" bindtap="cancleSearch">取消</view>
+    </view>
+
+    <view class="index-header">
+      <view class="li {{type_in==1 ? '':'active'}}" data-type_in="0" bindtap="typetap">口碑</view>
+      <view class="li {{type_in==1 ? 'active':''}}" data-type_in="1" bindtap="typetap">选车</view>
+      <view class="li" bindtap="selSearch">
+        <image src="http://cdn.e-power.vip/resources/image/praise/search.png"></image>
+      </view>
+    </view>
+    <view class="c-tab-wrap scroll-view scroll-view01">
+      <view class="title">价格</view>
+      <view class="all {{price==0 ? 'active' : ''}}" bindtap="toSet" data-tab='price' data-set="0">
+        全部
+      </view>
+      <scroll-view scroll-x class="scroll-wrap-x" scroll-left="{{scrollLeft}}">
+        <view bindtap="toSet" data-tab='price' data-set="1" class="item scroll-x-item ">
+          <view class="text {{price == 1 ? 'active' : ''}}">10万内
+          </view>
+        </view>
+        <view bindtap="toSet" data-tab='price' data-set="2" class="item scroll-x-item">
+          <view class="text {{price == 2 ? 'active' : ''}}">10-15万</view>
+        </view>
+        <view bindtap="toSet" data-tab='price' data-set="3" class="item scroll-x-item">
+          <view class="text {{price == 3 ? 'active' : ''}}">15-20万
+          </view>
+        </view>
+        <view bindtap="toSet" data-tab='price' data-set="4" class="item scroll-x-item ">
+          <view class="text {{price == 4 ? 'active' : ''}}">20-30万</view>
+        </view>
+        <view bindtap="toSet" data-tab='price' data-set="5" class="item scroll-x-item">
+          <view class="text {{price == 5 ? 'active' : ''}}">30-50万</view>
+        </view>
+        <view bindtap="toSet" data-tab='price' data-set="6" class="item scroll-x-item">
+          <view class="text {{price == 6 ? 'active' : ''}}">50万以上</view>
+        </view>
+        <view class="item scroll-x-item"></view>
+      </scroll-view>
+      <view class="grey"></view>
+    </view>
+
+    <view class="c-tab-wrap scroll-view scroll-view02">
+      <view class="title">车型</view>
+      <view class="all {{shape==0 ? 'active' : ''}}" bindtap="toSet" data-tab='shape' data-set="0">
+        全部
+      </view>
+      <scroll-view scroll-x class="scroll-wrap-x">
+        <view bindtap="toSet" data-tab='shape' data-set="1" class="item scroll-x-item">
+          <view class="text {{shape==1 ? 'active' : ''}}">轿车</view>
+        </view>
+        <view bindtap="toSet" data-tab='shape' data-set="2" class="item scroll-x-item">
+          <view class="text {{shape==2 ? 'active' : ''}}">SUV
+          </view>
+        </view>
+        <view bindtap="toSet" data-tab='shape' data-set="3" class="item scroll-x-item">
+          <view class="text {{shape==3 ? 'active' : ''}}">MPV</view>
+        </view>
+        <view bindtap="toSet" data-tab='shape' data-set="4" class="item scroll-x-item">
+          <view class="text {{shape==4 ? 'active' : ''}}">其他</view>
+        </view>
+        <view class="grey"></view>
+      </scroll-view>
+    </view>
+
+    <view class="c-tab-wrap scroll-view scroll-view03">
+      <view class="title">类别</view>
+      <view class="all {{type==0 ? 'active' : ''}}" bindtap="toSet" data-tab='type' data-set="0">
+        全部
+      </view>
+      <scroll-view scroll-x class="scroll-wrap-x">
+        <view bindtap="toSet" data-tab='type' data-set="1" class="item scroll-x-item">
+          <view class="text {{type==1 ? 'active' : ''}}">纯电动
+          </view>
+        </view>
+        <view bindtap="toSet" data-tab='type' data-set="2" class="item scroll-x-item">
+          <view class="text {{type==2 ? 'active' : ''}}">插电式混动</view>
+        </view>
+        <view bindtap="toSet" data-tab='type' data-set="3" class="item scroll-x-item">
+          <view class="text {{type==3 ? 'active' : ''}}">混合动力
+          </view>
+        </view>
+      </scroll-view>
+
+    </view>
+
+  </view>
+  <view style="margin-top:{{heightMt}}px">
+    <view class="c-tab-fixed-holder"></view>
+    <view class="c-tab-fixed-holder"></view>
+    <view class="c-tab-fixed-holder"></view>
+    <view class="c-tab-fixed-holder"></view>
+  </view>
+  <view class="praise-container search-result" wx:if="{{name_data && search && name_data.length!=0}}" style="top:{{heightMt + 41 * 4 - 1}}px">
+    <scroll-view class="content" scroll-into-view="{{toView}}" scroll-y="{{true}}" style="height:{{windowHeight - heightMt - 41*4}}px; margin-bottom:20rpx;">
+      <block wx:for="{{name_data}}" wx:for-item="item" wx:key="index">
+        <view class="list" bindtap="toDetail" data-car_2="{{item.car_2}}">
+          <view class="image">
+            <image src="{{item.icon}}" lazy-load="{{true}}"></image>
+            <view class="text">
+              <view class="text-title">综合
+                <view></view>
+                能耗
+              </view>
+
+              <block wx:if="{{item.fuel_consumption != '0.0' || item.power_consumption != '0.0'}}">
+                <block wx:if="{{item.fuel_consumption != 0.0}}">
+                  <block wx:if="{{item.power_consumption != 0.0}}">
+                    <text>{{item.fuel_consumption + 'L'}}+{{item.power_consumption + '度/百公里'}}</text>
+                  </block>
+                  <block wx:else>
+                    <text>{{item.fuel_consumption + 'L'}}/百公里</text>
+                  </block>
+                </block>
+                <block wx:else>
+                  <block wx:if="{{item.power_consumption != 0.0}}">
+                    <swiper indicator-dots="{{false}}" autoplay="{{true}}" interval="{{4000}}" duration="{{500}}">
+                      <swiper-item>
+                        <text>{{item.power_consumption + '度/百公里'}}</text>
+                      </swiper-item>
+                      <swiper-item>
+                        <text>{{item.rmb + '元/百公里'}}</text>
+                      </swiper-item>
+                    </swiper>
+                  </block>
+                  <block wx:else>
+                    <text>/百公里</text>
+                  </block>
+                </block>
+              </block>
+              <block wx:else>
+                <text>{{now_no_data}}</text>
+              </block>
+            </view>
+          </view>
+
+          <view class="content">
+            <view class="title">{{item.name}}
+              <view class="grade {{item.score ? '':'grey'}}">{{item.score || now_no_praise}}</view>
+            </view>
+            <view class="remark">
+              <block wx:if="{{item.min_price != '0.00'}}">补贴后：{{item.min_price}}~{{item.max_price}}万
+              </block>
+              <block wx:else>
+                {{now_no_sale}}
+              </block>
+            </view>
+
+            <view class="specific-list">
+              <view class="specific satisfaction">
+                <view class="specific-title">满意</view>
+                <block wx:if="{{item.satisfied_tag.length != 0}}">
+                  <view class="spot" wx:for="{{item.satisfied_tag}}" wx:for-item="satis" wx:key="index">{{satis}}</view>
+                </block>
+                <block wx:else>
+                  <view class="spot">{{now_no_data}}</view>
+                </block>
+              </view>
+              <view class="specific un-satisfaction">
+                <view class="specific-title">不满意</view>
+                <block wx:if="{{item.dissatisfied_tag.length != 0}}">
+                  <view class="spot" wx:for="{{item.dissatisfied_tag}}" wx:for-item="disatis" wx:key="index">{{disatis}}</view>
+                </block>
+                <block wx:else>
+                  <view class="spot">{{now_no_data}}</view>
+                </block>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <view class="search-bg animated {{search?'fadeIn':'fadeOut none'}}" bindtap="cancleSearch" style="top:{{heightMt + 41*2}}px"></view>
+
+  <block wx:if="{{recommend_data && recommend_data.length>0}}">
+    <view class="c-tab-wrap c-tab-wrap-content">
+      <view class="content content1">
+
+        <block wx:if="{{recommend_data.length==1}}">
+          <text wx:for="{{recommend_data}}" wx:key="{{index}}" wx:for-item="item" bindtap="toPostDetail" data-tid="{{item.tid}}">
+                {{item.subject}}
+              </text>
+        </block>
+        <block wx:else>
+          <swiper indicator-dots="{{false}}" autoplay="{{true}}" interval="{{4000}}" duration="{{500}}">
+            <block wx:for="{{recommend_data}}" wx:key="{{index}}" wx:for-item="item">
+              <swiper-item>
+                <text bindtap="toPostDetail" data-tid="{{item.tid}}">
+                {{item.subject}}
+              </text>
+              </swiper-item>
+            </block>
+          </swiper>
+        </block>
+      </view>
+      <view class="content content2">推荐</view>
+      <view class="content content3" bindtap="toPraisePost">更多...</view>
+    </view>
+  </block>
+
+  <view class="praise-container animated {{type_in == 1?'fadeOut none':'fadeIn'}}">
+    <block wx:for="{{reputation_data}}" wx:for-item="item" wx:key="index">
+      <view class="list" bindtap="toDetail" data-car_2="{{item.car_2}}">
+        <view class="image">
+          <image src="{{item.icon}}" lazy-load="{{true}}"></image>
+          <view class="text">
+            <view class="text-title">综合
+              <view></view>
+              能耗
+            </view>
+
+            <block wx:if="{{item.fuel_consumption != '0.0' || item.power_consumption != '0.0'}}">
+              <block wx:if="{{item.fuel_consumption != 0.0}}">
+                <block wx:if="{{item.power_consumption != 0.0}}">
+
+                  <text>{{item.fuel_consumption + 'L'}}+{{item.power_consumption + '度/百公里'}}</text>
+
+                </block>
+                <block wx:else>
+                  <text>{{item.fuel_consumption + 'L'}}/百公里</text>
+                </block>
+              </block>
+              <block wx:else>
+                <block wx:if="{{item.power_consumption != 0.0}}">
+                  <swiper indicator-dots="{{false}}" autoplay="{{true}}" interval="{{4000}}" duration="{{500}}">
+                    <swiper-item>
+                      <text>{{item.power_consumption + '度/百公里'}}</text>
+                    </swiper-item>
+                    <swiper-item>
+                      <text>{{item.rmb + '元/百公里'}}</text>
+                    </swiper-item>
+                  </swiper>
+                </block>
+                <block wx:else>
+                  <text>/百公里</text>
+                </block>
+              </block>
+            </block>
+            <block wx:else>
+              <text>{{now_no_data}}</text>
+            </block>
+          </view>
+        </view>
+        <view class="ranking ranking{{index+1}}">{{index > 2 ? index+1 : ''}}</view>
+        <view class="content">
+          <view class="title">{{item.name}}
+            <view class="grade {{item.score ? '':'grey'}}">{{item.score || now_no_praise}}</view>
+          </view>
+          <view class="remark">
+            <block wx:if="{{item.min_price != '0.00'}}">补贴后：{{item.min_price}}~{{item.max_price}}万
+            </block>
+            <block wx:else>
+              {{now_no_sale}}
+            </block>
+          </view>
+
+          <view class="specific-list">
+            <view class="specific satisfaction">
+              <view class="specific-title">满意</view>
+              <block wx:if="{{item.satisfied_tag.length != 0}}">
+                <view class="spot" wx:for="{{item.satisfied_tag}}" wx:for-item="satis" wx:key="index">{{satis}}</view>
+              </block>
+              <block wx:else>
+                <view class="spot">{{now_no_data}}</view>
+              </block>
+            </view>
+            <view class="specific un-satisfaction">
+              <view class="specific-title">不满意</view>
+              <block wx:if="{{item.dissatisfied_tag.length != 0}}">
+                <view class="spot" wx:for="{{item.dissatisfied_tag}}" wx:for-item="disatis" wx:key="index">{{disatis}}</view>
+              </block>
+              <block wx:else>
+                <view class="spot">{{now_no_data}}</view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 加载更多 -->
+    <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+    <!-- 没有更多的数据了 -->
+    <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+    <!-- 发口碑 -->
+    <moreFunctions showToPraise="{{true}}" bindshowAuthorization="showAuthorization"></moreFunctions>
+  </view>
+  <view class="praise-container praise-container-cars animated {{type_in == 1?'fadeIn':'fadeOut none'}}">
+    <scroll-view class="content" scroll-into-view="{{toView}}" scroll-y="{{true}}" style="height:{{windowHeight - heightMt - 41*4}}px; margin-bottom:20rpx;" bindscroll="bindScroll">
+      <block wx:for="{{cars_data}}" wx:for-index="idx" wx:for-item="itemss" wx:key="{{index}}">
+
+        <block wx:for="{{itemss}}" wx:for-item="items" wx:key="{{index}}">
+          <view class="titlea" id="{{idx}}">
+            <text>{{idx}}</text>{{items.name}}</view>
+          <block wx:for="{{items.list}}" wx:for-item="item" wx:key="{{index}}">
+            <view class="list" bindtap="toDetail" data-car_2="{{item.car_2}}">
+              <view class="image">
+                <image src="{{item.icon}}" lazy-load="{{true}}"></image>
+                <view class="text">
+                  <view class="text-title">综合
+                    <view></view>
+                    能耗
+                  </view>
+
+                  <block wx:if="{{item.fuel_consumption != '0.0' || item.power_consumption != '0.0'}}">
+                    <block wx:if="{{item.fuel_consumption != 0.0}}">
+                      <block wx:if="{{item.power_consumption != 0.0}}">
+                        <text>{{item.fuel_consumption + 'L'}}+{{item.power_consumption + '度/百公里'}}</text>
+                      </block>
+                      <block wx:else>
+                        <text>{{item.fuel_consumption + 'L'}}/百公里</text>
+                      </block>
+                    </block>
+                    <block wx:else>
+                      <block wx:if="{{item.power_consumption != 0.0}}">
+                        <swiper indicator-dots="{{false}}" autoplay="{{true}}" interval="{{4000}}" duration="{{500}}">
+                          <swiper-item>
+                            <text>{{item.power_consumption + '度/百公里'}}</text>
+                          </swiper-item>
+                          <swiper-item>
+                            <text>{{item.rmb + '元/百公里'}}</text>
+                          </swiper-item>
+                        </swiper>
+                      </block>
+                      <block wx:else>
+                        <text>/百公里</text>
+                      </block>
+                    </block>
+                  </block>
+                  <block wx:else>
+                    <text>{{now_no_data}}</text>
+                  </block>
+                </view>
+              </view>
+
+              <view class="content">
+                <view class="title">{{item.name}}
+                  <view class="grade {{item.score ? '':'grey'}}">{{item.score || now_no_praise}}</view>
+                </view>
+                <view class="remark">
+                  <block wx:if="{{item.min_price != '0.00'}}">补贴后：{{item.min_price}}~{{item.max_price}}万
+                  </block>
+                  <block wx:else>
+                    {{now_no_sale}}
+                  </block>
+                </view>
+
+                <view class="specific-list">
+                  <view class="specific satisfaction">
+                    <view class="specific-title">满意</view>
+                    <block wx:if="{{item.satisfied_tag.length != 0}}">
+                      <view class="spot" wx:for="{{item.satisfied_tag}}" wx:for-item="satis" wx:key="index">{{satis}}</view>
+                    </block>
+                    <block wx:else>
+                      <view class="spot">{{now_no_data}}</view>
+                    </block>
+                  </view>
+                  <view class="specific un-satisfaction">
+                    <view class="specific-title">不满意</view>
+                    <block wx:if="{{item.dissatisfied_tag.length != 0}}">
+                      <view class="spot" wx:for="{{item.dissatisfied_tag}}" wx:for-item="disatis" wx:key="index">{{disatis}}</view>
+                    </block>
+                    <block wx:else>
+                      <view class="spot">{{now_no_data}}</view>
+                    </block>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </block>
+
+      </block>
+    </scroll-view>
+  </view>
+
+  <view class="letter" wx:if="{{type_in==1 && !search}}" bindtouchstart="handlerStart" catchtouchmove="handlerMove">
+    <view wx:for="{{letter}}" wx:for-item="item" wx:key="{{index}}" class="li" data-id="{{item}}">
+      {{item}}
+    </view>
+  </view>
+  <view class="whith-letter {{text?'active':''}}">{{text}}</view>
+  <!-- 发口碑 -->
+  <moreFunctions showToPraise="{{true}}" bindshowAuthorization="showAuthorization"></moreFunctions>
+</page>

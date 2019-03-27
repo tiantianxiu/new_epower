@@ -1,0 +1,141 @@
+<!--add_article.wxml-->
+<view class="container-nopadding">
+
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+  <!-- 授权登录框 -->
+  <authorization showAuthorization="{{showAuthorization}}" bindagreeAuthorizeFun="agreeAuthorizeFun" bindrejectAuthorizeFun="rejectAuthorizeFun"></authorization>
+
+  <progressBar showProgress="{{showProgress}}" progress="{{progress}}"></progressBar>
+ <navBar navbar-data="{{navbarData}}"></navBar>
+
+  <view wx:if="{{!showChanegBox}}" class="page-body" style="margin-top:{{heightMt}}px">
+    <view class="page__bd">
+      <block wx:if="{{post_type != 2}}">
+        <view class='form-group group-wrap tab-wrap'>
+          <view class="group-name">选择类别</view>
+          <view class="group-item">
+            <view class="tab-item {{type==1 ? 'active' : ''}}" data-type="1" bindtap="typeChange">发帖</view>
+            <view class="tab-item {{type==2 ? 'active' : ''}}" data-type="2" bindtap="typeChange">吐槽</view>
+            <!-- <view class="tab-item {{type==3 ? 'active' : ''}}" data-type="3" bindtap="typeChange">投票</view> -->
+          </view>
+        </view>
+      </block>
+      <view wx:if="{{type == 3}}" class="form-group3">
+        <view class="form-group group-wrap">
+          <view class="form-item">
+            <input class="input-text" type="number" placeholder="最多可选项(默认1个)" value="{{articleTitle}}" bindinput="inputnum" placeholder-style="color:#dcdcdc"></input>
+          </view>
+          <view class="form-item">  
+            <input class="input-text" type="number" placeholder="记票天数(默认8天)" value="{{articleTitle}}" bindinput="inputdays" placeholder-style="color:#dcdcdc"></input>
+          </view>
+        </view>  
+        <view class="form-group group-wrap">  
+          <view class="form-item">
+             <view class="tab-item {{visibilitypoll ? 'active' : ''}}"  bindtap="visibilitypollTap">投票后结果可见</view>
+          </view>
+          <view class="form-item">
+             <view class="tab-item {{overt ? 'active' : ''}}"  bindtap="overtTap">公开投票参与人</view>
+          </view>
+        </view>
+        <view class="form-group group-wrap form-group8" wx:for="{{polloptions}}"> 
+          <view class="form-item">
+            <input class="input-text" type="text" placeholder="选项: 最多可填写 20 个选项" bindinput="inputOption" placeholder-style="color:#dcdcdc"></input>
+            <view class="cloce-img">
+              <image src="http://cdn.e-power.vip/resources/image/close.png" mode="widthFix"></image>
+            </view>
+          </view>
+        </view>
+        <view class="form-group group-wrap form-group8">
+          <view class="form-item" bindtap="addOptionBtn">
+            <text class="add-option">+增加一项</text>
+          </view>
+        </view>
+
+      </view>
+      <block wx:if="{{post_type != 1 && post_type != 2}}">
+        <view class='form-group group-wrap'>
+          <view class="group-name">选择版块</view>
+          <view class="form-item group-item">
+            <picker class="input-picker" range="{{sub_group_list}}" bindchange="subGroupChange" value="{{sub_group_index}}" mode="selector" placeholder-style="color:#dcdcdc">
+              <view>{{sub_group_list[sub_group_index]}}</view>
+              <image class="img" src="http://cdn.e-power.vip/resources/image/icon_down.png" />
+            </picker>
+          </view>
+        </view>
+      </block>
+      <view class="form-group">
+        <view class="form-item">
+          <input class="input-text" type="text" placeholder="请输入标题（6~20字）" name="key" value="{{articleTitle}}" bindinput="inputTitle" placeholder-style="color:#dcdcdc"></input>
+        </view>
+
+        <view class="form-item text-container" wx:for="{{articleContent}}" wx:for-item="article" wx:key="">
+          <view class="close" data-idx="{{index}}" bindtap="delItem" wx:if="{{articleContent.length > 1 || index != 0}}">
+            <image src="http://cdn.e-power.vip/resources/image/close.png" />
+          </view>
+
+          <view class="content-wrap">
+            <view wx:if="{{article.type == 'image'}}" class="image-wrap" style="background-image: url({{article.url}})" data-idx="{{index}}" data-idx="{{index}}" data-isfm="{{article.isfm}}" data-url="{{article.url}}" bindtap="chanegImg">
+              <image wx:if="{{article.isfm}}" class="tag-fm" src="http://cdn.e-power.vip/resources/image/fengmian-2.png" />
+            </view>
+
+            <view wx:if="{{article.type == 'video'}}" class="video-wrap" data-idx="{{index}}">
+              <video src="{{article.url}}" data-src="{{article.url}}" controls></video>
+            </view>
+
+            <view class="textarea-wrap {{article.url == ''?'':'textarea-smaller'}}" wx:if="{{article.showTextBox || article.url == ''}}">
+              <textarea maxlength="-1" data-idx="{{index}}" wx:if="{{showTextarea}}" placeholder="请输入内容" bindinput="inputContent" cursor-spacing="22" value="{{article.text}}" placeholder-style="color:#dcdcdc" focus="{{focus}}" />
+            </view>
+
+            <block wx:if="{{article.url != ''}}">
+              <view wx:if="{{article.text == '' && !article.showTextBox}}" class="btn-swipper" data-idx="{{index}}" bindtap="editText">
+                <image class="icon-width" src="http://cdn.e-power.vip/resources/image/icon_add.png" />添加描述</view>
+              <view wx:else class="btn-swipper" data-idx="{{index}}" bindtap="delText">
+                <image class="icon-width" src="http://cdn.e-power.vip/resources/image/icon_del.png" />删除描述</view>
+            </block>
+          </view>
+
+          <view class="btn-order-wrap">
+            <block>
+              <view class="btn-order" data-order="up" bindtap="orderItem" data-idx="{{index}}">
+                <image wx:if="{{index > 0}}" src="http://cdn.e-power.vip/resources/image/icon_up.png" />
+              </view>
+            </block>
+            <block>
+              <view class="btn-order" data-order="down" bindtap="orderItem" data-idx="{{index}}">
+                <image wx:if="{{index < articleContent.length - 1}}" src="http://cdn.e-power.vip/resources/image/icon_down.png" />
+              </view>
+            </block>
+          </view>
+        </view>
+
+        <view class="btn-area">
+          <view class="btn-insert-wrap">
+            <view class="btn-insert" bindtap="addTextarea">
+              <image src="http://cdn.e-power.vip/resources/image/text.png" />添加文字</view>
+            <view class="btn-insert" bindtap="chooseImage">
+              <image src="http://cdn.e-power.vip/resources/image/upload-pic.png" />添加图片</view>
+            <view class="btn-insert" bindtap="chooseVedio">
+              <image src="http://cdn.e-power.vip/resources/image/vedio.png" />添加视频</view>
+          </view>
+          <button class="btn-main" bindtap="articleSubmit">发帖</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="chaneg-box-wrap" wx:if="{{showChanegBox}}" style="top:{{heightMt}}px">
+    <view class="goback" data-idx="{{index}}" bindtap="hideChanegBox">
+      <image src="http://cdn.e-power.vip/resources/image/goback.png" />
+    </view>
+
+    <view class="image-box" style="background-image: url({{chanegImgUrl}})">
+      <image wx:if="{{chanegImgIsfm}}" class="tag-fm" src="http://cdn.e-power.vip/resources/image/fengmian-1.png" />
+    </view>
+    <view class="btn-b-wrap">
+      <view class="btn-primary" bindtap="setFm">{{chanegImgIsfm?'取消封面':'设为封面'}}</view>
+      <view class="btn-primary" bindtap="reselectionImg">重新选择</view>
+    </view>
+  </view>
+</view>
+

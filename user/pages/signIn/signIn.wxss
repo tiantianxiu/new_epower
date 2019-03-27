@@ -1,0 +1,116 @@
+image{
+  width: 100%;
+}
+.page-body{
+  background-color: #fff;
+}
+.sign-top{
+  height: 136rpx;
+  background: center center no-repeat url(http://cdn.e-power.vip/resources/image/sign-top.png);
+  background-size: contain;
+  color: #fff;
+}
+.sign-top .text{
+  font-size: 24rpx;
+  padding:20rpx 40rpx;
+  letter-spacing:5rpx;
+}
+
+.signinwrap{
+  padding:40rpx;
+}
+.date-list{
+  padding:30rpx 0;
+  display: flex;
+}
+.day-item{
+  flex: 1;
+  text-align:center;
+  font-size: 20rpx;
+  color: #baded2;  
+}
+.lunar-date{
+  font-size: 18rpx;
+  opacity: 0.8;
+}
+.sign-icon{
+  width: 78rpx;
+  height: 58rpx;
+  display: inline-block;
+  background: center center no-repeat url(http://cdn.e-power.vip/resources/image/icon-sign.png);
+  background-size: contain;
+  transition: 0.3s;
+}
+.signed{
+  color: #f56d61;
+}
+.signed .sign-icon{ 
+  background-image: url(http://cdn.e-power.vip/resources/image/icon-signed.png);
+}
+.sign-active{
+    color: #f56d61;
+}
+.sign-active .sign-icon{
+  background-image: url(http://cdn.e-power.vip/resources/image/icon-sign-active.png);
+  transform: scale(1.2);
+}
+
+
+.sign-btn{
+  background-color: #f54a3b;
+  color: #fff; 
+  width: 330rpx;
+  height: 90rpx;
+  border-radius: 45rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38rpx;
+  font-weight: bold;
+  letter-spacing: 12rpx;
+  margin:20rpx auto 70rpx;
+}
+.sign-btn text{
+  display: block;
+  line-height: 1.4
+}
+.sign-btn-disabled-wrap{
+  border:1px solid #999;
+}
+.sign-btn-disabled-wrap .sign-btn{
+  background-color: #999;
+}
+.sign-btn-disabled{
+  opacity: 0.5;
+}
+.section-round-wrap{
+  border-radius:40rpx 40rpx 0 0;
+}
+.section-round-wrap,
+.section-round-wrap .section-title,
+.section-round-wrap .article{
+  background-color: #edf4f2;
+}
+.section-round-wrap .article{
+  border-bottom: 4rpx solid #e2efeb;
+}
+.section-round-wrap .section-wrap{
+  border-bottom: 4rpx solid #e2efeb;
+}
+.section-round-wrap .section-wrap:last-child{
+  border-bottom: none;
+}
+.section-round-wrap .section-title{
+  position: relative;
+}
+.section-round-wrap .section-title .title{
+  font-weight: bold;
+  color:#000;
+}
+.section-round-wrap .section-title .navigator-arrow{
+  width: 40rpx;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+  	"authorization": "../../components/authorization/authorization",
+    "replyTail": "../../components/replyTail/replyTail",
+    "navBar": "../../components/navBar/navBar"
+  },
+  "navigationBarTitleText": "消息通知"
+
+}

@@ -1,0 +1,159 @@
+<import src="/zanui/loadmore/index.wxml" />
+
+<view class="container-nopadding">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+  <navBar navbar-data="{{navbarData}}" bindsquareTap="squareTap" bindsquareLong="squareLong"></navBar>
+  <view class="page-body" style="margin-top:{{heightMt}}px">
+
+    <!-- 授权登录框 -->
+    <authorization showAuthorization="{{showAuthorization}}"></authorization>
+
+    <view class="slide-image-wrap slide-image-wrap-radius" id="topic-body-titel">
+      <view class="section-wrap">
+        <view class="topic-body-content">
+          <view class="square-header">
+            <view class="li">
+              <view class="title">热门围观</view>
+              <view class="content">
+                <view class="av" bindtap="picTap" data-typeid="67" data-class_name="#315专题#">
+                  <image src=http://cdn.e-power.vip/resources/image/square/square11.jpg " mode="aspectFill "></image>
+              </view>
+              <view class="av " bindtap="toTopicDetail " data-fid="120 ">
+                <image src="http://www.e-power.vip/data/attachment/common/da/common_120_icon.jpg " mode="aspectFill "></image>
+                </view>
+                <view class="av " bindtap="toTopicDetail " data-fid="109 ">
+                  <image src="http://www.e-power.vip/data/attachment/common/27/common_109_icon.jpg " mode="aspectFill "></image>
+              </view>
+              <view class="av " bindtap="toTopicDetail " data-fid="99 ">
+                <image src="http://www.e-power.vip/data/attachment/common/ac/common_99_icon.png " mode="aspectFill "></image>
+                </view>
+              </view>
+            </view>
+            <view class="li " wx:if="{{member.length>0}}">
+                    <view class="title">
+                      暗中观察
+                      <view class="sex">
+                        <image src="http://cdn.e-power.vip/resources/image/square/male.png" wx:if="{{gender==1 }}"></image>
+                        <image src="http://cdn.e-power.vip/resources/image/square/male_grey.png" wx:if="{{gender==2 }}" bindtap="setGender" data-gender="1"></image>
+                      </view>
+                      <view class="sex female">
+                        <image src="http://cdn.e-power.vip/resources/image/square/female.png" wx:if="{{gender==2 }}"></image>
+                        <image src="http://cdn.e-power.vip/resources/image/square/female_grey.png" wx:if="{{gender==1 }}" bindtap="setGender" data-gender="2"></image>
+                      </view>
+                      <view class="round" bindtap="setUserIndex" data-user_index="1">换一批</view>
+                    </view>
+                    <view class="content content-per">
+
+                      <view class="av" wx:for="{{member}}" wx:for-item="item" wx:key="{{index}}">
+                        <image src="{{item.avatar}}" bindtap="toUserDetail" data-uid="{{item.uid}}" mode="aspectFill"></image>
+                      </view>
+
+                    </view>
+                </view>
+              </view>
+
+              <block wx:for="{{thread}}" wx:for-item="item" wx:key="{{index}}">
+                <view class="list">
+                  <view class="author-info" data-uid="{{item.authorid}}" bindtap="toUserDetail">
+                    <view class="author">
+                      <image src="{{item.avatar}}" mode="aspectFill"  />
+                    </view>
+                    <image class="icon-width icon-width-l icon-v4" src="http://cdn.e-power.vip/resources/image/icon-v2.png" wx:if="{{item.level=='自媒体' || item.level=='新能源砖家' || item.is_carvip==1 || item.is_auth_car_icon==1 }}" />
+                    <view class="author-name">
+                      <text class="text-name">{{item.author}}</text>
+                      <text class="tag-item tag-green" wx:if="{{item.level !='车代表' && item.level !='' }}">{{item.level}}</text>
+                    </view>
+                    <view class="tag-item-wrap">
+                      <view wx:if="{{item.is_carvip==1 }}" class="tag-item tag-green">
+                        <image class="icon-v" src="http://cdn.e-power.vip/resources/image/icon-v.png" />车代表</view>
+
+                      <view wx:if="{{item.is_auth_car}}" class="tag-item tag-green">{{item.is_auth_car}}</view>
+                      <view class="e-power">
+                        <image src="http://cdn.e-power.vip/resources/image/e_power2.png" />
+                        <view class="exts">
+                          <text wx:for="{{item.extcredits2_arr}}" wx:for-item="ext_item" wx:key="{{index}}" class="index{{ext_item}}"></text>
+                        </view>
+                        <view class="du">度</view>
+                      </view>
+                    </view>
+                  </view>
+
+                  <view class="contents">
+
+                    <view class="message" bindtap="toDetail" data-tid="{{item.tid}}">
+                      <text wx:if="{{item.class_name}}" class="pic-class-text" hover-stop-propagation="{{true}}" catchtap="picTap" data-class_name="{{item.class_name}}" data-typeid="{{item.typeid}}">{{item.class_name}}</text> {{item.message_more || item.message}}
+                      <text class="message-more" wx:if="{{item.message_more}}">全文</text>
+                    </view>
+
+                    <view class="images" wx:if="{{item.image_list.length> 0}}">
+                      <block wx:for="{{item.image_list}}" wx:for-item="images" wx:key="{{index}}">
+                        <block wx:if="{{item.attachment == 1}}">
+                          <view class="images-for-image images-for-video" bindtap="toDetail" data-tid="{{item.tid}}">
+                            <image if="{{item.video}}" src="{{item.video}}"  data-pid="{{item.pid}}"></image>
+                            <view class="video-icon" wx:if="{{item.attachment == 1}}" data-pid="{{item.pid}}" ></view>
+                            <video id="myVideo{{item.pid}}" data-pid="{{item.pid}}" src="{{images}}" style=" z-index: 0;" autoplay="{{false}}" bindpause="pauseTap"  poster="{{item.video}}" bindended="exitFullScreen" enable-play-gesture="{{true}}"
+                              bindfullscreenchange="fullscreenchange" wx:if="{{showCoverId == item.pid}}">
+                            </video>
+                          </view>
+                        </block>
+                        <block wx:else>
+                          <view class="images-for-image" hover-stop-propagation="{{true}}" catchtap="imagesFor" data-image="{{images}}" wx:if="{{item.image_list.length==1}}">
+                            <image src="{{images}}" mode="aspectFill" ></image>
+                          </view>
+                          <view class="images-for" hover-stop-propagation="{{true}}" catchtap="imagesFor" data-images="{{item.image_list}}" data-url="{{images}}" wx:else>
+                            <image src="{{images}}" mode="aspectFill"></image>
+                          </view>
+                        </block>
+                      </block>
+                    </view>
+                    <view class="square-address" wx:if="{{item.address}}">{{item.address}}</view>
+                    <view class="topic-icon">
+                      <view class="square-address">
+                        <view wx:if="{{item.displayorder > 0}}" class="tag-top">置顶</view>
+                        {{item.timestamped}}
+                      </view>
+                      <image class="tozans" src="http://cdn.e-power.vip/resources/image/detail/tozans.png" bindtap="toZan" wx:if="{{item.is_zan==0 || item.is_zan==2}}" data-index="{{index}}" data-type="1" data-tid="{{item.tid}}" data-is_zan="{{item.is_zan}}">
+                        <text>{{item.zan}}</text>
+                      </image>
+                      <image class="tozans" src="http://cdn.e-power.vip/resources/image/detail/tozaneds.png" bindtap="toZan" wx:else data-index="{{index}}" data-type="1" data-tid="{{item.tid}}" data-is_zan="{{item.is_zan}}">
+                        <text>{{item.zan}}</text>
+                      </image>
+                      <image class="tozans" src="http://cdn.e-power.vip/resources/image/detail/tocais.png" bindtap="toZan" wx:if="{{item.is_zan==0 || item.is_zan==1}}" data-index="{{index}}" data-type="2" data-tid="{{item.tid}}" data-is_zan="{{item.is_zan}}">
+                        <text>{{item.cai}}</text>
+                      </image>
+                      <image class="tozans" src="http://cdn.e-power.vip/resources/image/detail/tocaieds.png" bindtap="toZan" wx:else data-index="{{index}}" data-type="2" data-tid="{{item.tid}}" data-is_zan="{{item.is_zan}}">
+                        <text>{{item.cai}}</text>
+                      </image>
+                      <image class="tozans" src="http://cdn.e-power.vip/resources/image/detail/toreplys.png" bindtap="toDetail" data-tid="{{item.tid}}">
+                        <text>{{item.replies}}</text>
+                      </image>
+                    </view>
+                    <view class="post" wx:if="{{item.post.length > 0}}" bindtap="toDetail" data-tid="{{item.tid}}">
+                      <view wx:for="{{item.post}}" wx:for-item="post" wx:key="{{index}}">
+                        <text>{{post.username}}： </text>{{post.message}}
+                      </view>
+                      <view class="message-more" wx:if="{{item.replies > 3}}">查看其他{{item.replies - 3}}条评论</view>
+                    </view>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+
+        <!-- 加载更多 -->
+        <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+        <!-- 没有更多的数据了 -->
+        <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+        <!-- 返回顶部 -->
+      </view>
+    </view>
+    <view bindtap="squareTap" class="mask" wx:if="{{witchAdd}}">
+      <view class="add-list add-image" hover-stop-propagation="{{true}}" catchtap="squareLong" data-type="2">
+        <text>+</text> 添加图片</view>
+      <view class="add-list add-video" hover-stop-propagation="{{true}}" catchtap="squareLong" data-type="1">
+        <text>+</text> 添加视频</view>
+    </view>
+    <squareRight bindsquareTap="squareTap" bindsquareLong="squareLong"></squareRight>

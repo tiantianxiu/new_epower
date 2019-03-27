@@ -1,0 +1,64 @@
+<navBar navbar-data="{{navbarData}}"></navBar>
+
+<view class="container-nopadding">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+
+
+  <view class="page-body" style="margin-top:{{heightMt}}px">
+
+    <view id="dialogueList">
+      <view class="dialogue-list-wrap">
+        <block wx:for="{{dialogueList}}" wx:key='{{index}}' wx:for-item="list">
+
+          <view class="dialogue-list dialogue-right" wx:if="{{list.right == 1}}">
+            <view class="user-info">
+              <text class="time">{{list.timed || list.time}}</text>
+              <block wx:if="{{list.attachment != 2}}">
+                <rich-text class="dialogue-text" nodes="{{list.messaged || list.message}}">
+                </rich-text>
+              </block>
+              <block wx:else>
+                <view class="dialogue-image" bindtap="imagePreview" data-url="{{list.message}}" style="background-image:url({{list.message}})">
+                </view>
+              </block>
+              <view class="user-photo">
+                <image src="{{list.avatar}}" />
+              </view>
+            </view>
+          </view>
+
+          <view class="dialogue-list" wx:else>
+            <view class="user-info">
+              <text class="time">{{list.timed || list.time}}</text>
+              <view class="user-photo">
+                <image src="{{list.avatar}}" />
+              </view>
+              <block wx:if="{{list.attachment != 2}}">
+                <rich-text class="dialogue-text" nodes="{{list.messaged || list.message}}">
+                </rich-text>
+              </block>
+              <block wx:else>
+                <view class="dialogue-image" bindtap="imagePreview" data-url="{{list.message}}" style="background-image:url({{list.message}})">
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+
+        <view class="accept" id="accept"  wx:if="{{is_luozhu}}">
+          <text bindtap="acceptTap">立即采纳</text>
+        </view>
+
+      </view>
+    </view>
+
+  </view>
+
+  <!-- 授权登录框 -->
+  <authorization showAuthorization="{{showAuthorization}}"></authorization>
+
+  <replyQuest id="reply-quest" focus="{{focus}}" bindaddPost="addPost" bindshowAuthorization="showAuthorization" hasTall="{{hasTall}}"></replyQuest>
+
+</view>

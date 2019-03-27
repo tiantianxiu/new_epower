@@ -1,0 +1,342 @@
+<!--发表口碑-->
+<loading hidden="{{loading_hidden}}">
+  {{loading_msg}}
+</loading>
+<navBar navbar-data="{{navbarData}}"></navBar>
+<view class="page-body" style="margin-top:{{heightMt}}px">
+  <!-- <view class="appear-list">
+    <view class="title" style="width: 8%;">
+      UID
+    </view>
+    <view class="input" style="margin-left: 10%; width:78%; padding-right: 4%;">
+      <input placeholder="请填写UID" type="number" placeholder-class="placeholder" bindinput="inputUid"></input>
+    </view>
+  </view>-->
+   <!-- <view class="appear-list">
+    <view class="title" style="width: 14%;">
+      邀请码
+    </view>
+    <view class="input" style="margin-left: 10%; width:72%; padding-right: 4%;">
+      <input placeholder="请填写六位数的邀请码" type="number" placeholder-class="placeholder" bindinput="inputInvalidCode"></input>
+    </view>
+  </view>  -->
+  <view class="appear-list" bindtap="addCar">
+    <view class="title">
+      车型
+    </view>
+    <view class="content">{{my_car}}</view>
+    <view class="navigator-arrow"></view>
+  </view>
+  <view class="appear-list">
+    <view class="half">
+      <view class="title">
+        购买日期
+      </view>
+      <view class="navigator-arrow">
+        <picker mode="date" value="{{date}}" bindchange="getDate" end="{{nowDate}}">
+          <view>{{date?date:'请选择'}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="half"  bindtap="toDistrict">
+      <view class="title" style="width:50%">
+        购买地
+      </view>
+      <view class="navigator-arrow">
+        {{district || '请选择'}}
+      </view>
+    </view>
+  </view>
+  <view class="appear-list">
+    <view class="half half50">
+      <view class="title">
+        落地价
+      </view>
+      <view class="input">
+        <input placeholder="请填写" type="digit" value="{{buy_car_price}}" placeholder-class="placeholder" bindinput="inputBuyPrice" class="{{empty_buy_car_price && !buy_car_price? 'border-red': ''}}" focus="{{empty_buy_car_price}}"></input>
+        <text>万</text>
+      </view>
+    </view>
+
+    <view class="half half50">
+      <view class="title" style="width:56%">
+        <block wx:if="{{type_category!=3}}">
+          纯电续航
+        </block>
+        <block wx:else>
+          续航里程
+        </block>
+      </view>
+      <view class="input">
+        <input placeholder="请填写" type="number" placeholder-class="placeholder" bindinput="inputMilesPower"></input>
+        <text>Km</text>
+      </view>
+    </view>
+  </view>
+  <block wx:if="{{type_category!=3}}">
+    <view class="appear-list">
+      <view class="half half50">
+        <view class="title">
+          行驶公里数
+        </view>
+        <view class="input">
+          <input placeholder="请填写" type="number" class="{{empty_mile && !miles? 'border-red': ''}}" focus="{{empty_mile}}" placeholder-class="placeholder" bindinput="inputMiles"></input>
+          <text>Km</text>
+        </view>
+      </view>
+
+      <view class="half half50">
+        <view class="title" style="width:50%">
+          冬季续航
+        </view>
+        <view class="input">
+          <input placeholder="请填写" type="number" placeholder-class="placeholder" bindinput="inputMilesWinter"></input>
+          <text>Km</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="appear-list">
+      <view class="title" style="width: 20%">
+        行驶公里数
+      </view>
+      <view class="input input-special">
+        <input placeholder="请填写" type="number" class="{{empty_mile && !miles? 'border-red': ''}}" focus="{{empty_mile}}" placeholder-class="placeholder placeholder-special" bindinput="inputMiles"></input>
+        <text>Km</text>
+
+      </view>
+    </view>
+  </block>
+
+  <view class="appear-list">
+    <view class="title" style="width: 20%">
+      综合能耗
+    </view>
+    <view class="input input-special">
+      <block wx:if="{{type_category!=1}}">
+        <input placeholder="请填写油耗" type="digit" placeholder-class="placeholder placeholder-special" bindinput="inputFuelConsumption" value="{{fuel_consumption}}"></input>
+        <text>L</text>
+      </block>
+      <block wx:if="{{type_category!=3}}">
+        <input placeholder="请填写电耗" type="digit" placeholder-class="placeholder placeholder-special" bindinput="inputPowerConsumption" value="{{power_consumption}}"></input>
+        <text>度/100Km</text>
+      </block>
+    </view>
+  </view>
+
+  <view class="appear-list score-list">
+    <view class="title">
+      综合评分
+    </view>
+    <view class="progress" bindtap="gradeShow">
+      <slider value="{{compute_value}}" backgroundColor="#d2d2d2" activeColor="#00c481" block-size="0" bindchange="computeSlider" data-title="all_appear">
+        <view class="mark-list">
+          <view class="mark markz">0</view>
+          <view class="mark mark1">1</view>
+          <view class="mark mark2">2</view>
+          <view class="mark mark3">3</view>
+          <view class="mark mark4">4</view>
+          <view class="mark mark5">5</view>
+        </view>
+      </slider>
+    </view>
+    <view class="grade">
+      {{compute_grade}}分
+    </view>
+    <view class="pr-icon {{gradeShow ? 'active':''}}">
+      <image src="http://cdn.e-power.vip/resources/image/praise/praises_icon.png"></image>
+    </view>
+    <view class="progress-absolute" bindtap="gradeIsShow"></view>
+  </view>
+  <view class="score-list {{gradeShow ? 'active':''}}">
+    <view class="title">
+      颜值
+    </view>
+    <view class="progress">
+      <slider backgroundColor="#d2d2d2" activeColor="#00c481" bindchange="slider" bindchanging="sliderring" data-title="appear" isCustom="true" block-size="0" value="{{values.appear}}">
+        <view class="mark-list">
+          <view class="mark markz">0</view>
+          <view class="mark mark1">1</view>
+          <view class="mark mark2">2</view>
+          <view class="mark mark3">3</view>
+          <view class="mark mark4">4</view>
+          <view class="mark mark5">5</view>
+        </view>
+      </slider>
+    </view>
+    <view class="grade">
+      {{compute.appear}}分
+    </view>
+  </view>
+  <view class="score-list {{gradeShow ? 'active':''}}">
+    <view class="title">
+      电池
+    </view>
+    <view class="progress">
+      <slider backgroundColor="#d2d2d2" activeColor="#00c481" bindchange="slider" bindchanging="sliderring" data-title="battery" block-size="0" value="{{values.battery}}">
+        <view class="mark-list">
+          <view class="mark markz">0</view>
+          <view class="mark mark1">1</view>
+          <view class="mark mark2">2</view>
+          <view class="mark mark3">3</view>
+          <view class="mark mark4">4</view>
+          <view class="mark mark5">5</view>
+        </view>
+      </slider>
+    </view>
+    <view class="grade">
+      {{compute.battery}}分
+    </view>
+  </view>
+  <view class="score-list {{gradeShow ? 'active':''}}">
+    <view class="title">
+      舒适
+    </view>
+    <view class="progress">
+      <slider backgroundColor="#d2d2d2" activeColor="#00c481" bindchange="slider" bindchanging="sliderring" data-title="cosiness" block-size="0" value="{{values.cosiness}}">
+        <view class="mark-list">
+          <view class="mark markz">0</view>
+          <view class="mark mark1">1</view>
+          <view class="mark mark2">2</view>
+          <view class="mark mark3">3</view>
+          <view class="mark mark4">4</view>
+          <view class="mark mark5">5</view>
+        </view>
+      </slider>
+    </view>
+    <view class="grade">
+      {{compute.cosiness}}分
+    </view>
+  </view>
+  <view class="score-list {{gradeShow ? 'active':''}}">
+    <view class="title">
+      动力
+    </view>
+    <view class="progress">
+      <slider backgroundColor="#d2d2d2" activeColor="#00c481" bindchange="slider" bindchanging="sliderring" data-title="power" isCustom="true" block-size="0" value="{{values.power}}">
+        <view class="mark-list">
+          <view class="mark markz">0</view>
+          <view class="mark mark1">1</view>
+          <view class="mark mark2">2</view>
+          <view class="mark mark3">3</view>
+          <view class="mark mark4">4</view>
+          <view class="mark mark5">5</view>
+        </view>
+      </slider>
+    </view>
+    <view class="grade">
+      {{compute.power}}分
+    </view>
+  </view>
+  <view class="score-list {{gradeShow ? 'active':''}}">
+    <view class="title">
+      性价比
+    </view>
+    <view class="progress">
+      <slider backgroundColor="#d2d2d2" activeColor="#00c481" bindchange="slider" bindchanging="sliderring" data-title="cost" isCustom="true" block-size="0" value="{{values.cost}}">
+        <view class="mark-list">
+          <view class="mark markz">0</view>
+          <view class="mark mark1">1</view>
+          <view class="mark mark2">2</view>
+          <view class="mark mark3">3</view>
+          <view class="mark mark4">4</view>
+          <view class="mark mark5">5</view>
+        </view>
+      </slider>
+    </view>
+    <view class="grade">
+      {{compute.cost}}分
+    </view>
+  </view>
+  <view class="score-list {{gradeShow ? 'active':''}}">
+    <view class="title">
+      智能
+    </view>
+    <view class="progress">
+      <slider backgroundColor="#d2d2d2" activeColor="#00c481" bindchange="slider" bindchanging="sliderring" data-title="intelligent" isCustom="true" block-size="0" value="{{values.intelligent}}">
+        <view class="mark-list">
+          <view class="mark markz">0</view>
+          <view class="mark mark1">1</view>
+          <view class="mark mark2">2</view>
+          <view class="mark mark3">3</view>
+          <view class="mark mark4">4</view>
+          <view class="mark mark5">5</view>
+        </view>
+      </slider>
+    </view>
+    <view class="grade">
+      {{compute.intelligent}}分
+    </view>
+  </view>
+  <view class="score-list {{gradeShow ? 'active':''}}">
+    <view class="title">
+      服务
+    </view>
+    <view class="progress">
+      <slider backgroundColor="#d2d2d2" activeColor="#00c481" bindchange="slider" bindchanging="sliderring" data-title="server" isCustom="true" block-size="0" value="{{values.server}}">
+        <view class="mark-list">
+          <view class="mark markz">0</view>
+          <view class="mark mark1">1</view>
+          <view class="mark mark2">2</view>
+          <view class="mark mark3">3</view>
+          <view class="mark mark4">4</view>
+          <view class="mark mark5">5</view>
+        </view>
+      </slider>
+    </view>
+    <view class="grade">
+      {{compute.server}}分
+    </view>
+  </view>
+  <view class="appear-list" style="padding: 0;"></view>
+  <view class="appear-list score-list">
+    <view class="title" style="line-height:50rpx">
+      车辆详评
+    </view>
+  </view>
+  <block wx:for="{{cars_tag}}" wx:for-item="item" wx:for-index="key" wx:key="{{index}}">
+    <view class="appear-list score-list score-list-detail">
+      <view class="header">
+        <text>{{item.name}}</text>
+      </view>
+      <view class="evaluate-ul">
+        <block wx:for="{{item.son}}" wx:for-item="item1" wx:for-index="key1" wx:key="{{index}}">
+          <view class="evaluate">
+            <text>{{item1.name}}</text>
+            <block wx:for="{{item1.son}}" wx:for-item="item2" wx:for-index="key2" wx:key="{{index}}">
+              <view class="li {{key2==0?'unbad':'bad'}} {{item2.active?'active':''}}">{{item2.name}}
+                <icon type="success" size="12" color="#e60012" wx:if="{{item2.active}}" />
+                <view class="enlarge-tap" bindtap="tagTap" data-fir_key="{{key}}" data-sec_key="{{key1}}" data-thi_key="{{key2}}" data-id="{{item2.id}}" data-secid="{{item1.id}}"></view>
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+
+  <view class="appear-list" style="display:block;">
+    <view class="title">其他</view>
+    <view class="textarea">
+      <textarea placeholder="我还想说...(最多三百字)" placeholder-class="placeholder" maxlength="300" bindinput="inputOther" adjust-position="{{true}}" cursor-spacing="{{100}}"></textarea>
+    </view>
+  </view>
+  <view class="score-list score-list-image" style="margin-bottom:30rpx;" bindtap="chooseImage">
+    <view class="title">上传图片</view>
+    <view class="navigator-arrow" style="width: 78%"></view>
+  </view>
+  <view class="cars-url">
+    <view wx:for="{{carsUrl}}" wx:for-item="item" wx:key="{{index}}" class="url-li">
+      <icon type="clear" size="25" data-index="{{index}}" bindtap="delImage"></icon>
+      <image src="{{item.url}}" bindtap="previewImage" data-src="{{item.url}}"></image>
+    </view>
+  </view>
+
+  <view class="btn" bindtap="getReputation">保存</view>
+</view>
+<!-- 车型 -->
+<carModel carModelShow="{{carModelShow}}" hasPraise="{{true}}" bindcarModelInfo="carModelInfo" isPraise="{{true}}"></carModel>
+<!-- 添加图片 -->
+<copper id="avatarCopper" binduploadImg="uploadImg"></copper>

@@ -1,0 +1,53 @@
+<!--pages/order_buy/order_buy.wxml-->
+<import src="/zanui/loadmore/index.wxml" />
+<view class="container-nopadding">
+	<loading hidden="{{loading_hidden}}">
+	{{loading_msg}}
+	</loading>
+    <!-- 授权登录框 -->
+  <authorization showAuthorization="{{showAuthorization}}" bindagreeAuthorizeFun="agreeAuthorizeFun" bindrejectAuthorizeFun="rejectAuthorizeFun"></authorization>
+  
+  <navBar navbar-data="{{navbarData}}"></navBar>
+	<view class="page-body" style="margin-top:{{heightMt}}px">
+		<block wx:if="{{myCarVerify.length>0}}">
+			<view class="car-list-wrap">
+				<view class="car-list" wx:for="{{myCarVerify}}" wx:key="" wx:for-item="myCarlist" wx:if="{{type != 'certified' || type == 'certified' && myCarlist.status == '已认证'}}">
+					<view class="car-list-info" data-action="edit" data-name="{{myCarlist.car_3}}" data-brand="{{myCarlist.car_1}}" data-model="{{myCarlist.car_2}}" data-vid="{{myCarlist.vid}}" data-img="{{myCarlist.myfile}}" data-imgUrl="{{myCarlist.real_myfile}}" data-owner="{{myCarlist.realname}}" data-phone="{{myCarlist.mobile}}" data-status="{{myCarlist.status}}" data-carnumber="{{myCarlist.plate_number}}" bindtap="toUpload">
+						<view class="car-img" style="background-image: url({{base_url}}{{myCarlist.icon}});"></view>
+						<view class="car-text">
+							<text class="name">{{myCarlist.car_1}}</text>
+							<text class="text">{{myCarlist.car_3}}</text>
+						</view>						
+						<view class="car-status">
+							<text class="status {{myCarlist.status == '审核中' || myCarlist.status == '不通过' ? 'status-red' : ''}}">{{myCarlist.status}}</text>
+						</view>
+					</view>
+					
+					<view wx:if="{{type != 'certified'}}" class="del-car {{myCarlist.show_plate_model == myCarlist.vid ? 'btn-disabled':''}}" data-status="{{myCarlist.status}}" data-vid="{{myCarlist.vid}}" data-show="{{myCarlist.show_plate_model}}" bindtap="carFun">{{myCarlist.status == '已认证'? '显示此车辆':'删除车辆'}}</view>
+					
+				</view>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="box-wrap">
+				<view class="item no-list">
+					<view class="img"><image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/no-car.png"/></view>
+					<view>暂时没有已认证车辆</view>
+				</view>
+			</view>
+		</block>
+
+
+		<view class="btn-area-fixed" wx:if="{{type != 'certified'}}">
+			<view class="btn-area-holder"></view>
+			<view class="btn-area">
+				<view class="tips">温馨提示：每人最多可以认证3辆车</view>
+				<view class="btn-main" bindtap="addCar">+ 添加车辆</view>
+            	<view wx:if="{{applyStatus == 4 || applyStatus == 2}}" class="btn-main {{applyStatus == 4 || applyStatus == 2? '':'btn-disabled'}}" bindtap="applyCarOwner">{{applyTest}}</view>
+            </view>
+        </view>
+
+	</view>
+	
+    <carModel carModelShow="{{carModelShow}}" bindcarModelInfo="carModelInfo"></carModel>
+</view>

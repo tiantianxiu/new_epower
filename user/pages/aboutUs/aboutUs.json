@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "navigationBarTitleText": "关于我们",
+  "usingComponents": {
+    "navBar": "/components/navBar/navBar"
+  }
+}

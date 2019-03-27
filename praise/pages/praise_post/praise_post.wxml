@@ -1,0 +1,26 @@
+<!--pages/forum/forum.wxml-->
+<import src="/zanui/loadmore/index.wxml" />
+<page>
+<navBar navbar-data="{{navbarData}}"></navBar>
+<view class="container-nopadding" style="margin-top:{{heightMt}}px">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+  <view class="page-body">
+    <view class="section-wrap section-zone-wrap">
+
+      <view class="section-body">
+        <view class="section-zone-title col-wrap">
+          <image src="http://cdn.e-power.vip/resources/image/praise/post_header.jpg" mode="widthFix"></image>
+        </view>
+        <view class="lists">
+          <view wx:for="{{article}}" wx:for-item="article" wx:key="{{article.tid}}" data-tid="{{article.tid}}" class="box-wrap" bindtap="toDetail" class="section-zone-list col-wrap">
+            <view class='ll'></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>
+</page>

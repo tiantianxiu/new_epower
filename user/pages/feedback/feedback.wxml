@@ -1,0 +1,51 @@
+<!--add_article.wxml-->
+<navBar navbar-data="{{navbarData}}"></navBar>
+<view class="container-nopadding" style="margin-top:{{heightMt}}px">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+<view class="page-body">
+  <view class="page__bd">
+
+    <view class="form-group">
+        <view class="form-item form-select box-wrap" bindtap="showFeedbackWind">
+          <view class="item">反馈类型</view>
+
+          <view class="navigator-arrow">
+            
+            <block wx:if="{{selectType == ''}}">请选择反馈类型</block>
+            <block wx:else><view class="color-default">{{feedbackType[selectType]}}</view></block>
+          </view>
+        </view>
+        
+        <view class="form-item">
+          <view class="form-item-title">补充说明</view>
+          <textarea hidden="{{winTypeShow}}" maxlength="150" class="input-textarea" placeholder="请填写反馈补充说明..." bindinput="inputContent" style="height:400rpx" value="{{textContent}}" placeholder-style="line-height: 80rpx; display:inline-block; color:#dcdcdc"/>  
+          <view class="textarea-ext">{{textContentL}}/{{maxLength}}</view>
+        </view>
+
+        <view class="btn-area">
+          <button open-type="{{getUserInfo}}" bindgetuserinfo="bindGetUserInfo" class="btn-main" bindtap="feedbackSubmit">提交反馈</button>
+        </view>
+    </view>
+  </view>
+
+<block wx:if="{{winTypeShow}}">
+  <view class="mask" bindtap="hideFeedbackWind"></view>
+  <viwe class="window-wrap">
+    <view class="win-body">
+      <view class="feedback-type">
+        <view class="title">反馈类型</view>
+        <view bindtap="changeType" wx:for="{{feedbackType}}" wx:key="" wx:for-item="type" wx:for-index="idx" class="feedback-item {{selectType == idx ? 'selected' : ''}}" data-type="{{idx}}" >{{idx}}{{type}}</view>
+      </view>
+    </view>
+    <view class="win-bottom">
+      <view class="win-btn" bindtap="hideFeedbackWind">取消</view>
+      <view class="win-btn win-sure" bindtap="hideFeedbackWind">确认</view>
+    </view>
+  </viwe>
+</block>
+
+</view>
+</view>
+

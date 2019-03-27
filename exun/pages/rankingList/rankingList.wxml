@@ -1,0 +1,37 @@
+<!--pages/zone/zone.wxml-->
+<view class="container-nopadding">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+
+<navBar navbar-data="{{navbarData}}"></navBar>
+  <view class="page-body" style="margin-top:{{heightMt}}px">
+    <view class="slide-image-wrap">
+      <view style="background-image:url(http://cdn.e-power.vip/resources/image/ranklist_top.jpg);" class="slide-image">
+      </view>
+    </view>
+    <view class="ranklist-wrap">
+      <view class="ranklist ranklist-header">
+        <view class="col col-rank">排名</view>
+        <view class="col col-name">名称</view>
+        <view class="col col-num">作品</view>
+      </view>
+      <view class="ranklist ranklist-header" wx:for="{{ranklist}}" wx:for-item="rank" wx:key=''>
+        <block>
+          <view wx:if="{{index==0}}" class="col col-rank">
+            <image src="http://cdn.e-power.vip/resources/image/rank1.png"></image>
+          </view>
+          <view wx:elif="{{index==1}}" class="col col-rank">
+            <image src="http://cdn.e-power.vip/resources/image/rank2.png"></image>
+          </view>
+          <view wx:elif="{{index==2}}" class="col col-rank">
+            <image src="http://cdn.e-power.vip/resources/image/rank3.png"></image>
+          </view>
+          <view wx:else class="col col-rank">{{index + 1}}</view>
+        </block>
+        <view class="col col-name">{{rank.name}}</view>
+        <view class="col col-num">{{rank.threads}}</view>
+      </view>
+    </view>
+  </view>
+</view>

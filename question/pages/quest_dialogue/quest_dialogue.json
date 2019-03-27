@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+  	"authorization": "/components/authorization/authorization",
+    "replyQuest": "/components/replyQuest/replyQuest",
+    "navBar": "/components/navBar/navBar"
+  },
+  "navigationBarTitleText": "消息通知"
+}

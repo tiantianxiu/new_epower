@@ -1,0 +1,8 @@
+
+{
+"navigationBarTitleText": "申请进驻",
+"usingComponents": {
+    "progressBar": "/components/progressBar/progressBar",
+    "navBar": "/components/navBar/navBar"
+  }
+}

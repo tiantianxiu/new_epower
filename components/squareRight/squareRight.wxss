@@ -1,0 +1,14 @@
+.square-post-icon{
+  position: fixed;
+  right: 20rpx;
+  bottom: 13%;
+  background-color: #00c481;
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 50%;
+}
+.square-post-icon image{
+  width: 50%;
+  height: 50%;
+  margin: 25%;
+}

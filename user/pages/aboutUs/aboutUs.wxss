@@ -1,0 +1,47 @@
+.info-list-wrap{
+  background-color: #fff;
+}
+.list-item{
+  padding:30rpx 30rpx;
+  font-size: 24rpx;
+  color:676767;
+  border-bottom: 3rpx solid #eee; 
+}
+.list-item text{
+  display: block;
+  line-height:28rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color:#676767;
+}
+.list-item text.name{
+  border-left:4rpx solid #00c481;
+  padding-left: 20rpx;
+}
+.list-item text.item{
+  text-align: right;
+}
+.pic-wrap{
+  background-color: #fff;
+  line-height: 0;
+  text-align: center;
+  padding-bottom: 40rpx;
+  border-bottom: 3rpx solid #eee; 
+}
+.pic-wrap .text{
+  font-size: 30rpx;
+  color:#676767;
+  line-height: 2.4;
+}
+.pic-2 image{
+  width: 311rpx;
+  height: 311rpx;
+}
+.pic-1{
+  padding:40rpx 0 20rpx;
+}
+.pic-1 image{
+  width: 262rpx;
+  height: 248rpx;
+}

@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "navigationBarTitleText": "签到",
+  "usingComponents": {
+    	"authorization": "/components/authorization/authorization",
+      "navBar": "/components/navBar/navBar"
+  	}
+}

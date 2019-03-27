@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "navigationBarTitleText": "版块专区",
+  "usingComponents": {
+    "authorization": "/components/authorization/authorization",
+    "navBar": "/components/navBar/navBar"
+
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "用户资料",
+  "usingComponents": {
+    "copper": "/components/copper/copper",
+    "moreFunctions": "/components/moreFunctions/moreFunctions",
+    "authorization": "/components/authorization/authorization",
+    "replyTail": "/components/replyTail/replyTail",
+    "navBar": "/components/navBar/navBar"
+  }
+}

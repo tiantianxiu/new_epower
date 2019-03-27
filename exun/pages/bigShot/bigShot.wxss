@@ -1,0 +1,72 @@
+.bigshot-wrap:after{
+  clear:both;
+  content: '';
+  display: block;
+  overflow: hidden;
+  height: 0;
+  width: 0;
+  font-size: 0;
+}
+.bigshot-list{
+  border-radius: 10rpx;
+  background-color: #fff;
+  overflow: hidden;
+  height: 210rpx;
+  box-shadow:0 0 0 6rpx rgba(0,0,0,.01);
+  box-sizing: border-box;
+  position: relative;
+  padding:15rpx;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.row{
+  padding:0 15rpx;
+}
+.col-3{
+  float: left;
+  width: 33.333%;  
+  padding:20rpx 15rpx;
+  box-sizing: border-box;
+}
+.bigshot-list .icon{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.bigshot-list .icon image{
+  width: 100%;
+  height: 100%;
+}
+.bigshot-list .name{
+  line-height: 80rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 24rpx;
+  font-weight: bold;
+  text-overflow: ellipsis;
+}
+.bigshot-list .info{
+  font-size: 20rpx;
+  color: #a3a7a8;
+  height: 30rpx;
+  overflow: hidden;
+  display: none;
+}
+.bigshot-list .ext{
+  white-space: nowrap;
+  font-size: 20rpx;
+  text-overflow: ellipsis;
+  position: absolute;
+  left: 0;
+  right: 0;
+  color: #a3a7a8;
+  bottom: 20rpx;
+}
+.section-wrap .section-title{
+  background: none;
+  border: none;
+  padding-top: 40rpx;
+}

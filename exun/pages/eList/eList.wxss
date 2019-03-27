@@ -1,0 +1,10 @@
+.section-wrap .section-ext{
+  padding-right: 150rpx;
+  position: relative;
+}
+.section-wrap .section-ext .navigator-arrow{
+  width: 125rpx;
+  position: absolute;
+  top: 20rpx;
+  right: 30rpx;
+}

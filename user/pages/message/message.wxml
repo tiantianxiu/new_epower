@@ -1,0 +1,157 @@
+<import src="/wxParse/wxParse.wxml" />
+<import src="/zanui/loadmore/index.wxml" />
+<view class="container-nopadding">
+  <loading hidden="{{loading_hidden}}">
+    {{loading_msg}}
+  </loading>
+  <navBar navbar-data="{{navbarData}}"></navBar>
+  <view class="c-tab-fixed-wrap" style="margin-top:{{heightMt}}px">
+    <view class="c-tab-wrap box-wrap" style="top:{{heightMt}}px">
+      <view class="item {{type == 1 ? 'current' : ''}}" bindtap="changeTab" data-type="1">
+        <view class="text">回复通知
+          <view class="msgNum" wx:if="{{dotPost > 0}}">{{dotPost}}</view>
+        </view>
+      </view>
+      <view class="item {{type == 2 ? 'current' : ''}}" bindtap="changeTab" data-type="2">
+        <view class="text">私信
+          <view class="msgNum" wx:if="{{dotMsg > 0}}">{{dotMsg}}</view>
+        </view>
+      </view>
+      <view class="item {{type == 3 ? 'current' : ''}}" bindtap="changeTab" data-type="3">
+        <view class="text">系统通知
+          <view class="msgNum" wx:if="{{dotSystem > 0}}">{{dotSystem}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="c-tab-fixed-holder"></view>
+  </view>
+
+
+  <view class="page-body">
+    <!-- 回复通知 -->
+    <block wx:if="{{type == 1}}">
+      <view class="section-wrap section-detail-wrap" wx:for="{{postList}}" wx:for-item="list" wx:key="" wx:for-index="idx" data-tid="{{list.tid}}" data-idx="{{idx}}" data-type="{{systemType}}" data-isnew="{{list.new}}" data-id="{{list.id}}" data-note="{{list.note}}"
+        bindtap="toDetail" data-status="{{list.status}}" data-pid="{{list.pid}}" data-hidden="{{list.hidden}}" data-kid="{{list.kid}}">
+        <view class="section-title">
+          <text class="title">{{list.hidden==1?'口碑':'帖子'}}：{{list.subject}}</text>
+          <view class="navigator-arrow"></view>
+        </view>
+        <view class="section-body">
+
+          <block>
+            <view class="article">
+              <view class="author-info">
+                <view class="author">
+                  <image src="{{list.avatar}}" mode="aspectFill" lazy-load="{{true}}" />
+                </view>
+                <image class="icon-width icon-width-l icon-v4" src="http://cdn.e-power.vip/resources/image/icon-v2.png" wx:if="{{list.level=='自媒体' || list.level=='新能源砖家' || list.is_carvip==1 || list.is_auth_car_icon==1 }}" />
+                <view class="author-name">{{list.author}}
+
+                  <text class="tag-item tag-green" wx:if="{{list.is_auth_car_icon !=1 && list.level != '车代表' && list.level != ''}}">{{list.level}}</text>
+                  <block wx:if="{{list.new == 1}}">
+                    <view class="dot dot-inline"></view>
+                  </block>
+                </view>
+                <view class="tag-item-wrap">
+
+                  <view wx:if="{{list.is_carvip == 1}}" class="tag-item tag-green">
+                    <image class="icon-v" src="http://cdn.e-power.vip/resources/image/icon-v.png" />车代表</view>
+                  <view wx:if="{{list.is_auth_car}}" class="tag-item tag-green">{{list.is_auth_car}}</view>
+                </view>
+              </view>
+
+              <view class="article-text {{list.new==1?'b':''}}">
+                {{list.note}}
+              </view>
+
+              <!-- <block wx:for="{{replyTemArray}}" wx:key="">
+                <block wx:if="{{index == idx}}">
+                  <view class="article-text {{list.new==1?'b':''}}">
+                    <template is="wxParse" data="{{wxParseData:item}}" />
+                  </view>
+                </block>
+              </block> -->
+
+              <view class="box-wrap article-ext-info">
+                <view class="item">{{list.dateline}}</view>
+
+              </view>
+            </view>
+          </block>
+
+        </view>
+      </view>
+    </block>
+    <!-- 私信 -->
+    <block wx:elif="{{type == 2}}">
+      <view class="section-wrap section-detail-wrap" wx:for="{{msgList}}" wx:for-item="list" wx:key="list.index" wx:for-index="idx" bindtap="messageDetail" data-idx="{{idx}}" data-type="{{msgType}}" data-isnew="{{list.isnew}}" data-id="{{list.plid}}" data-uid="{{list.uid}}">
+        <view class="section-body">
+          <view class="article">
+            <view class="author-info">
+              <view class="author">
+                <image src="{{list.avatar}}" />
+              </view>
+              <view class="author-name">{{list.username}}
+                <block wx:if="{{list.is_carvip == 1}}">
+                  <image class="icon-width" src="http://cdn.e-power.vip/resources/image/icon-v.png"></image>
+                </block>
+              </view>
+              <view class="box-wrap">
+                <rich-text class="author-text item {{list.isnew == 1 ? 'b':''}}" nodes="{{list.message}}"></rich-text>
+                <block wx:if="{{list.isnew == 1}}">
+                  <view class="dot"></view>
+                </block>
+              </view>
+              <view class="ext">{{list.dateline}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <!-- 系统通知 -->
+    <block wx:else>
+      <view class="section-wrap section-system-wrap section-detail-wrap {{list.toggleShow ? 'readSta':''}}" wx:for="{{systemListy}}" wx:for-item="list" wx:key="list.index" wx:for-index="idx" bindtap="readFun" data-idx="{{idx}}" data-type="{{systemType}}" data-isnew="{{list.new}}"
+        data-id="{{list.id}}">
+        <view class="section-body">
+          <view class="article" bindtap="naviTap" data-from_id="{{list.from_id}}">
+            <view class="author-info">
+              <view class="author">
+                <image src="http://cdn.e-power.vip/resources/logo/mouldbbs300.png" />
+              </view>
+              <view class="author-name">{{list.dateline}}</view>
+              <view class="box-wrap">
+                <view class="author-text item {{list.new==1?'b':''}}">
+                  {{list.note}}
+                </view>
+                <block wx:if="{{list.new == 1}}">
+                  <view class="dot"></view>
+                </block>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 没有消息时 -->
+    <view class="box-wrap page-body" wx:if="{{noList}}">
+      <view class="item no-list">
+        <view class="img">
+          <image class="icon-img" src="http://cdn.e-power.vip/resources/image/user/no-msg.png" />
+        </view>
+        <view>{{noListText}}</view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <template is="zan-loadmore" data="{{ loading: have_data}}"></template>
+    <!-- 没有更多的数据了 -->
+    <template is="zan-loadmore" data="{{ nomore :nomore_data}}"></template>
+    <!-- 返回顶部 -->
+    <moreFunctions showToTop="true" scrollTop="{{scrollTop}}"></moreFunctions>
+    <view class="position-fixed" bindtap="allRead">
+      <image src="http://cdn.e-power.vip/resources/image/user/all_read.png" mode="widthFix" />
+    </view>
+  </view>
+
+</view>

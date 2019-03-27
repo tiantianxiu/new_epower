@@ -1,0 +1,29 @@
+@import '/pages/square/square';
+
+.slide-image-wrap {
+  border-bottom-right-radius: 30rpx;
+  border-bottom-left-radius: 30rpx;
+  margin-bottom: 30rpx;
+  background: #fff;
+  overflow: hidden;
+}
+
+.slide-image-wrap-radius {
+  border-radius: 30rpx;
+}
+
+.topic-banner-text {
+  padding: 12rpx 20rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.topic-desc {
+  font-size: 20rpx;
+  padding: 0 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  color: #6e6e6e;
+}
